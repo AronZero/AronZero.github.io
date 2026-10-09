@@ -8,8 +8,8 @@ export const site = {
   },
   statement: 'I design interfaces — then I build them, down to the last transition.',
   email: 'aronjayconsuelo@gmail.com',
-  /** PLACEHOLDER — full LinkedIn profile URL. */
-  linkedin: 'https://www.linkedin.com/',
+  /** Full LinkedIn profile URL. */
+  linkedin: 'https://www.linkedin.com/in/aron-jay-consuelo-515114103/',
   /**
    * Résumé PDF in /public. Set to null to hide every résumé button.
    */

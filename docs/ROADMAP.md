@@ -21,4 +21,4 @@
 ## Waiting on content (from Aron)
 
 - [ ] Real projects: title, role, description, tags, stack, URL, screenshots (see [CONTENT.md](CONTENT.md))
-- [ ] LinkedIn URL; résumé PDF saved as `public/Aron-Jay-Consuelo-Resume.pdf` (email + experience done 2026-10-08)
+- [x] LinkedIn URL (2026-10-09); résumé PDF saved as `public/Aron-Jay-Consuelo-Resume.pdf` (email + experience done 2026-10-08)
