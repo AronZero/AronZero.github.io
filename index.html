@@ -39,14 +39,31 @@
         // First-entry intro: home page only, once per browser session, full motion, visible tab, no Save-Data.
         // ?intro=replay (the only accepted value) forces it for review.
         var force = new URLSearchParams(location.search).get('intro') === 'replay';
-        var seen = '1';
-        try { seen = sessionStorage.getItem('ajc-intro'); } catch (e) {} // storage blocked: can't remember it, so don't play
         var saveData = !!(navigator.connection && navigator.connection.saveData);
-        if (root.dataset.motion === 'full' && location.pathname === '/' && !location.hash &&
-            (force || (!seen && document.visibilityState === 'visible' && !saveData))) {
-          root.dataset.intro = 'play';
+        var decide = function () {
+          var seen = '1';
+          try { seen = sessionStorage.getItem('ajc-intro'); } catch (e) {} // storage blocked: can't remember it, so don't play
+          var play = root.dataset.motion === 'full' && location.pathname === '/' && !location.hash && (force || (!seen && !saveData));
+          try { sessionStorage.setItem('ajc-intro', '1'); } catch (e) {} // any entry counts, so deep links don't play it later
+          return play;
+        };
+        if (document.visibilityState === 'visible' && !document.prerendering) {
+          if (decide()) root.dataset.intro = 'play';
+        } else {
+          // Prerendered (typing the URL in a new tab) or opened in a background tab: decide when it's
+          // first shown. A prerendered page's sessionStorage writes are also discarded on activation.
+          var onShow = function () {
+            if (document.visibilityState !== 'visible' || document.prerendering) return;
+            document.removeEventListener('visibilitychange', onShow);
+            document.removeEventListener('prerenderingchange', onShow);
+            if (decide() && root.dataset.intro !== 'done') {
+              root.dataset.intro = 'play';
+              window.dispatchEvent(new Event('ajc:intro'));
+            }
+          };
+          document.addEventListener('visibilitychange', onShow);
+          document.addEventListener('prerenderingchange', onShow);
         }
-        try { sessionStorage.setItem('ajc-intro', '1'); } catch (e) {} // any entry counts, so deep links don't play it later
       })();
     </script>
   </head>

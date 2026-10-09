@@ -32,6 +32,14 @@ export function Intro() {
   const markRef = useRef<SVGSVGElement>(null);
   const id = 'intro' + useId().replace(/[^a-zA-Z0-9_-]/g, '');
 
+  // A prerendered or background tab decides on first show (index.html), after this has mounted.
+  useEffect(() => {
+    const start = () => setPlaying(document.documentElement.dataset.intro === 'play');
+    window.addEventListener('ajc:intro', start);
+    start();
+    return () => window.removeEventListener('ajc:intro', start);
+  }, []);
+
   useEffect(() => {
     if (!playing) return;
     const root = document.documentElement;
