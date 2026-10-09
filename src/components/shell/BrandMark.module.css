@@ -1,0 +1,27 @@
+/* Strata Signature. Height follows font-size; width follows the 62.2 × 33.2 viewBox. */
+.mark { display: block; height: 1em; width: auto; flex: none; overflow: visible; }
+.surface, .stack { fill: var(--text-1); }
+.structure { fill: var(--accent-ink); transform: translateX(3px); transition: transform var(--d-3) var(--ease); }
+.mono .structure { fill: currentColor; }
+.mono .surface, .mono .stack { fill: currentColor; }
+
+/* Hover and keyboard focus on the wrapping link: the displaced layer settles into line. */
+html[data-motion="full"] a:is(:hover, :focus-visible) > .mark .structure { transform: none; }
+
+/* Intro: the three layers slide in from staggered offsets once, on load.
+   Skipped when the first-entry Intro plays (data-intro is "play", then "done"): it hands off into this mark instead. */
+html[data-motion="full"]:not([data-intro]) .intro :is(.surface, .structure, .stack) {
+  animation: layer-in var(--d-4) var(--ease) backwards; /* backwards, so hover can still move the layer afterwards */
+}
+html[data-motion="full"] .intro .surface { --from: -6px; animation-delay: 120ms; }
+html[data-motion="full"] .intro .structure { --from: 12px; --to: 3px; animation-delay: 210ms; }
+html[data-motion="full"] .intro .stack { --from: -3px; animation-delay: 300ms; }
+@keyframes layer-in {
+  from { opacity: 0; transform: translateX(var(--from)); }
+  to { opacity: 1; transform: translateX(var(--to, 0)); }
+}
+
+/* While the first-entry Intro plays, this mark waits for the handoff.
+   Pure-CSS fail-safe: it shows at 3.2s even if the Intro script never finishes. */
+:global(html[data-intro="play"]) .intro { opacity: 0; animation: mark-show 1ms 3200ms forwards; }
+@keyframes mark-show { to { opacity: 1; } }

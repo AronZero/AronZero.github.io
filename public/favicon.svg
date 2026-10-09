@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
+  <!-- Strata Signature favicon: the A alone, ink centered at x=16. Layer cuts stay clear of the crossbar. -->
+  <defs>
+    <path id="a" d="M18.81 25.69L18.27 22.69Q18.27 22.54 18.1 22.54L13.93 22.54Q13.76 22.54 13.76 22.69L13.21 25.69Q13.19 26 12.84 26L10.24 26Q9.84 26 9.93 25.63L14.16 6.31Q14.21 6 14.53 6L17.56 6Q17.87 6 17.93 6.31L22.16 25.63L22.16 25.74Q22.16 26 21.84 26L19.19 26Q18.84 26 18.81 25.69ZM14.41 19.94L17.59 19.94Q17.76 19.94 17.73 19.8L16.07 10.77Q16.04 10.69 15.99 10.69Q15.93 10.69 15.9 10.77L14.27 19.8Q14.24 19.94 14.41 19.94Z"/>
+    <clipPath id="s1"><rect width="32" height="11.9"/></clipPath>
+    <clipPath id="s2"><rect y="13.65" width="32" height="4.55"/></clipPath>
+    <clipPath id="s3"><rect y="19.94" width="32" height="12.06"/></clipPath>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="#0F0E0D"/>
+  <use href="#a" xlink:href="#a" clip-path="url(#s1)" fill="#F2F0ED"/>
+  <use href="#a" xlink:href="#a" clip-path="url(#s2)" fill="#F99E35" transform="translate(2 0)"/>
+  <use href="#a" xlink:href="#a" clip-path="url(#s3)" fill="#F2F0ED"/>
+</svg>

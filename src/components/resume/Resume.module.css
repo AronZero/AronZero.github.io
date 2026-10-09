@@ -1,0 +1,39 @@
+.intro { row-gap: var(--s-6); align-items: end; margin-bottom: var(--s-9); }
+.intro > :first-child { --c: 1 / 9; }
+
+.links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); margin-top: var(--s-5); }
+
+/* ---------- Experience: contents-style rows ---------- */
+.jobs { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.job { row-gap: var(--s-4); padding-block: var(--s-7); border-bottom: 1px solid var(--line); align-items: baseline; }
+.period { color: var(--text-2); }
+.company { margin-top: var(--s-2); font-size: var(--fs-small); color: var(--text-2); }
+
+.duties { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-3); }
+.duties li {
+  position: relative; padding-left: var(--s-5);
+  font-size: var(--fs-small); line-height: 1.6; color: var(--text-body);
+}
+.duties li::before {
+  content: ""; position: absolute; left: 0; top: .8em; width: var(--s-3); height: 1px; background: var(--text-3);
+}
+
+/* ---------- Certifications: grouped by issuer ---------- */
+.certGrid { row-gap: var(--s-8); }
+.issuer {
+  display: flex; justify-content: space-between; gap: var(--s-4);
+  padding-bottom: var(--s-3); border-bottom: 1px solid var(--line-strong);
+}
+.certs { list-style: none; padding: 0; margin: 0; }
+.certs li {
+  padding-block: var(--s-4); border-bottom: 1px solid var(--line);
+  font-family: var(--font-display); font-weight: var(--fw-display);
+  font-size: var(--fs-lead); line-height: 1.15; color: var(--text-1);
+}
+
+@media (max-width: 719px) {
+  .intro { margin-bottom: var(--s-7); }
+  .job { padding-block: var(--s-6); row-gap: var(--s-3); }
+  .job > :first-child { margin-bottom: calc(var(--s-1) * -1); }
+  .certGrid { row-gap: var(--s-7); }
+}

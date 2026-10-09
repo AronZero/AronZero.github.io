@@ -1,0 +1,39 @@
+.gauge {
+  position: fixed; right: clamp(12px, 1.4vw, 24px); top: 50%; z-index: var(--z-gauge);
+  transform: translateY(-50%); display: none;
+}
+.gauge ol { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.gauge a {
+  display: flex; align-items: center; gap: 10px; padding: 5px 0;
+  color: var(--text-3); text-decoration: none;
+  font: 500 .6875rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase;
+}
+.text {
+  display: flex; gap: 6px; padding: 3px 6px; border-radius: 2px; background: var(--bg);
+  opacity: 0; transform: translateX(6px);
+  transition: opacity var(--d-2) var(--ease), transform var(--d-2) var(--ease);
+}
+.name { display: none; }
+.tick { width: 14px; height: 1px; background: var(--line-strong); transition: width var(--d-3) var(--ease), background-color var(--d-2); }
+.gauge a:hover .text, .gauge a:focus-visible .text, .gauge a[aria-current] .text { opacity: 1; transform: none; }
+.gauge a:hover .name, .gauge a:focus-visible .name { display: inline; }
+.gauge a:hover, .gauge a[aria-current] { color: var(--text-1); }
+.gauge a:hover .tick { width: 22px; background: var(--text-1); }
+.gauge a[aria-current] .tick { width: 32px; background: var(--accent-ink); }
+
+.bar {
+  position: fixed; top: var(--header-h); left: 0; right: 0; z-index: var(--z-topbar); height: 36px;
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.barInner { height: 100%; display: flex; align-items: center; }
+.fill {
+  position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%;
+  background: var(--accent-ink); transform-origin: left; transform: scaleX(var(--progress, 0));
+}
+
+@media (min-width: 1100px) {
+  .gauge { display: block; }
+  .bar { display: none; }
+}

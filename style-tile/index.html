@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Style Tile — Aron Jay Consuelo</title>
+  <meta name="description" content="Visual approval checkpoint for the portfolio of Aron Jay Consuelo: typography, color, layout, components, motion and responsive behavior.">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Set before first paint so hidden reveal states and motion mode never flash.
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      var stored = null;
+      try { stored = localStorage.getItem('ajc-motion'); } catch (e) {}
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      root.dataset.motion = stored || (reduced ? 'reduced' : 'full');
+      if (window.self !== window.top) root.classList.add('is-embedded');
+    })();
+  </script>
+  <script src="tile.js" defer></script>
+</head>
+<body>
+  <!-- Icon sprite (Lucide-style strokes, drawn inline for the prototype) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.5v.01M12 17v-6.5M12 13.5a3 3 0 0 1 6 0V17"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h10"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M9 3v18M15 3v18"/></symbol>
+    <symbol id="i-replay" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#layer-00" aria-label="Aron Jay Consuelo, back to top">
+        <svg class="brand__mark" viewBox="0 0 22 14" aria-hidden="true"><path d="M0 1h22M0 7h15"/><path d="M0 13h8"/></svg>
+        <span class="brand__name">Aron Jay Consuelo</span>
+        <span class="brand__role t-label">UI/UX · Front-end</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="#layer-05" aria-current="page">Work</a>
+        <a class="nav-link" href="#index">Playground</a>
+        <a class="nav-link" href="#layer-00">About</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="true">
+          <span class="motion-toggle__dot" aria-hidden="true"></span>Motion: <span data-motion-label>On</span>
+        </button>
+        <a class="btn btn--secondary btn--sm" href="#contact">Résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></a>
+        <button class="btn btn--secondary btn--sm menu-btn" type="button" data-open-menu aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">
+          Index <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Layer bar: replaces the gauge below 1100px -->
+  <div class="topbar" aria-hidden="true">
+    <div class="wrap">
+      <span class="t-label"><span class="c-accent" data-topbar-num>00</span> / 08 — <span class="c-1" data-topbar-name>Cover</span></span>
+      <span class="t-label">Style tile</span>
+    </div>
+    <span class="topbar__fill"></span>
+  </div>
+
+  <!-- Depth gauge -->
+  <nav class="gauge" aria-label="Layers on this page">
+    <ol>
+      <li><a href="#layer-00"><span class="gauge__text"><span>00</span><span class="gauge__name">Cover</span></span><span class="gauge__tick"></span></a></li>
+      <li><a href="#layer-01"><span class="gauge__text"><span>01</span><span class="gauge__name">Type</span></span><span class="gauge__tick"></span></a></li>
+      <li><a href="#layer-02"><span class="gauge__text"><span>02</span><span class="gauge__name">Color</span></span><span class="gauge__tick"></span></a></li>
+      <li><a href="#layer-03"><span class="gauge__text"><span>03</span><span class="gauge__name">Layout</span></span><span class="gauge__tick"></span></a></li>
+      <li><a href="#layer-04"><span class="gauge__text"><span>04</span><span class="gauge__name">Components</span></span><span class="gauge__tick"></span></a></li>
+      <li><a href="#layer-05"><span class="gauge__text"><span>05</span><span class="gauge__name">Projects</span></span><span class="gauge__tick"></span></a></li>
+      <li><a href="#layer-06"><span class="gauge__text"><span>06</span><span class="gauge__name">Motion</span></span><span class="gauge__tick"></span></a></li>
+      <li><a href="#layer-07"><span class="gauge__text"><span>07</span><span class="gauge__name">Responsive</span></span><span class="gauge__tick"></span></a></li>
+      <li><a href="#layer-08"><span class="gauge__text"><span>08</span><span class="gauge__name">Access</span></span><span class="gauge__tick"></span></a></li>
+    </ol>
+  </nav>
+
+  <!-- Mobile menu -->
+  <dialog class="menu" id="menu" aria-label="Site index">
+    <div class="menu__inner wrap">
+      <div class="menu__top">
+        <span class="brand__name c-1">Aron Jay Consuelo</span>
+        <button class="btn btn--secondary btn--sm" type="button" data-close-menu>Close <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <ol class="menu__list">
+        <li><a href="#layer-05"><span class="t-label">01</span><em>Work</em></a></li>
+        <li><a href="#index"><span class="t-label">02</span><em>Playground</em></a></li>
+        <li><a href="#layer-00"><span class="t-label">03</span><em>About</em></a></li>
+        <li><a href="#contact"><span class="t-label">04</span><em>Contact</em></a></li>
+      </ol>
+      <div class="menu__foot">
+        <a class="btn btn--primary" href="#contact">Download résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></a>
+        <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="true">
+          <span class="motion-toggle__dot" aria-hidden="true"></span>Motion: <span data-motion-label>On</span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Grid overlay (toggle with G) -->
+  <div class="grid-overlay" aria-hidden="true">
+    <div class="wrap"><div class="grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+  </div>
+
+  <!-- Floating index preview -->
+  <div class="float-preview" aria-hidden="true">
+    <div class="float-preview__inner">
+      <div class="frame" data-key="coffee"><div data-mock="coffee"></div></div>
+      <div class="frame" data-key="ledger"><div data-mock="ledger"></div></div>
+      <div class="frame" data-key="clinic"><div data-mock="clinic"></div></div>
+      <div class="frame" data-key="game"><div data-mock="game"></div></div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ 00 Cover ============ -->
+    <section class="layer hero" id="layer-00" data-layer="00" data-name="Cover" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div class="hero__top">
+          <span class="t-label fade-up">Style tile v0.1 — visual approval checkpoint</span>
+          <span class="t-label fade-up" style="--delay:120ms">Placeholder projects · real system</span>
+        </div>
+
+        <h1 class="t-hero hero__name reveal" id="hero-title">
+          <span class="line"><span>Aron Jay</span></span>
+          <span class="line"><span><em>Consuelo</em></span></span>
+        </h1>
+
+        <div class="strata-lines hero__strata draw" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i></div>
+
+        <div class="grid hero__grid">
+          <dl class="hero__roles fade-up" style="--c:1 / 5; --delay:300ms">
+            <dt class="t-label">Role</dt><dd>UI/UX Designer</dd>
+            <dt class="t-label">Focus</dt><dd>Front-end Development</dd>
+            <dt class="t-label">Also</dt><dd>Graphic Design</dd>
+          </dl>
+          <div style="--c:6 / 13; --cm:1 / -1">
+            <p class="t-statement hero__statement fade-up" style="--delay:450ms">I design interfaces — <em>then I build them,</em> down to the last transition.</p>
+            <p class="t-body fade-up" style="--delay:600ms">From user flows to production-ready React and TypeScript, with a graphic designer’s eye for type, composition and detail. Every project here reads in layers: from the surface people see to the stack it ships on.</p>
+            <div class="hero__actions fade-up" style="--delay:750ms">
+              <a class="btn btn--primary" href="#layer-05">View selected work <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+              <a class="btn btn--secondary" href="#contact">Download résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <a class="hero__scroll t-label" href="#layer-01">Scroll to explore the system <i aria-hidden="true"></i></a>
+      </div>
+    </section>
+
+    <!-- ============ 01 Typography ============ -->
+    <section class="layer" id="layer-01" data-layer="01" data-name="Type" aria-labelledby="type-title">
+      <div class="wrap">
+        <div class="layer-head"><span class="t-label"><span class="layer-head__num">01</span> — Typography</span><span class="t-label">Layer 01 / 08</span></div>
+        <div class="grid section-intro">
+          <h2 class="t-h2 reveal" id="type-title" style="--c:1 / 9"><span class="line"><span>Typography</span></span><span class="line"><span><em>sets the voice.</em></span></span></h2>
+          <p class="t-body fade-up" style="--c:9 / 13">A condensed display face carries the personality at poster scale. Geist does the reading. Geist Mono handles everything technical: labels, stacks and code.</p>
+        </div>
+
+        <div class="specimens">
+          <div class="specimen grid">
+            <div class="specimen__spec" style="--c:1 / 4"><p class="t-label c-1">Display</p><p class="spec-meta">Barlow Condensed · 500 + 300 italic<br>52 → 144px · lh 0.9 · −1%</p></div>
+            <p class="t-display" style="--c:4 / 13">Considered <em>by design.</em></p>
+          </div>
+          <div class="specimen grid">
+            <div class="specimen__spec" style="--c:1 / 4"><p class="t-label c-1">Section heading</p><p class="spec-meta">Barlow Condensed · 500<br>44 → 96px · lh 0.95 · −1%</p></div>
+            <p class="t-h2" style="--c:4 / 13">Selected <em>work</em></p>
+          </div>
+          <div class="specimen grid">
+            <div class="specimen__spec" style="--c:1 / 4"><p class="t-label c-1">Project title</p><p class="spec-meta">Barlow Condensed · 500<br>28 → 44px · lh 1.05</p></div>
+            <p class="t-h3" style="--c:4 / 12">Northbound Coffee — a calmer storefront for a small-batch roastery</p>
+          </div>
+          <div class="specimen grid">
+            <div class="specimen__spec" style="--c:1 / 4"><p class="t-label c-1">Lead</p><p class="spec-meta">Geist · 300<br>20 → 28px · lh 1.4</p></div>
+            <p class="t-lead" style="--c:4 / 11">I work where design decisions meet implementation details — and I’m comfortable owning both sides of that line.</p>
+          </div>
+          <div class="specimen grid">
+            <div class="specimen__spec" style="--c:1 / 4"><p class="t-label c-1">Body</p><p class="spec-meta">Geist · 400<br>17 → 18px · lh 1.65 · max 62ch</p></div>
+            <div style="--c:4 / 10">
+              <p class="t-body">The brief was simple: make the shop feel as unhurried as the coffee. I started with the purchase flow, removing every step that didn’t help someone choose a bag of beans, then rebuilt the product page around origin, roast and taste.</p>
+              <p class="t-body">The result shipped as a small React component library, so the roastery’s team can publish new beans without touching a layout.</p>
+            </div>
+          </div>
+          <div class="specimen grid">
+            <div class="specimen__spec" style="--c:1 / 4"><p class="t-label c-1">Label / metadata</p><p class="spec-meta">Geist Mono · 500 · uppercase<br>12px · +8% tracking</p></div>
+            <p class="t-label" style="--c:4 / 13">Role — UI/UX Design · Front-end Development &nbsp;&nbsp; Nº 01</p>
+          </div>
+          <div class="specimen grid">
+            <div class="specimen__spec" style="--c:1 / 4"><p class="t-label c-1">Technical</p><p class="spec-meta">Geist Mono · 400<br>14px · lh 1.6</p></div>
+            <p class="t-mono c-2" style="--c:4 / 13"><span class="c-accent">&lt;ProjectCard</span> role=<span class="c-1">"UI/UX &amp; Front-end"</span> stack={[<span class="c-1">"React"</span>, <span class="c-1">"TypeScript"</span>]} <span class="c-accent">/&gt;</span></p>
+          </div>
+          <div class="specimen grid">
+            <div class="specimen__spec" style="--c:1 / 4"><p class="t-label c-1">Pull quote</p><p class="spec-meta">Barlow Condensed · 300 italic<br>28 → 44px · lh 1.12</p></div>
+            <blockquote class="t-quote" style="--c:4 / 11">“Good interfaces feel inevitable. Getting there takes a lot of deliberate decisions.”</blockquote>
+          </div>
+        </div>
+
+        <div class="families">
+          <div class="family"><span class="family__aa t-display">Aa<em>a</em></span><p class="t-label c-1">Barlow Condensed</p><p class="t-small">Display, headings, quotes. Tall and tight: poster-scale confidence, used large and sparingly. Weight contrast (500 / 300 italic) does the emphasis.</p></div>
+          <div class="family"><span class="family__aa" style="font-family:var(--font-sans);font-weight:300;letter-spacing:-.04em">Aa</span><p class="t-label c-1">Geist</p><p class="t-small">Body, UI, buttons. Neutral, precise, comfortable for long reading on dark.</p></div>
+          <div class="family"><span class="family__aa" style="font-family:var(--font-mono);letter-spacing:-.06em">Aa</span><p class="t-label c-1">Geist Mono</p><p class="t-small">Labels, metadata, stacks, code. The “layer” voice that signals structure.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 Color ============ -->
+    <section class="layer" id="layer-02" data-layer="02" data-name="Color" aria-labelledby="color-title">
+      <div class="wrap">
+        <div class="layer-head"><span class="t-label"><span class="layer-head__num">02</span> — Color</span><span class="t-label">Layer 02 / 08</span></div>
+        <div class="grid section-intro">
+          <h2 class="t-h2 reveal" id="color-title" style="--c:1 / 9"><span class="line"><span>Warm black,</span></span><span class="line"><span><em>one spot of light.</em></span></span></h2>
+          <p class="t-body fade-up" style="--c:9 / 13">A near-black with a warm undertone so the orange feels at home. The accent is treated like a printer’s spot color: once or twice per screen, never as decoration.</p>
+        </div>
+
+        <div class="swatches">
+          <div class="swatch swatch--xl">
+            <div class="swatch__chip" style="background:var(--bg);color:var(--text-1)"><span>Aa</span><span class="t-label">bg</span></div>
+            <div class="swatch__info"><span class="swatch__name">Background</span><span class="t-label">--bg · #0F0E0D</span><span class="c-2">Page canvas. Warm near-black, never #000.</span></div>
+          </div>
+          <div class="swatch swatch--wide">
+            <div class="swatch__chip" style="background:var(--accent);color:var(--on-accent);border-color:var(--accent)"><span>Aa</span><span class="t-label" style="color:var(--on-accent)">accent</span></div>
+            <div class="swatch__info"><span class="swatch__name">Accent</span><span class="t-label">--accent · #F99E35</span><span class="c-2">Active state, focus ring, current layer, primary action.</span><span class="swatch__ratio">9.2 : 1 on bg · AAA</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--surface-1)"></div>
+            <div class="swatch__info"><span class="swatch__name">Surface 1</span><span class="t-label">#171614</span><span class="c-2">Cards, raised layers.</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--surface-2)"></div>
+            <div class="swatch__info"><span class="swatch__name">Surface 2</span><span class="t-label">#1F1D1B</span><span class="c-2">Frames, deeper layers.</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--bg);color:var(--text-1)"><span>Aa</span></div>
+            <div class="swatch__info"><span class="swatch__name">Text primary</span><span class="t-label">#F2F0ED</span><span class="c-2">Headings, key values.</span><span class="swatch__ratio">17.0 : 1 · AAA</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--bg);color:var(--text-body)"><span>Aa</span></div>
+            <div class="swatch__info"><span class="swatch__name">Text body</span><span class="t-label">#D6D3CE</span><span class="c-2">Long-form reading.</span><span class="swatch__ratio">12.9 : 1 · AAA</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--bg);color:var(--text-2)"><span>Aa</span></div>
+            <div class="swatch__info"><span class="swatch__name">Text secondary</span><span class="t-label">#A3A09B</span><span class="c-2">Descriptions, roles.</span><span class="swatch__ratio">7.4 : 1 · AAA</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--bg);color:var(--text-3)"><span>Aa</span></div>
+            <div class="swatch__info"><span class="swatch__name">Text tertiary</span><span class="t-label">#8A867F</span><span class="c-2">Labels, metadata.</span><span class="swatch__ratio">5.3 : 1 · AA</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--bg);background-image:linear-gradient(var(--line),var(--line));background-size:100% 1px;background-position:0 50%;background-repeat:no-repeat"></div>
+            <div class="swatch__info"><span class="swatch__name">Divider</span><span class="t-label">#2A2826</span><span class="c-2">Hairlines only. Decorative, carries no meaning.</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--bg);border:1px solid var(--line-strong)"></div>
+            <div class="swatch__info"><span class="swatch__name">Border strong</span><span class="t-label">#66625C</span><span class="c-2">Buttons, inputs, tags.</span><span class="swatch__ratio">3.2 : 1 · UI ≥ 3:1</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--accent-wash);border-color:var(--accent)"></div>
+            <div class="swatch__info"><span class="swatch__name">Accent wash</span><span class="t-label">#F99E35 · 12%</span><span class="c-2">Hover fills, selection.</span></div>
+          </div>
+        </div>
+
+        <div class="dodont">
+          <div class="dodont__item">
+            <div class="dodont__sample" style="color:var(--on-accent)">View case study →</div>
+            <p class="t-small"><span class="c-1"><svg class="icon" style="display:inline;vertical-align:-3px" aria-hidden="true"><use href="#i-check"/></svg> Do:</span> dark text on accent. 9.2 : 1, passes AAA.</p>
+          </div>
+          <div class="dodont__item">
+            <div class="dodont__sample" style="color:#FFFFFF">View case study →</div>
+            <p class="t-small"><span class="c-1"><svg class="icon" style="display:inline;vertical-align:-3px" aria-hidden="true"><use href="#i-close"/></svg> Don’t:</span> white text on accent. 2.1 : 1, fails AA.</p>
+          </div>
+        </div>
+
+        <div class="sub-head"><span class="t-label c-1">02.1 — Interactive states</span></div>
+        <div class="states">
+          <div class="states__row">
+            <span class="t-label c-1">Text link</span>
+            <div class="states__cells">
+              <div class="state"><a class="link" href="#layer-02">Read the case study</a><span class="t-label">Default</span></div>
+              <div class="state"><a class="link is-hover" href="#layer-02">Read the case study</a><span class="t-label">Hover</span></div>
+              <div class="state"><a class="link is-focus" href="#layer-02">Read the case study</a><span class="t-label">Focus</span></div>
+            </div>
+          </div>
+          <div class="states__row">
+            <span class="t-label c-1">Primary button</span>
+            <div class="states__cells">
+              <div class="state"><span class="btn btn--primary">View work <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></span><span class="t-label">Default</span></div>
+              <div class="state"><span class="btn btn--primary is-hover">View work <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></span><span class="t-label">Hover</span></div>
+              <div class="state"><span class="btn btn--primary is-focus">View work <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></span><span class="t-label">Focus</span></div>
+              <div class="state"><span class="btn btn--primary is-active">View work <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></span><span class="t-label">Pressed</span></div>
+              <div class="state"><span class="btn btn--primary is-disabled">View work <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></span><span class="t-label">Disabled</span></div>
+            </div>
+          </div>
+          <div class="states__row">
+            <span class="t-label c-1">Secondary button</span>
+            <div class="states__cells">
+              <div class="state"><span class="btn btn--secondary">Résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></span><span class="t-label">Default</span></div>
+              <div class="state"><span class="btn btn--secondary is-hover">Résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></span><span class="t-label">Hover</span></div>
+              <div class="state"><span class="btn btn--secondary is-focus">Résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></span><span class="t-label">Focus</span></div>
+              <div class="state"><span class="btn btn--secondary is-active">Résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></span><span class="t-label">Pressed</span></div>
+            </div>
+          </div>
+          <div class="states__row">
+            <span class="t-label c-1">Filter tag</span>
+            <div class="states__cells">
+              <div class="state"><span class="tag tag--static">UI/UX <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="t-label">Default</span></div>
+              <div class="state"><span class="tag tag--static is-hover">UI/UX <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="t-label">Hover</span></div>
+              <div class="state"><span class="tag tag--static is-selected">UI/UX <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="t-label">Selected ✓</span></div>
+              <div class="state"><span class="tag tag--static is-focus">UI/UX <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="t-label">Focus</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 Layout ============ -->
+    <section class="layer" id="layer-03" data-layer="03" data-name="Layout" aria-labelledby="layout-title">
+      <div class="wrap">
+        <div class="layer-head"><span class="t-label"><span class="layer-head__num">03</span> — Layout &amp; rhythm</span><span class="t-label">Layer 03 / 08</span></div>
+        <div class="grid section-intro">
+          <h2 class="t-h2 reveal" id="layout-title" style="--c:1 / 9"><span class="line"><span>Asymmetry</span></span><span class="line"><span><em>with a reason.</em></span></span></h2>
+          <div style="--c:9 / 13">
+            <p class="t-body fade-up">Twelve columns on desktop, four on mobile. Text keeps a narrow measure; images break out of it. Nothing is centered by default.</p>
+            <div class="toolbar fade-up" style="margin-top:var(--s-5)">
+              <button class="btn btn--secondary btn--sm" type="button" data-grid-toggle aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg> Show grid</button>
+              <span class="t-label">or press <span class="kbd">G</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editorial spread -->
+        <article class="grid spread" aria-label="Sample editorial spread">
+          <p class="t-label" style="--c:1 / 4">Nº 01 — Brief</p>
+          <h3 class="t-display spread__title" style="--c:1 / 10; font-size:clamp(2.5rem, 1.4rem + 4.4vw, 6rem)">The work is the hero. <em>Everything else is typesetting.</em></h3>
+          <p class="t-small spread__note" style="--c:1 / 4; --cm:2 / -1"><span class="t-label c-1" style="display:block;margin-bottom:6px">Margin note</span>Context sits beside the work, never on top of it. On mobile, notes fold inline under the image.</p>
+          <figure class="spread__figure" style="--c:5 / 13; --cm:1 / -1">
+            <div class="crop bleed-m">
+              <div class="frame"><div class="frame__bar"><span>01</span><span>northbound.example</span></div><div data-mock="coffee"></div></div>
+              <span class="crop__marks" aria-hidden="true"></span>
+            </div>
+            <figcaption class="t-label spread__caption">Fig. 01 — Landing hero, inset on columns 5–12. Crop marks are a nod to print.</figcaption>
+          </figure>
+          <blockquote class="t-quote spread__quote" style="--c:2 / 9; --cm:1 / 4">“Asymmetry gives the eye somewhere to go — and a reason to keep scrolling.”</blockquote>
+        </article>
+
+        <div class="sub-head"><span class="t-label c-1">03.1 — Spacing scale</span></div>
+        <div class="grid" style="row-gap:var(--s-8)">
+          <div class="spacing" style="--c:1 / 8">
+            <div class="spacing__row"><span class="t-label">s-1</span><span class="t-mono c-2">4</span><span class="spacing__bar" style="width:4px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-2</span><span class="t-mono c-2">8</span><span class="spacing__bar" style="width:8px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-3</span><span class="t-mono c-2">12</span><span class="spacing__bar" style="width:12px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-4</span><span class="t-mono c-2">16</span><span class="spacing__bar" style="width:16px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-5</span><span class="t-mono c-2">24</span><span class="spacing__bar" style="width:24px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-6</span><span class="t-mono c-2">32</span><span class="spacing__bar" style="width:32px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-7</span><span class="t-mono c-2">48</span><span class="spacing__bar" style="width:48px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-8</span><span class="t-mono c-2">64</span><span class="spacing__bar" style="width:64px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-9</span><span class="t-mono c-2">96</span><span class="spacing__bar" style="width:96px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-10</span><span class="t-mono c-2">128</span><span class="spacing__bar" style="width:128px"></span></div>
+            <div class="spacing__row"><span class="t-label">s-11</span><span class="t-mono c-2">192</span><span class="spacing__bar" style="width:min(192px, 100%)"></span></div>
+            <div class="spacing__row"><span class="t-label">s-12</span><span class="t-mono c-2">256</span><span class="spacing__bar" style="width:min(256px, 100%)"></span></div>
+          </div>
+          <div style="--c:9 / 13">
+            <p class="t-label c-1" style="margin-bottom:var(--s-5)">Section rhythm</p>
+            <div class="rhythm" aria-label="Vertical rhythm of a section">
+              <div class="rhythm__gap" style="height:48px"><span class="t-label">192 / 96 mobile — section start</span></div>
+              <div class="rhythm__block t-label">Layer label + hairline</div>
+              <div class="rhythm__gap" style="height:32px"><span class="t-label">64</span></div>
+              <div class="rhythm__block t-label">Heading + intro</div>
+              <div class="rhythm__gap" style="height:40px"><span class="t-label">128</span></div>
+              <div class="rhythm__block t-label" style="padding-block:28px">Content</div>
+              <div class="rhythm__gap" style="height:48px"><span class="t-label">192 / 96 mobile — section end</span></div>
+            </div>
+            <p class="t-small" style="margin-top:var(--s-5)">Diagram at quarter scale. Larger gaps signal larger shifts in topic.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 Components ============ -->
+    <section class="layer" id="layer-04" data-layer="04" data-name="Components" aria-labelledby="comp-title">
+      <div class="wrap">
+        <div class="layer-head"><span class="t-label"><span class="layer-head__num">04</span> — Components</span><span class="t-label">Layer 04 / 08</span></div>
+        <div class="grid section-intro">
+          <h2 class="t-h2 reveal" id="comp-title" style="--c:1 / 9"><span class="line"><span>Quiet parts,</span></span><span class="line"><span><em>precise behavior.</em></span></span></h2>
+          <p class="t-body fade-up" style="--c:9 / 13">Components stay out of the way of the work. Shape and typeface tell elements apart, so color is never the only signal.</p>
+        </div>
+
+        <div class="sub-head" style="margin-top:0"><span class="t-label c-1">04.1 — Navigation</span></div>
+        <div class="demo-row">
+          <div class="demo-desktop" style="grid-column:1 / 10">
+            <div class="demo">
+              <div class="demo-nav">
+                <span class="brand"><svg class="brand__mark" viewBox="0 0 22 14" aria-hidden="true"><path d="M0 1h22M0 7h15"/><path d="M0 13h8"/></svg><span class="brand__name">Aron Jay Consuelo</span></span>
+                <span class="nav nav--demo"><span class="nav-link" aria-current="page">Work</span><span class="nav-link is-hover">Playground</span><span class="nav-link">About</span><span class="nav-link">Contact</span></span>
+                <span class="btn btn--secondary btn--sm">Résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></span>
+              </div>
+            </div>
+            <p class="t-small" style="margin-top:var(--s-3)">Desktop bar. Current page: full orange underline. Hover: white underline draws in. The depth gauge on the right edge of this page is the second navigation layer.</p>
+          </div>
+          <div class="gauge-demo" style="grid-column:10 / 13">
+            <ol>
+              <li><i></i>00 Cover</li><li><i></i>01 Brief</li><li class="is-current"><i></i>02 Surface</li><li><i></i>03 Structure</li><li><i></i>04 Stack</li><li><i></i>05 Live</li>
+            </ol>
+            <p class="t-small" style="margin-top:var(--s-3)">Depth gauge on a case study. The current layer gets a longer tick, the accent color and its number.</p>
+          </div>
+          <div style="grid-column:1 / 7">
+            <div class="demo demo-mobile">
+              <div class="demo-nav"><span class="brand__name c-1" style="font-size:1.25rem">Aron Jay Consuelo</span><span class="btn btn--secondary btn--sm">Index <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></span></div>
+              <div class="demo-mobile__bar"><span class="t-label"><span class="c-accent">02</span> / 05 — <span class="c-1">Surface</span></span></div>
+            </div>
+            <p class="t-small" style="margin-top:var(--s-3)">Mobile: the gauge becomes a layer bar under the header, and the links move into a full-screen Index.</p>
+          </div>
+        </div>
+
+        <div class="sub-head"><span class="t-label c-1">04.2 — Links &amp; buttons</span></div>
+        <div class="grid" style="row-gap:var(--s-7)">
+          <div style="--c:1 / 7">
+            <p class="t-body">Inline links are always underlined, like this <a class="link" href="#layer-05">case study on the Northbound storefront</a>. The underline turns orange from left to right on hover.</p>
+            <div class="toolbar" style="margin-top:var(--s-5)">
+              <a class="arrow-link" href="#layer-05"><span>Visit live site</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+            </div>
+          </div>
+          <div class="toolbar" style="--c:8 / 13; align-content:start">
+            <a class="btn btn--primary" href="#layer-05">View case study <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            <a class="btn btn--secondary" href="#contact">Download résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></a>
+          </div>
+        </div>
+
+        <div class="sub-head"><span class="t-label c-1">04.3 — Tags &amp; metadata</span></div>
+        <div class="grid" style="row-gap:var(--s-7)">
+          <div style="--c:1 / 6">
+            <p class="t-label" style="margin-bottom:var(--s-3)">Discipline — outlined pill, sans</p>
+            <div class="tags"><span class="tag tag--static">Web Design</span><span class="tag tag--static">UI/UX</span><span class="tag tag--static">Front-end</span><span class="tag tag--static">Graphic Design</span></div>
+            <p class="t-label" style="margin:var(--s-6) 0 var(--s-3)">Technology — monospace, slash-separated</p>
+            <ul class="stack"><li>AngularJS</li><li>React</li><li>TypeScript</li><li>Figma</li></ul>
+            <p class="t-small" style="margin-top:var(--s-4)">Two kinds of tags, told apart by shape and typeface rather than color.</p>
+          </div>
+          <dl class="meta" style="--c:7 / 13">
+            <dt class="t-label">Role</dt><dd>UI/UX Design · Front-end Development</dd>
+            <dt class="t-label">Discipline</dt><dd>Web Design · UI/UX</dd>
+            <dt class="t-label">Built with</dt><dd><ul class="stack"><li>React</li><li>TypeScript</li><li>Figma</li></ul></dd>
+            <dt class="t-label">Live</dt><dd><a class="arrow-link" style="min-height:0" href="#layer-05"><span>northbound.example</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a></dd>
+          </dl>
+        </div>
+
+        <div class="sub-head"><span class="t-label c-1">04.4 — Dividers</span></div>
+        <div style="display:grid;gap:var(--s-7)">
+          <div><hr class="rule"><p class="t-label" style="margin-top:var(--s-3)">Hairline — between rows and sections</p></div>
+          <div><div class="rule-labeled"><span class="t-label"><span class="c-accent">03</span> — Structure</span></div><p class="t-label" style="margin-top:var(--s-3)">Labeled — opens every layer</p></div>
+          <div><hr class="rule-strata" style="max-width:240px"><p class="t-label" style="margin-top:var(--s-3)">Strata — the brand motif, used once per page</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 Projects ============ -->
+    <section class="layer" id="layer-05" data-layer="05" data-name="Projects" aria-labelledby="proj-title">
+      <div class="wrap">
+        <div class="layer-head"><span class="t-label"><span class="layer-head__num">05</span> — Project presentation</span><span class="t-label">Layer 05 / 08</span></div>
+        <div class="grid section-intro">
+          <h2 class="t-h2 reveal" id="proj-title" style="--c:1 / 9"><span class="line"><span>Selected</span></span><span class="line"><span><em>work</em></span></span></h2>
+          <p class="t-body fade-up" style="--c:9 / 13">A featured “core sample” for the strongest work, then an editorial index for everything else. All projects here are placeholders built in CSS.</p>
+        </div>
+
+        <!-- Featured -->
+        <article class="grid featured" aria-labelledby="feat-title">
+          <div style="--c:1 / 8; --cm:1 / -1">
+            <div class="crop bleed-m">
+              <div class="frame" role="img" aria-label="Placeholder screenshot: Northbound Coffee landing page hero">
+                <div class="frame__bar" aria-hidden="true"><span>01</span><span>northbound.example</span></div>
+                <div class="lens" data-lens="lens-range" data-mock-lens="coffee">
+                  <span class="lens__ring" aria-hidden="true"></span>
+                  <span class="lens__divider" aria-hidden="true"></span>
+                </div>
+              </div>
+              <span class="crop__marks" aria-hidden="true"></span>
+            </div>
+            <div class="lens-control">
+              <label class="t-label c-1" for="lens-range">Structure lens</label>
+              <input type="range" id="lens-range" min="0" max="100" value="0" step="1" aria-valuetext="Structure hidden">
+              <output class="t-label" for="lens-range" id="lens-out">0%</output>
+            </div>
+            <p class="t-small" style="margin-top:var(--s-2)">Hover the screenshot to look underneath, or use the slider (keyboard and touch).</p>
+          </div>
+          <div style="--c:9 / 13">
+            <div class="featured__num"><span class="t-label c-accent">Nº 01</span><span class="t-label">Featured</span></div>
+            <h3 class="t-h3 featured__title" id="feat-title">Northbound Coffee</h3>
+            <p class="t-label featured__role">Role — UI/UX Design · Front-end Development</p>
+            <p class="t-body c-2 featured__desc">A storefront redesign for a small-batch roastery: calmer product pages, a simpler subscription flow, and a React component library the team can publish with.</p>
+            <div class="tags"><span class="tag tag--static">Web Design</span><span class="tag tag--static">UI/UX</span><span class="tag tag--static">Front-end</span></div>
+            <ul class="stack"><li>React</li><li>TypeScript</li><li>Figma</li></ul>
+            <div class="featured__actions">
+              <a class="btn btn--primary" href="#layer-06">View case study <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+              <a class="arrow-link" href="#layer-05"><span>Live site</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Index -->
+        <div class="index-head" id="index">
+          <div>
+            <p class="t-label" style="margin-bottom:var(--s-3)">Index — all work</p>
+            <h3 class="t-h3">Contents</h3>
+          </div>
+          <div>
+            <div class="tags" role="group" aria-label="Filter projects by discipline">
+              <button class="tag" type="button" data-filter="all" aria-pressed="true">All <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button>
+              <button class="tag" type="button" data-filter="web" aria-pressed="false">Web Design <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button>
+              <button class="tag" type="button" data-filter="uiux" aria-pressed="false">UI/UX <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button>
+              <button class="tag" type="button" data-filter="frontend" aria-pressed="false">Front-end <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button>
+              <button class="tag" type="button" data-filter="game" aria-pressed="false">Games <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button>
+            </div>
+            <p class="t-label" id="filter-status" role="status" style="margin-top:var(--s-3)">Showing 4 of 4 projects</p>
+          </div>
+        </div>
+
+        <ol class="index" data-index>
+          <li class="index-row" data-mock-key="coffee" data-cats="web uiux frontend">
+            <a href="#layer-05">
+              <span class="index-row__thumb frame" aria-hidden="true"><span data-mock="coffee" style="display:block"></span></span>
+              <span class="index-row__num">01</span>
+              <span class="index-row__title">Northbound Coffee</span>
+              <span class="index-row__role">UI/UX Design · Front-end</span>
+              <span class="stack"><span>React / TypeScript / Figma</span></span>
+              <svg class="icon index-row__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </a>
+          </li>
+          <li class="index-row" data-mock-key="ledger" data-cats="uiux">
+            <a href="#layer-05">
+              <span class="index-row__thumb frame" aria-hidden="true"><span data-mock="ledger" style="display:block"></span></span>
+              <span class="index-row__num">02</span>
+              <span class="index-row__title">Ledgerly</span>
+              <span class="index-row__role">UI/UX Design</span>
+              <span class="stack"><span>Figma / Design system</span></span>
+              <svg class="icon index-row__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </a>
+          </li>
+          <li class="index-row" data-mock-key="clinic" data-cats="web frontend">
+            <a href="#layer-05">
+              <span class="index-row__thumb frame" aria-hidden="true"><span data-mock="clinic" style="display:block"></span></span>
+              <span class="index-row__num">03</span>
+              <span class="index-row__title">Kindred Clinic</span>
+              <span class="index-row__role">Web Design · Front-end</span>
+              <span class="stack"><span>AngularJS / Sass</span></span>
+              <svg class="icon index-row__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </a>
+          </li>
+          <li class="index-row" data-mock-key="game" data-cats="game">
+            <a href="#layer-05">
+              <span class="index-row__thumb frame" aria-hidden="true"><span data-mock="game" style="display:block"></span></span>
+              <span class="index-row__num">04</span>
+              <span class="index-row__title">Untitled PICO-8 Game</span>
+              <span class="index-row__role">Game Design · Pixel Art · Code</span>
+              <span class="stack"><span>PICO-8 / Lua · Playable</span></span>
+              <svg class="icon index-row__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </a>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 06 Motion ============ -->
+    <section class="layer" id="layer-06" data-layer="06" data-name="Motion" aria-labelledby="motion-title">
+      <div class="wrap">
+        <div class="layer-head"><span class="t-label"><span class="layer-head__num">06</span> — Motion</span><span class="t-label">Layer 06 / 08</span></div>
+        <div class="grid section-intro">
+          <h2 class="t-h2 reveal" id="motion-title" style="--c:1 / 9"><span class="line"><span>Motion explains</span></span><span class="line"><span><em>the structure.</em></span></span></h2>
+          <p class="t-body fade-up" style="--c:9 / 13">Layers move the way the content is organised. One easing curve, four durations, nothing loops, and everything respects your motion setting (try the toggle in the header).</p>
+        </div>
+
+        <div class="grid motion-tokens">
+          <div style="--c:1 / 5">
+            <p class="t-label c-1" style="margin-bottom:var(--s-4)">House easing — expo-out</p>
+            <svg class="curve" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <line x1="0" y1="100" x2="100" y2="0"/>
+              <path d="M0 100 C16 0 30 0 100 0"/>
+            </svg>
+            <p class="t-mono c-2" style="margin-top:var(--s-3)">cubic-bezier(.16, 1, .3, 1)</p>
+          </div>
+          <div style="--c:6 / 13">
+            <p class="t-label c-1" style="margin-bottom:var(--s-4)">Durations — hover to compare</p>
+            <div class="durations">
+              <div class="duration" style="--dur:160ms"><span class="t-mono c-2">160ms</span><span class="duration__bar"></span></div>
+              <div class="duration" style="--dur:280ms"><span class="t-mono c-2">280ms</span><span class="duration__bar"></span></div>
+              <div class="duration" style="--dur:600ms"><span class="t-mono c-2">600ms</span><span class="duration__bar"></span></div>
+              <div class="duration" style="--dur:1000ms"><span class="t-mono c-2">1000ms</span><span class="duration__bar"></span></div>
+            </div>
+            <p class="t-small" style="margin-top:var(--s-4)">Micro-interactions 160–280ms · reveals 600–1000ms · layer transitions follow your scroll.</p>
+          </div>
+        </div>
+
+        <div class="reveal-demo">
+          <p class="t-label" style="margin-bottom:var(--s-5)">06.1 — Text reveal</p>
+          <h3 class="t-display reveal" id="reveal-demo" style="font-size:clamp(2.5rem, 1.4rem + 4.4vw, 6rem)">
+            <span class="line"><span>Every line arrives</span></span>
+            <span class="line"><span><em>in reading order.</em></span></span>
+          </h3>
+          <div class="toolbar">
+            <button class="btn btn--secondary btn--sm" type="button" data-replay="reveal-demo"><svg class="icon" aria-hidden="true"><use href="#i-replay"/></svg> Replay</button>
+            <span class="t-label">Line mask · 90ms stagger · reduced motion: a simple fade</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06.2 Strata scroll scene -->
+      <div class="scene" data-scene="strata" aria-labelledby="scene-title">
+        <div class="scene__sticky">
+          <div class="wrap">
+            <div class="grid scene__grid">
+              <div style="--c:1 / 5">
+                <p class="t-label">06.2 — Scroll-driven: layer transition</p>
+                <h3 class="t-h3 scene__intro" id="scene-title" style="margin-top:var(--s-4)">Scroll down through a project.</h3>
+                <ol class="steps">
+                  <li data-active><span class="t-label">02</span><span class="t-h3">Surface</span><span class="t-label steps__now">Viewing</span></li>
+                  <li><span class="t-label">03</span><span class="t-h3">Structure</span><span class="t-label steps__now">Viewing</span></li>
+                  <li><span class="t-label">04</span><span class="t-h3">Stack</span><span class="t-label steps__now">Viewing</span></li>
+                </ol>
+              </div>
+              <div style="--c:6 / 13">
+                <div class="stack-stage">
+                  <div class="layer-card layer-card--1">
+                    <div class="frame" role="img" aria-label="Surface layer: Northbound Coffee landing page (placeholder)">
+                      <div class="frame__bar" aria-hidden="true"><span>02</span><span>Surface</span></div>
+                      <div data-mock="coffee"></div>
+                    </div>
+                  </div>
+                  <div class="layer-card layer-card--2">
+                    <div class="frame" role="img" aria-label="Structure layer: blueprint reading of the same page">
+                      <div class="frame__bar" aria-hidden="true"><span>03</span><span>Structure</span></div>
+                      <div data-mock="coffee" data-structure></div>
+                    </div>
+                  </div>
+                  <div class="layer-card layer-card--3">
+                    <div class="frame">
+                      <div class="frame__bar" aria-hidden="true"><span>04</span><span>Stack</span></div>
+                      <div class="spec-card">
+                        <div>
+                          <p class="t-label c-accent">Nº 01 — Stack</p>
+                          <p class="t-h3" style="margin-top:var(--s-2)">Northbound Coffee</p>
+                        </div>
+                        <dl class="meta">
+                          <dt class="t-label">Role</dt><dd>UI/UX Design · Front-end</dd>
+                          <dt class="t-label">Built with</dt><dd><ul class="stack"><li>React</li><li>TypeScript</li><li>Figma</li></ul></dd>
+                          <dt class="t-label">Live</dt><dd>northbound.example ↗</dd>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============ 07 Responsive ============ -->
+    <section class="layer" id="layer-07" data-layer="07" data-name="Responsive" aria-labelledby="resp-title">
+      <div class="wrap">
+        <div class="layer-head"><span class="t-label"><span class="layer-head__num">07</span> — Responsive</span><span class="t-label">Layer 07 / 08</span></div>
+        <div class="grid section-intro">
+          <h2 class="t-h2 reveal" id="resp-title" style="--c:1 / 9"><span class="line"><span>Recomposed,</span></span><span class="line"><span><em>not shrunk.</em></span></span></h2>
+          <p class="t-body fade-up" style="--c:9 / 13">Both phones below are this exact page at 320px, live. Scroll inside them. Every change is a layout decision, not a scale-down.</p>
+        </div>
+
+        <div class="grid" style="row-gap:var(--s-8)">
+          <div class="phones" style="--c:1 / 9">
+            <div class="phone">
+              <div class="phone__body"><iframe title="This page at mobile width, opened at the cover" data-src="?embed=1#layer-00" loading="lazy"></iframe></div>
+              <span class="t-label">Cover</span>
+            </div>
+            <div class="phone">
+              <div class="phone__body"><iframe title="This page at mobile width, opened at the project index" data-src="?embed=1#index" loading="lazy"></iframe></div>
+              <span class="t-label">Project index</span>
+            </div>
+          </div>
+          <p class="t-small only-small" style="--cm:1 / -1">You’re already on a small screen, so this page is the mobile demo.</p>
+          <ol class="notes" style="--c:10 / 13">
+            <li><span class="t-label c-accent">01</span><div><strong>Display type stays loud</strong><span class="t-small">The name still fills the width. The italic offset becomes a smaller indent instead of disappearing.</span></div></li>
+            <li><span class="t-label c-accent">02</span><div><strong>Images bleed edge to edge</strong><span class="t-small">Screenshots drop their frames and run full-width, like a magazine column break.</span></div></li>
+            <li><span class="t-label c-accent">03</span><div><strong>Index thumbnails alternate</strong><span class="t-small">The hover preview becomes inline thumbnails, staggered left and right to keep the layout asymmetric.</span></div></li>
+            <li><span class="t-label c-accent">04</span><div><strong>Gauge → layer bar</strong><span class="t-small">The depth gauge becomes a slim bar under the header with the current layer’s number and name.</span></div></li>
+            <li><span class="t-label c-accent">05</span><div><strong>Notes fold inline</strong><span class="t-small">Margin notes move under the image, indented one column with an orange rule.</span></div></li>
+            <li><span class="t-label c-accent">06</span><div><strong>Hover becomes touch</strong><span class="t-small">The lens turns into the slider. Layer steps become tabs with an underline.</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 Accessibility ============ -->
+    <section class="layer" id="layer-08" data-layer="08" data-name="Access" aria-labelledby="a11y-title">
+      <div class="wrap">
+        <div class="layer-head"><span class="t-label"><span class="layer-head__num">08</span> — Accessibility</span><span class="t-label">Layer 08 / 08</span></div>
+        <div class="grid section-intro">
+          <h2 class="t-h2 reveal" id="a11y-title" style="--c:1 / 9"><span class="line"><span>Polish includes</span></span><span class="line"><span><em>everyone.</em></span></span></h2>
+          <p class="t-body fade-up" style="--c:9 / 13">These rules are built into the system, so later pages can’t forget them.</p>
+        </div>
+        <ul class="a11y">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><strong>Readable contrast</strong><span class="t-small">All text is at least 4.5 : 1, and the smallest gray is 5.3 : 1. White never sits on orange.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><strong>Color is never the only signal</strong><span class="t-small">Current page = underline. Current layer = longer tick + number. Selected filter = check icon. Inline links are always underlined.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><strong>Motion is optional</strong><span class="t-small">Follows your system setting, with a manual toggle. Pinned scenes become plain stacked content, and nothing auto-plays or loops.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><strong>Keyboard first</strong><span class="t-small">Skip link, a visible orange focus ring, a slider in place of the hover lens, and a native dialog menu (Esc closes it and focus returns).</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><strong>Real structure</strong><span class="t-small">Landmarks, one h1, labelled sections. Screenshots carry text alternatives, and decorative layers are hidden from screen readers.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><strong>Comfortable targets</strong><span class="t-small">Interactive elements are 40–48px tall, and at least 44px on touch screens.</span></div></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Contact / footer ============ -->
+  <footer class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <hr class="rule-strata" style="max-width:240px">
+      <h2 class="t-display contact__title" id="contact-title">Let’s build something <em>considered.</em></h2>
+      <div class="grid contact__grid">
+        <div style="--c:1 / 8">
+          <p class="t-body" style="margin-bottom:var(--s-5)">Open to UI/UX Designer and Front-end Developer roles. Email is the fastest way to reach me.</p>
+          <div class="contact__email">
+            <a class="link" href="mailto:hello@example.com">hello@example.com</a>
+            <button class="copy-btn" type="button" data-copy="hello@example.com"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span data-copy-label>Copy</span></button>
+            <span class="sr-only" role="status" id="copy-status"></span>
+          </div>
+        </div>
+        <div class="contact__links" style="--c:8 / 13">
+          <a class="btn btn--primary" href="#contact">Download résumé <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></a>
+          <a class="arrow-link" href="#contact"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg><span>LinkedIn</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </div>
+      <div class="colophon">
+        <span class="t-label">Aron Jay Consuelo — Style tile v0.1 · not the final site</span>
+        <span class="t-label">Set in Barlow Condensed, Geist &amp; Geist Mono · built by hand</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

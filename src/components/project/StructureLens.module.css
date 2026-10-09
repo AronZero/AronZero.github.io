@@ -1,0 +1,14 @@
+.lens { position: relative; overflow: hidden; }
+.layer { clip-path: circle(0px at 50% 50%); transition: clip-path 180ms var(--ease); }
+.ring {
+  position: absolute; top: 0; left: 0; width: 0; height: 0; border-radius: 50%;
+  border: 1px solid var(--accent-ink); pointer-events: none; opacity: 0;
+  transition: opacity var(--d-2) var(--ease);
+}
+.lens[data-lensing] .ring { opacity: 1; }
+.divider { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--accent-ink); pointer-events: none; opacity: 0; }
+.lens[data-split] .divider { opacity: 1; }
+.control { display: flex; align-items: center; gap: var(--s-4); margin-top: var(--s-5); }
+.control output { min-width: 4ch; text-align: right; }
+
+:global(html[data-motion="reduced"]) .layer { transition: none; }

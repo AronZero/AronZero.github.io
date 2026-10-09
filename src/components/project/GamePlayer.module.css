@@ -1,0 +1,43 @@
+.player { width: 100%; }
+
+/* PICO-8 renders a square screen; the frame keeps the whole of it in view. */
+.stage {
+  position: relative; aspect-ratio: 1;
+  max-height: calc(100svh - var(--header-h) - var(--s-10));
+  margin-inline: auto;
+  background: var(--surface-1);
+}
+.frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+
+.poster {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  padding: 0; border: 0; background: var(--surface-1); cursor: pointer; color: inherit;
+}
+.posterShot {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+  transition: opacity var(--d-2) var(--ease);
+}
+.posterBtn { position: relative; pointer-events: none; }
+.poster:hover .posterShot { opacity: .72; }
+.poster:hover .posterBtn { background: var(--accent-hover); }
+.poster:hover .posterBtn .icon { transform: translateX(3px); }
+.poster:focus-visible { outline-offset: -4px; }
+
+.toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--s-3) var(--s-5); margin-top: var(--s-5);
+}
+.toolbar p { margin: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.actions [aria-pressed="true"] { border-color: var(--accent-ink); background: var(--accent-wash); }
+
+/* Phones get the shell's own full-screen button over the game instead. */
+@media (pointer: coarse) { .full { display: none; } }
+
+/* Phones: once running, a tall stage so the screen sits on top and the shell's touch controls fit below it. */
+@media (max-width: 719px) {
+  .stage[data-running] { aspect-ratio: 9 / 16; max-height: calc(100svh - var(--header-h) - var(--s-9)); }
+}
+
+:global(html[data-motion="reduced"]) .posterShot,
+:global(html[data-motion="reduced"]) .posterBtn .icon { transition: none; transform: none; }

@@ -1,0 +1,155 @@
+/* Shared UI primitives (global, used across pages).
+   Page-specific layout lives in CSS Modules next to each component. */
+
+/* ---------- Icons (Lucide) ---------- */
+.icon { flex: none; }
+
+/* ---------- Links ---------- */
+.link {
+  color: var(--text-1); text-decoration: none; padding-bottom: 2px;
+  background:
+    linear-gradient(var(--accent-ink), var(--accent-ink)) 0 100% / 0% 1px no-repeat,
+    linear-gradient(var(--line-strong), var(--line-strong)) 0 100% / 100% 1px no-repeat;
+  transition: background-size var(--d-3) var(--ease);
+}
+.link:hover { background-size: 100% 1px, 100% 1px; }
+
+.arrow-link {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+  color: var(--text-1); text-decoration: none; font-weight: 500; font-size: var(--fs-small);
+  background: none; border: 0; padding: 0; cursor: pointer;
+}
+.arrow-link > span { background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat; transition: background-size var(--d-3) var(--ease); }
+.arrow-link:hover > span { background-size: 100% 1px; }
+.arrow-link .icon { transition: transform var(--d-2) var(--ease); }
+.arrow-link:hover .icon--up-right { transform: translate(2px, -2px); }
+.arrow-link:hover .icon--right { transform: translateX(3px); }
+.arrow-link:hover .icon--left { transform: translateX(-3px); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 22px;
+  font: 500 var(--fs-small)/1 var(--font-sans); letter-spacing: -.005em;
+  border: 1px solid transparent; border-radius: var(--radius-sm);
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background-color var(--d-2) var(--ease), border-color var(--d-2) var(--ease),
+              color var(--d-2) var(--ease), transform var(--d-1) var(--ease);
+}
+.btn .icon { transition: transform var(--d-2) var(--ease); }
+.btn--primary { background: var(--accent); color: var(--on-accent); }
+.btn--primary:hover { background: var(--accent-hover); }
+.btn--primary:hover .icon { transform: translateX(3px); }
+.btn--primary:active { background: var(--accent-press); transform: translateY(1px); }
+.btn--secondary { background: transparent; color: var(--text-1); border-color: var(--line-strong); }
+.btn--secondary:hover { border-color: var(--accent-ink); background: var(--accent-wash); }
+.btn--secondary:active { transform: translateY(1px); background: var(--accent-wash-strong); }
+.btn--sm { min-height: 40px; padding: 0 14px; font-size: .875rem; }
+.btn[disabled] { opacity: .38; cursor: not-allowed; }
+@media (max-width: 719px) { .btn--sm { min-height: 44px; } }
+
+/* ---------- Tags ---------- */
+.tags { display: flex; flex-wrap: wrap; gap: var(--s-2); list-style: none; padding: 0; margin: 0; }
+.tag {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px;
+  border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: transparent;
+  font: 400 .8125rem/1 var(--font-sans); color: var(--text-2);
+  transition: color var(--d-2) var(--ease), border-color var(--d-2) var(--ease), background-color var(--d-2) var(--ease);
+}
+button.tag { cursor: pointer; }
+button.tag:hover { color: var(--text-1); border-color: var(--text-2); }
+.tag[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.tag__check { width: 0; opacity: 0; transition: width var(--d-2) var(--ease), opacity var(--d-2); }
+.tag[aria-pressed="true"] .tag__check { width: 14px; opacity: 1; }
+@media (max-width: 719px) { button.tag { min-height: 40px; } }
+
+.stack { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; font-family: var(--font-mono); font-size: .8125rem; color: var(--text-2); }
+.stack li + li::before { content: "/"; margin: 0 .6em; color: var(--text-3); }
+
+/* ---------- Metadata ---------- */
+.meta { display: grid; grid-template-columns: max-content 1fr; column-gap: var(--s-6); margin: 0; }
+.meta dt, .meta dd { padding: var(--s-3) 0; border-top: 1px solid var(--line); }
+.meta dd { color: var(--text-1); font-size: var(--fs-small); }
+
+/* ---------- Section structure ---------- */
+.layer-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-4);
+  padding-top: var(--s-4); border-top: 1px solid var(--line); margin-bottom: var(--s-8);
+}
+.layer-head__num { color: var(--accent-ink); }
+.text-color-accent { color: var(--accent-ink); }
+@media (max-width: 719px) { .layer-head { margin-bottom: var(--s-7); } }
+
+.rule-strata {
+  height: 9px; border: 0; margin: 0; max-width: 240px;
+  background:
+    linear-gradient(var(--line-strong), var(--line-strong)) 0 0 / 100% 1px no-repeat,
+    linear-gradient(var(--line-strong), var(--line-strong)) 0 4px / 64% 1px no-repeat,
+    linear-gradient(var(--accent-ink), var(--accent-ink)) 0 8px / 28% 1px no-repeat;
+}
+
+.strata-lines { display: grid; gap: 5px; }
+.strata-lines i { display: block; height: 1px; background: var(--line-strong); transform-origin: left; }
+.strata-lines i:nth-child(2) { width: 64%; }
+.strata-lines i:nth-child(3) { width: 28%; background: var(--accent-ink); }
+html.js[data-motion="full"] .strata-lines.reveal-draw i { transform: scaleX(0); transition: transform 1.2s var(--ease) calc(400ms + var(--i, 0) * 120ms + var(--intro-offset, 0ms)); }
+html.js[data-motion="full"] .strata-lines.reveal-draw.is-in i { transform: scaleX(1); }
+
+/* ---------- Browser frame + crop marks ---------- */
+.frame {
+  display: block;
+  position: relative; overflow: hidden; border-radius: var(--radius-md);
+  background: var(--surface-2); border: 1px solid var(--line);
+  box-shadow: var(--shadow-frame);
+}
+.frame__bar {
+  height: 30px; display: flex; align-items: center; justify-content: center; position: relative;
+  border-bottom: 1px solid var(--line);
+  font: 400 .6875rem/1 var(--font-mono); color: var(--text-3); letter-spacing: .02em;
+}
+.frame__bar > :first-child { position: absolute; left: 12px; }
+.frame__shot { display: block; width: 100%; height: auto; background: var(--surface-1); }
+
+.crop { position: relative; }
+.crop__marks {
+  --c: var(--text-3); --o: 18px; --l: 12px;
+  position: absolute; inset: calc(var(--o) * -1); pointer-events: none;
+  background:
+    linear-gradient(var(--c), var(--c)) 0 var(--o) / var(--l) 1px,
+    linear-gradient(var(--c), var(--c)) var(--o) 0 / 1px var(--l),
+    linear-gradient(var(--c), var(--c)) 100% var(--o) / var(--l) 1px,
+    linear-gradient(var(--c), var(--c)) calc(100% - var(--o)) 0 / 1px var(--l),
+    linear-gradient(var(--c), var(--c)) 0 calc(100% - var(--o)) / var(--l) 1px,
+    linear-gradient(var(--c), var(--c)) var(--o) 100% / 1px var(--l),
+    linear-gradient(var(--c), var(--c)) 100% calc(100% - var(--o)) / var(--l) 1px,
+    linear-gradient(var(--c), var(--c)) calc(100% - var(--o)) 100% / 1px var(--l);
+  background-repeat: no-repeat;
+}
+@media (max-width: 719px) {
+  .bleed-m .frame { border-radius: 0; border-inline: 0; }
+  .bleed-m .crop__marks { display: none; }
+}
+
+/* ---------- Range input (lens slider) ---------- */
+.range {
+  -webkit-appearance: none; appearance: none; flex: 1; height: 32px; background: transparent; cursor: pointer;
+}
+.range::-webkit-slider-runnable-track { height: 1px; background: var(--line-strong); }
+.range::-moz-range-track { height: 1px; background: var(--line-strong); }
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%;
+  background: var(--accent); border: 3px solid var(--bg);
+}
+.range::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); }
+
+/* ---------- Dialogs ---------- */
+html:has(dialog[open]) { overflow: hidden; }
+
+/* ---------- Route transitions (View Transitions API) ---------- */
+::view-transition-old(root) { animation: vt-out 260ms var(--ease-io) both; }
+::view-transition-new(root) { animation: vt-in 520ms var(--ease) both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-12px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(16px); } }
+
+/* ---------- Pixel art (game screenshots) ---------- */
+img[data-pixel] { image-rendering: pixelated; }

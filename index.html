@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aron Jay Consuelo — UI/UX Designer & Front-end Developer</title>
+    <meta name="description" content="Portfolio of Aron Jay Consuelo, a UI/UX designer specialising in front-end development, with a background in graphic design." />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0F0E0D" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>
+      // Runs before first paint: sets theme and motion mode so neither flashes.
+      (function () {
+        var root = document.documentElement;
+        var theme = null;
+        try {
+          theme = localStorage.getItem('ajc-theme');
+          localStorage.removeItem('ajc-motion'); // old manual motion setting, no longer used
+        } catch (e) {}
+        root.dataset.theme = theme === 'light' ? 'light' : 'dark';
+        if (theme === 'light') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#F5F2ED');
+        // Motion is on unless the OS asks for reduced motion.
+        root.dataset.motion = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+        root.classList.add('js');
+        // First-entry intro: home page only, once per browser session, full motion, visible tab, no Save-Data.
+        // ?intro=replay (the only accepted value) forces it for review.
+        var force = new URLSearchParams(location.search).get('intro') === 'replay';
+        var seen = '1';
+        try { seen = sessionStorage.getItem('ajc-intro'); } catch (e) {} // storage blocked: can't remember it, so don't play
+        var saveData = !!(navigator.connection && navigator.connection.saveData);
+        if (root.dataset.motion === 'full' && location.pathname === '/' && !location.hash &&
+            (force || (!seen && document.visibilityState === 'visible' && !saveData))) {
+          root.dataset.intro = 'play';
+        }
+        try { sessionStorage.setItem('ajc-intro', '1'); } catch (e) {} // any entry counts, so deep links don't play it later
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding:24px;font-family:system-ui,sans-serif;color:#F2F0ED;background:#0F0E0D">This portfolio needs JavaScript for its interactive project views.</p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

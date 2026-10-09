@@ -1,0 +1,35 @@
+/* While the first-entry intro plays, reveals already on screen wait for the
+   overlay to lift (--intro-offset). Content is in the DOM from the start. */
+html[data-intro="play"] { --intro-offset: var(--intro-hold); }
+
+/* Reveal primitives. Hidden states only apply once JS has marked the
+   document (html.js), so content is never lost without JavaScript. */
+.reveal .line {
+  display: block;
+  overflow: hidden;
+  padding: 0 .08em .17em 0;
+  margin-bottom: -.1em;
+}
+.reveal .line > span { display: block; }
+
+html.js[data-motion="full"] .reveal .line > span {
+  transform: translateY(110%);
+  transition: transform var(--d-4) var(--ease) calc(var(--i, 0) * 90ms + var(--intro-offset, 0ms));
+}
+html.js[data-motion="full"] .reveal.is-in .line > span { transform: none; }
+
+html.js[data-motion="full"] .fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--d-4) var(--ease) calc(var(--delay, 0ms) + var(--intro-offset, 0ms)),
+    transform var(--d-4) var(--ease) calc(var(--delay, 0ms) + var(--intro-offset, 0ms));
+}
+html.js[data-motion="full"] .fade-up.is-in { opacity: 1; transform: none; }
+
+/* Reduced motion: no movement, just a short fade. */
+html.js[data-motion="reduced"] :is(.reveal .line > span, .fade-up) {
+  opacity: 0;
+  transition: opacity 300ms linear;
+}
+html.js[data-motion="reduced"] :is(.reveal.is-in .line > span, .fade-up.is-in) { opacity: 1; }

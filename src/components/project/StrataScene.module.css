@@ -1,0 +1,73 @@
+.scene { --t1: 0; --t2: 0; position: relative; height: 340vh; }
+.sticky {
+  position: sticky; top: 0; height: 100vh; height: 100svh;
+  display: flex; align-items: center; overflow: hidden;
+  padding-top: var(--header-h);
+}
+.grid { row-gap: var(--s-6); align-items: center; width: 100%; }
+.title { margin-top: var(--s-4); }
+
+.steps { list-style: none; padding: 0; margin: var(--s-6) 0 0; border-top: 1px solid var(--line); }
+.steps li {
+  display: flex; align-items: baseline; gap: var(--s-4); padding: var(--s-4) 0;
+  border-bottom: 1px solid var(--line); color: var(--text-3);
+  transition: color var(--d-2) var(--ease);
+}
+.steps li :global(.t-label) { min-width: 2.5em; }
+.stepName { font-family: var(--font-display); font-weight: var(--fw-display); font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem); line-height: 1.05; color: inherit; }
+.now { margin-left: auto; opacity: 0; color: var(--accent-ink) !important; transition: opacity var(--d-2); }
+.steps li[data-active] { color: var(--text-1); }
+.steps li[data-active] .now { opacity: 1; }
+.open { margin-top: var(--s-5); }
+
+.stage { position: relative; perspective: 1800px; aspect-ratio: 16 / 11.6; }
+.card { position: absolute; top: 0; left: 0; right: 0; transform-origin: 50% 0; will-change: transform, opacity; }
+.card::after {
+  content: ""; position: absolute; inset: 0; border-radius: var(--radius-md);
+  background: var(--bg); opacity: var(--dim, 0); pointer-events: none;
+}
+.card1 {
+  z-index: 3;
+  transform: translate3d(0, calc(var(--t1) * -30%), calc(var(--t1) * 80px)) rotateX(calc(var(--t1) * 18deg));
+  opacity: calc(1 - var(--t1) * 1.2);
+}
+.card2 {
+  z-index: 2; --dim: calc((1 - var(--t1)) * .55);
+  transform: translate3d(0, calc((1 - var(--t1)) * 5% - var(--t2) * 30%), calc(var(--t2) * 80px))
+             rotateX(calc(var(--t2) * 18deg)) scale(calc(1 - (1 - var(--t1)) * .05));
+  opacity: calc(1 - var(--t2) * 1.2);
+}
+.card3 {
+  z-index: 1; --dim: calc((1 - var(--t2)) * .55);
+  transform: translate3d(0, calc((1 - var(--t1)) * 5% + (1 - var(--t2)) * 5%), 0)
+             scale(calc(1 - (1 - var(--t1)) * .05 - (1 - var(--t2)) * .05));
+}
+
+.blueprintBox { position: relative; }
+.sizer { visibility: hidden; }
+.spec {
+  aspect-ratio: 16 / 10; padding: clamp(16px, 3vw, 40px);
+  display: flex; flex-direction: column; justify-content: space-between; gap: var(--s-4);
+  background: var(--surface-1);
+}
+.specTitle { margin-top: var(--s-2); }
+
+@media (max-width: 719px) {
+  .scene { height: 300vh; }
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: var(--s-4); }
+  .steps li { flex-direction: column; gap: 2px; padding: var(--s-3) 0; border-bottom-width: 2px; }
+  .steps li[data-active] { border-bottom-color: var(--accent-ink); }
+  .now { display: none; }
+  .stepName { font-size: 1.375rem; }
+  .title, .open { display: none; }
+  .spec { aspect-ratio: auto; min-height: 56vw; }
+}
+
+/* Reduced motion: no pinning, layers stacked as plain content. */
+:global(html[data-motion="reduced"]) .scene { height: auto; padding-block: var(--s-8); }
+:global(html[data-motion="reduced"]) .sticky { position: static; height: auto; overflow: visible; padding-top: 0; }
+:global(html[data-motion="reduced"]) .stage { aspect-ratio: auto; perspective: none; display: grid; gap: var(--s-6); }
+:global(html[data-motion="reduced"]) .card { position: relative; transform: none; opacity: 1; --dim: 0; }
+:global(html[data-motion="reduced"]) .title,
+:global(html[data-motion="reduced"]) .open { display: block; }
+:global(html[data-motion="reduced"]) .open { display: inline-flex; }

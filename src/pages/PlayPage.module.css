@@ -1,0 +1,31 @@
+.play { padding-top: calc(var(--header-h) + var(--s-8)); }
+
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-4); margin-bottom: var(--s-7); }
+
+.layout { row-gap: var(--s-7); align-items: start; }
+.title { max-width: 12ch; }
+.role { margin-top: var(--s-5); }
+
+.details > .t-label { margin: 0 0 var(--s-3); }
+.controls { margin: 0 0 var(--s-5); border-top: 1px solid var(--line); }
+.control { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-3) 0; border-bottom: 1px solid var(--line); }
+.control dt { min-width: 7.5em; }
+.control dd { margin: 0; color: var(--text-1); }
+.kbd {
+  display: inline-block; padding: 2px var(--s-2); min-width: 2em; text-align: center;
+  font: 400 var(--fs-mono)/1.6 var(--font-mono); color: var(--text-1);
+  border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: var(--radius-sm);
+}
+.external { margin-top: var(--s-6); }
+
+/* Wide screens: title and controls in a narrow column beside the game. */
+@media (min-width: 1100px) {
+  .layout { grid-template-rows: auto 1fr; }
+  .head { --c: 1 / 5; }
+  .details { --c: 1 / 5; }
+  .stage { --c: 6 / 13; grid-row: 1 / span 2; }
+}
+
+@media (max-width: 719px) {
+  .layout { row-gap: var(--s-6); }
+}

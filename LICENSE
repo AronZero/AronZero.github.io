@@ -1,6 +1,14 @@
+Scope: this MIT licence covers the source code only (HTML, CSS, TypeScript,
+JavaScript, configuration and build scripts). It does not cover the content,
+which is all rights reserved by Aron Jay Consuelo unless stated otherwise:
+project screenshots and images, the résumé, the AJC logo and favicon, written
+copy, and the Astrox game and its art. Third-party components keep their own
+licences: fonts and libraries are listed in public/third-party-licenses.txt, and
+the Astrox music is by Gruber, used under licence and credited on its project page.
+
 MIT License
 
-Copyright (c) 2026 AronZero
+Copyright (c) 2026 Aron Jay Consuelo (AronZero)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

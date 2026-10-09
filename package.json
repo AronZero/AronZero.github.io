@@ -1,0 +1,33 @@
+{
+  "name": "aronzero-portfolio",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Portfolio of Aron Jay Consuelo — UI/UX Designer & Front-end Developer.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run typecheck && npm run licenses && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "licenses": "node scripts/licenses.mjs",
+    "audit:deps": "npm audit && npm audit signatures"
+  },
+  "dependencies": {
+    "@fontsource-variable/geist": "5.3.0",
+    "@fontsource-variable/geist-mono": "5.3.0",
+    "@fontsource/barlow-condensed": "5.3.0",
+    "lucide-react": "1.47.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  }
+}

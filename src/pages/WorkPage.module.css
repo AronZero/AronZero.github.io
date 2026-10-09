@@ -1,0 +1,7 @@
+.page { padding-top: calc(var(--header-h) + var(--s-10)); min-height: 80svh; }
+.intro { row-gap: var(--s-6); align-items: end; margin-bottom: var(--s-9); }
+.intro > :first-child { --c: 1 / 8; }
+.filter { margin-bottom: var(--s-7); }
+@media (max-width: 719px) {
+  .page { padding-top: calc(var(--header-h) + var(--s-9)); }
+}

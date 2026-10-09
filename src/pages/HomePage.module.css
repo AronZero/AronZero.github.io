@@ -1,0 +1,34 @@
+.hero {
+  min-height: min(100svh, 1000px); display: flex; align-items: flex-end;
+  padding-top: calc(var(--header-h) + var(--topbar-h) + var(--s-8)); padding-bottom: var(--s-8);
+}
+.hero > :global(.wrap) { width: 100%; }
+.heroTop { display: flex; justify-content: space-between; gap: var(--s-4); margin-bottom: var(--s-7); }
+.stage { position: relative; }
+.name { position: relative; z-index: 1; }
+/* "Hey, I’m": a small italic kicker set as the first line of the h1. */
+.name :global(.line:first-child) {
+  font-size: var(--fs-h3); font-weight: var(--fw-emphasis); font-style: italic;
+  line-height: 1.1; letter-spacing: 0; color: var(--text-2);
+}
+.strata { margin: var(--s-6) 0 var(--s-8); }
+.heroGrid { row-gap: var(--s-7); align-items: start; }
+.roles { display: grid; grid-template-columns: max-content 1fr; column-gap: var(--s-5); row-gap: var(--s-2); }
+.roles dd { color: var(--text-1); font-size: var(--fs-small); }
+.statement { margin-bottom: var(--s-6); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
+
+.layersSection { padding-top: var(--section-y); }
+
+.intro { row-gap: var(--s-6); align-items: end; margin-bottom: var(--s-10); }
+.intro > :first-child { --c: 1 / 9; }
+
+.indexHead {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end;
+  gap: var(--s-5); margin-bottom: var(--s-8);
+}
+
+@media (max-width: 719px) {
+  .heroTop { flex-direction: column; gap: var(--s-1); margin-bottom: var(--s-6); }
+  .intro { margin-bottom: var(--s-9); }
+}

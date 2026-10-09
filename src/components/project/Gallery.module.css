@@ -1,0 +1,50 @@
+.gallery { row-gap: var(--s-8); }
+.item { display: grid; gap: var(--s-3); align-content: start; }
+.shot {
+  position: relative;
+  display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: var(--radius-md);
+  overflow: hidden; background: var(--surface-1); cursor: zoom-in;
+}
+.shot img { width: 100%; height: auto; transition: transform var(--d-4) var(--ease); }
+.shot:hover img { transform: scale(1.015); }
+
+.lightbox {
+  width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; inset: 0;
+  background: var(--scrim); color: var(--text-1);
+  display: none; grid-template-rows: auto minmax(0, 1fr); grid-auto-rows: auto;
+}
+.lightbox[open] { display: grid; }
+.lightbox::backdrop { background: transparent; }
+.lbTop, .lbNav {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-4);
+  padding: var(--s-4) var(--gutter);
+}
+.lbStage { display: grid; place-items: center; min-height: 0; padding: 0 var(--gutter); touch-action: pan-y; }
+.lbImage {
+  max-width: 100%; max-height: calc(100svh - 160px); width: auto; height: auto;
+  border-radius: var(--radius-md); border: 1px solid var(--line); user-select: none;
+}
+html[data-motion="full"] .lbImage { animation: lb-in var(--d-3) var(--ease); }
+@keyframes lb-in { from { opacity: 0; transform: scale(.985); } }
+
+@media (max-width: 719px) {
+  .lbNav :global(.t-label) { display: none; }
+  .shot { border-radius: 0; border-inline: 0; margin-inline: calc(var(--gutter) * -1); width: calc(100% + var(--gutter) * 2); }
+  .item figcaption { padding-right: var(--s-4); }
+}
+
+:global(html[data-motion="reduced"]) .shot img { transition: none; transform: none; }
+
+/* ---------- Animated screenshots (GIF plays only in the viewer) ---------- */
+.badge {
+  position: absolute; top: var(--s-3); right: var(--s-3);
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px;
+  border-radius: var(--radius-sm); background: var(--header-bg); color: var(--text-1);
+}
+.lbPlay { display: flex; justify-content: center; padding-top: var(--s-4); }
+
+/* Pixel art scales up to fill the stage, with hard edges. */
+.lbImage[data-pixel] {
+  width: 100%; height: 100%; max-height: calc(100svh - 220px);
+  object-fit: contain; border: 0; border-radius: 0;
+}

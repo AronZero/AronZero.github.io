@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+Thumbs.db
+.vite/
+*.log
+
+# Local backups (hero room trial revert kit)
+.backup/

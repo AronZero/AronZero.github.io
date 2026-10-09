@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intro Preview — Aron Jay Consuelo</title>
+  <meta name="description" content="Review checkpoint for the first-entry intro: the Strata Signature assembles, then hands off into the header and hero.">
+  <meta name="color-scheme" content="dark light">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Barlow+Condensed:ital,wght@0,500;0,600;1,300&display=swap">
+  <script>
+    // Before first paint (mirrors what index.html will do on the site):
+    // play only on first entry this session, full motion, no hash, visible tab, no Save-Data.
+    // On the site this also requires the path to be "/".
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      root.dataset.theme = 'dark';
+      root.dataset.motion = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+      var force = new URLSearchParams(location.search).get('intro') === 'replay'; // review only; one allowed value
+      var seen = '1';
+      try { seen = sessionStorage.getItem('ajc-intro'); } catch (e) {} // storage blocked: don't play, we can't remember it
+      var saveData = !!(navigator.connection && navigator.connection.saveData);
+      var play = root.dataset.motion === 'full' &&
+        (force || (!seen && !location.hash && document.visibilityState === 'visible' && !saveData));
+      if (play) {
+        root.dataset.intro = 'play';
+        try { sessionStorage.setItem('ajc-intro', '1'); } catch (e) {}
+      }
+    })();
+  </script>
+  <style>
+    /* ---------- Tokens (copied from src/styles/tokens.css) ---------- */
+    :root {
+      --bg: #0F0E0D; --line: #2A2826; --line-strong: #66625C;
+      --text-1: #F2F0ED; --text-body: #D6D3CE; --text-2: #A3A09B; --text-3: #8A867F;
+      --accent: #F99E35; --accent-hover: #FFB25E; --accent-ink: #F99E35; --on-accent: #0F0E0D;
+      --header-bg: rgb(15 14 13 / .84);
+      --font-display: "Barlow Condensed", "Arial Narrow", ui-sans-serif, sans-serif;
+      --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      --fs-hero: clamp(5rem, .5rem + 21vw, 17rem);
+      --fs-h3: clamp(1.75rem, 1.35rem + 1.6vw, 2.75rem);
+      --fs-statement: clamp(2rem, 1.45rem + 2.2vw, 3.5rem);
+      --fs-body: clamp(1.0625rem, 1rem + .2vw, 1.125rem);
+      --fs-small: .9375rem; --fs-label: .75rem;
+      --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+      --gutter: clamp(16px, 4vw, 56px); --col-gap: clamp(16px, 2vw, 32px); --maxw: 1440px; --header-h: 64px;
+      --radius-sm: 3px;
+      --ease: cubic-bezier(.16, 1, .3, 1); --ease-io: cubic-bezier(.65, 0, .35, 1);
+      --d-1: 160ms; --d-2: 280ms; --d-3: 600ms; --d-4: 1000ms;
+      --z-header: 50; --z-intro: 70;
+    }
+    :root[data-theme="light"] {
+      --bg: #F5F2ED; --line: #DDD7CE; --line-strong: #8A847C;
+      --text-1: #171513; --text-body: #2E2B27; --text-2: #57524B; --text-3: #66605A;
+      --accent-ink: #A04B08; --header-bg: rgb(245 242 237 / .86);
+    }
+
+    /* ---------- Base + mock site (header and hero only) ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { color-scheme: dark; }
+    html[data-theme="light"] { color-scheme: light; }
+    body { margin: 0; background: var(--bg); color: var(--text-body); font: var(--fs-body)/1.65 var(--font-sans); -webkit-font-smoothing: antialiased; }
+    h1, p, dl, dd { margin: 0; }
+    .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+    .t-label { font: 500 var(--fs-label)/1.4 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+    :focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+
+    .header { position: fixed; inset: 0 0 auto; z-index: var(--z-header); height: var(--header-h); background: var(--header-bg); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--line); }
+    .header .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); }
+    .brand { display: flex; align-items: center; gap: var(--s-3); min-height: 44px; color: var(--text-1); text-decoration: none; }
+    .brand .mark { font-size: 22px; }
+    .brand__name { font: 600 1.5rem/1 var(--font-display); white-space: nowrap; }
+    .brand__role { margin-left: var(--s-2); }
+    .nav { display: flex; gap: var(--s-6); }
+    .nav a { color: var(--text-2); font-size: var(--fs-small); text-decoration: none; padding: 6px 0; }
+    .nav a[aria-current] { color: var(--text-1); box-shadow: inset 0 -1px var(--accent-ink); }
+    .index-btn { display: none; }
+
+    .hero { min-height: min(100svh, 1000px); display: flex; align-items: flex-end; padding: calc(var(--header-h) + var(--s-8)) 0 var(--s-8); }
+    .hero-top { display: flex; justify-content: space-between; gap: var(--s-4); margin-bottom: var(--s-7); }
+    .t-hero { font: 600 var(--fs-hero)/.86 var(--font-display); letter-spacing: -.015em; color: var(--text-1); }
+    .t-hero .line:first-child { font-size: var(--fs-h3); font-weight: 300; font-style: italic; line-height: 1.1; letter-spacing: 0; color: var(--text-2); }
+    .strata { display: grid; gap: 5px; margin: var(--s-6) 0 var(--s-8); }
+    .strata i { display: block; height: 1px; background: var(--line-strong); transform-origin: left; }
+    .strata i:nth-child(2) { width: 64%; }
+    .strata i:nth-child(3) { width: 28%; background: var(--accent-ink); }
+    .hero-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--col-gap); row-gap: var(--s-7); align-items: start; }
+    .roles { grid-column: 1 / 5; display: grid; grid-template-columns: max-content 1fr; column-gap: var(--s-5); row-gap: var(--s-2); }
+    .roles dd { color: var(--text-1); font-size: var(--fs-small); }
+    .copy { grid-column: 6 / 13; }
+    .t-statement { font: 500 var(--fs-statement)/1.06 var(--font-display); color: var(--text-1); margin-bottom: var(--s-6); }
+    .t-statement em { font-weight: 300; }
+    .copy .t-body { max-width: 62ch; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; margin-top: var(--s-6); border-radius: var(--radius-sm); background: var(--accent); color: var(--on-accent); font: 500 var(--fs-small)/1 var(--font-sans); text-decoration: none; }
+    .btn:hover { background: var(--accent-hover); }
+
+    @media (max-width: 719px) {
+      .brand .mark { font-size: 19px; }
+      .brand__role, .nav { display: none; }
+      .index-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; background: none; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); color: var(--text-1); font: inherit; font-size: var(--fs-small); }
+      .hero-top { flex-direction: column; gap: var(--s-1); margin-bottom: var(--s-6); }
+      .roles, .copy { grid-column: 1 / -1; }
+    }
+
+    /* Hero reveals (from motion.css). While the intro plays they wait --intro-offset,
+       so the name rises as the overlay lifts. Content is in the DOM from the start. */
+    html[data-intro="play"] { --intro-offset: 600ms; }
+    .reveal .line { display: block; overflow: hidden; padding: 0 .08em .17em 0; margin-bottom: -.1em; }
+    .reveal .line > span { display: block; }
+    html.js[data-motion="full"] .reveal .line > span { transform: translateY(110%); transition: transform var(--d-4) var(--ease) calc(var(--i, 0) * 90ms + var(--intro-offset, 0ms)); }
+    html.js[data-motion="full"] .reveal.is-in .line > span { transform: none; }
+    html.js[data-motion="full"] .fade-up { opacity: 0; transform: translateY(16px); transition: opacity var(--d-4) var(--ease), transform var(--d-4) var(--ease); transition-delay: calc(var(--delay, 0ms) + var(--intro-offset, 0ms)); }
+    html.js[data-motion="full"] .fade-up.is-in { opacity: 1; transform: none; }
+    html.js[data-motion="full"] .strata i { transform: scaleX(0); transition: transform 1.2s var(--ease) calc(400ms + var(--i, 0) * 120ms + var(--intro-offset, 0ms)); }
+    html.js[data-motion="full"] .strata.is-in i { transform: scaleX(1); }
+    html.js[data-motion="reduced"] :is(.reveal .line > span, .fade-up) { opacity: 0; transition: opacity 300ms linear; }
+    html.js[data-motion="reduced"] :is(.reveal.is-in .line > span, .fade-up.is-in) { opacity: 1; }
+
+    /* ---------- Strata Signature (from BrandMark.module.css) ---------- */
+    .mark { display: block; height: 1em; width: auto; flex: none; overflow: visible; }
+    .mark .surface, .mark .stack { fill: var(--text-1); }
+    .mark .structure { fill: var(--accent-ink); transform: translateX(3px); transition: transform var(--d-3) var(--ease); }
+    html[data-motion="full"] a:is(:hover, :focus-visible) > .mark .structure { transform: none; }
+    /* Header load animation: kept for repeat visits and deep links, skipped when the intro hands off. */
+    html[data-motion="full"]:not([data-intro]) .mark.on-load :is(.surface, .structure, .stack) { animation: layer-in var(--d-4) var(--ease) backwards; }
+    html[data-motion="full"] .mark.on-load .surface { --from: -6px; animation-delay: 120ms; }
+    html[data-motion="full"] .mark.on-load .structure { --from: 12px; --to: 3px; animation-delay: 210ms; }
+    html[data-motion="full"] .mark.on-load .stack { --from: -3px; animation-delay: 300ms; }
+    @keyframes layer-in { from { opacity: 0; transform: translateX(var(--from)); } to { opacity: 1; transform: translateX(var(--to, 0)); } }
+
+    /* ---------- Intro ---------- */
+    /* Decorative and never interactive: it can't trap focus or swallow clicks. */
+    .intro { position: fixed; inset: 0; z-index: var(--z-intro); display: grid; place-items: center; pointer-events: none;
+      /* Fail-safe in pure CSS: gone at 2s even if the script never runs. */
+      animation: intro-gone 1ms 2000ms forwards; }
+    html:not([data-intro="play"]) .intro { display: none; }
+    @keyframes intro-gone { to { visibility: hidden; } }
+
+    .intro__bg { position: absolute; inset: 0; background: var(--bg); animation: intro-lift 420ms var(--ease-io) 680ms both; }
+    @keyframes intro-lift { to { opacity: 0; } }
+
+    /* Same box as the header mark (viewBox 0 -0.5 62.2 33.2), so the handoff maps box to box. */
+    .intro__mark { position: relative; font-size: clamp(88px, 24vw, 168px); transform-origin: 0 0; }
+
+    /* 1. Hairlines draw left to right at each layer's lower edge (0–470ms). */
+    .intro__lines { animation: intro-lift 240ms var(--ease-io) 600ms both; }
+    .intro__ln { stroke: var(--line-strong); stroke-width: 1; vector-effect: non-scaling-stroke;
+      transform-box: fill-box; transform-origin: 0 50%; animation: ln-draw 350ms var(--ease) both; }
+    .intro__ln--structure { stroke: var(--accent-ink); }
+    .intro__ln:nth-child(2) { animation-delay: 60ms; }
+    .intro__ln:nth-child(3) { animation-delay: 120ms; }
+    @keyframes ln-draw { from { transform: scaleX(0); } }
+
+    /* 2. Each layer rises out of its hairline, from the foundation up:
+          Stack, then Structure (which steps out into its displaced position), then Surface. */
+    .intro__band { animation: band-rise 360ms var(--ease) both; }
+    .intro__band.stack { --dy: 11.4px; animation-delay: 200ms; }
+    .intro__band.surface { --dy: 11.7px; animation-delay: 340ms; }
+    @keyframes band-rise { from { transform: translateY(var(--dy)); } to { transform: none; } }
+    .intro__band.structure { animation: band-step 420ms var(--ease) 270ms both; }
+    @keyframes band-step {
+      0% { transform: translate(0, 8.5px); }
+      70% { transform: translate(0, 0); }
+      100% { transform: translate(3px, 0); }
+    }
+    /* 3. Handoff (680–1160ms): script moves .intro__mark into the header slot while .intro__bg lifts. */
+
+    /* While the intro plays, the header mark waits for the handoff (CSS fail-safe at 2s). */
+    html[data-intro="play"] .brand .mark { opacity: 0; animation: mark-show 1ms 2000ms forwards; }
+    @keyframes mark-show { to { opacity: 1; } }
+
+    /* ---------- Preview controls (not part of the site) ---------- */
+    .pv { position: fixed; right: 16px; bottom: 16px; z-index: 100; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--s-2);
+      max-width: calc(100vw - 32px); padding: var(--s-2); border: 1px dashed var(--line-strong); border-radius: var(--radius-sm); background: var(--header-bg); backdrop-filter: blur(10px); }
+    .pv__title { padding-inline: var(--s-2); }
+    .pv button { min-height: 44px; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: transparent; color: var(--text-1); font: 500 .8125rem/1 var(--font-sans); cursor: pointer; }
+    .pv button:hover { border-color: var(--accent-ink); }
+    .pv button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .pv button:disabled { opacity: .4; cursor: not-allowed; }
+    .pv__status { flex-basis: 100%; text-align: right; padding-inline: var(--s-2); }
+    html[data-freeze] .pv { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Shared geometry: glyphs outlined from Barlow Condensed 600 (SIL OFL 1.1), same as BrandMark.tsx. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="g" d="M14.44 31.69L13.57 26.86Q13.57 26.63 13.29 26.63L6.58 26.63Q6.3 26.63 6.3 26.86L5.43 31.69Q5.38 32.2 4.83 32.2L0.64 32.2Q0 32.2 0.14 31.6L6.95 0.51Q7.04 0 7.54 0L12.42 0Q12.93 0 13.02 0.51L19.83 31.6L19.83 31.79Q19.83 32.2 19.32 32.2L15.04 32.2Q14.49 32.2 14.44 31.69ZM7.36 22.45L12.47 22.45Q12.74 22.45 12.7 22.22L10.03 7.68Q9.98 7.54 9.89 7.54Q9.8 7.54 9.75 7.68L7.13 22.22Q7.08 22.45 7.36 22.45ZM20.75 24.24L20.75 20.84Q20.75 20.61 20.91 20.45Q21.07 20.29 21.3 20.29L25.54 20.29Q25.77 20.29 25.93 20.45Q26.09 20.61 26.09 20.84L26.09 24.33Q26.09 25.94 26.96 26.96Q27.84 27.97 29.26 27.97Q30.69 27.97 31.59 26.96Q32.48 25.94 32.48 24.33L32.48 0.55Q32.48 0.32 32.64 0.16Q32.8 0 33.03 0L37.27 0Q37.5 0 37.66 0.16Q37.82 0.32 37.82 0.55L37.82 24.24Q37.82 28.01 35.45 30.29Q33.08 32.57 29.26 32.57Q25.44 32.57 23.1 30.29Q20.75 28.01 20.75 24.24ZM41.78 23.92L41.78 8.23Q41.78 4.28 44.15 1.96Q46.52 -0.37 50.43 -0.37Q54.38 -0.37 56.78 1.96Q59.17 4.28 59.17 8.23L59.17 8.79Q59.17 9.02 59.01 9.2Q58.85 9.38 58.62 9.38L54.34 9.57Q53.79 9.57 53.79 9.02L53.79 7.87Q53.79 6.26 52.87 5.24Q51.95 4.23 50.43 4.23Q48.96 4.23 48.04 5.24Q47.12 6.26 47.12 7.87L47.12 24.33Q47.12 25.94 48.04 26.96Q48.96 27.97 50.43 27.97Q51.95 27.97 52.87 26.96Q53.79 25.94 53.79 24.33L53.79 23.18Q53.79 22.95 53.95 22.79Q54.11 22.63 54.34 22.63L58.62 22.82Q58.85 22.82 59.01 22.98Q59.17 23.14 59.17 23.37L59.17 23.92Q59.17 27.83 56.78 30.2Q54.38 32.57 50.43 32.57Q46.52 32.57 44.15 30.2Q41.78 27.83 41.78 23.92Z"/>
+      <!-- Header bands (BrandMark BANDS) -->
+      <clipPath id="c0"><rect x="-6" y="-2" width="76" height="11.7"/></clipPath>
+      <clipPath id="c1"><rect x="-6" y="11.2" width="76" height="8.5"/></clipPath>
+      <clipPath id="c2"><rect x="-6" y="21.2" width="76" height="14"/></clipPath>
+      <!-- Intro bands: each ends exactly on its hairline. The outer clip stays on the line;
+           the same clip on the moving layer keeps only that slice, so it rises out of the line. -->
+      <clipPath id="i0"><rect x="-6" y="-2" width="76" height="11.7"/></clipPath>
+      <clipPath id="i1"><rect x="-6" y="11.2" width="76" height="8.5"/></clipPath>
+      <clipPath id="i2"><rect x="-6" y="21.2" width="76" height="11.4"/></clipPath>
+    </defs>
+  </svg>
+
+  <!-- The intro overlay: present at first paint, decorative, hidden from assistive tech. -->
+  <div class="intro" aria-hidden="true">
+    <div class="intro__bg"></div>
+    <svg class="mark intro__mark" viewBox="0 -0.5 62.2 33.2" focusable="false">
+      <g class="intro__lines">
+        <line class="intro__ln" x1="-6" x2="68.2" y1="9.7" y2="9.7"/>
+        <line class="intro__ln intro__ln--structure" x1="-6" x2="68.2" y1="19.7" y2="19.7"/>
+        <line class="intro__ln" x1="-6" x2="68.2" y1="32.6" y2="32.6"/>
+      </g>
+      <g clip-path="url(#i2)"><g class="intro__band stack"><use href="#g" clip-path="url(#i2)"/></g></g>
+      <g clip-path="url(#i1)"><g class="intro__band structure"><use href="#g" clip-path="url(#i1)"/></g></g>
+      <g clip-path="url(#i0)"><g class="intro__band surface"><use href="#g" clip-path="url(#i0)"/></g></g>
+    </svg>
+  </div>
+
+  <header class="header">
+    <div class="wrap">
+      <a class="brand" href="#" aria-label="Aron Jay Consuelo, home">
+        <svg class="mark on-load" viewBox="0 -0.5 62.2 33.2" aria-hidden="true" focusable="false">
+          <g class="surface"><use href="#g" clip-path="url(#c0)"/></g>
+          <g class="structure"><use href="#g" clip-path="url(#c1)"/></g>
+          <g class="stack"><use href="#g" clip-path="url(#c2)"/></g>
+        </svg>
+        <span class="brand__name">Aron Jay Consuelo</span>
+        <span class="t-label brand__role">UI/UX · Front-end</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#" aria-current="page">Work</a><a href="#">Playground</a><a href="#">Contact</a>
+      </nav>
+      <button class="index-btn" type="button">Index</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-name">
+      <div class="wrap">
+        <div class="hero-top">
+          <p class="t-label fade-up">Portfolio — UI/UX Design &amp; Front-end Development</p>
+          <p class="t-label fade-up" style="--delay:120ms">4 projects · index below</p>
+        </div>
+        <h1 id="hero-name" class="t-hero reveal">
+          <span class="line"><span style="--i:0">Hey, I’m</span></span>
+          <span class="line"><span style="--i:1">Aron Jay</span></span>
+        </h1>
+        <div class="strata" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i></div>
+        <div class="hero-grid">
+          <dl class="roles fade-up" style="--delay:300ms">
+            <dt class="t-label">Role</dt><dd>UI/UX Designer</dd>
+            <dt class="t-label">Focus</dt><dd>Front-end Development</dd>
+            <dt class="t-label">Also</dt><dd>Graphic Design</dd>
+          </dl>
+          <div class="copy">
+            <p class="t-statement fade-up" style="--delay:450ms">I design interfaces — <em>then I build them,</em> down to the last transition.</p>
+            <p class="t-body fade-up" style="--delay:600ms">From user flows to production-ready front-end code, with a graphic designer’s eye for type, composition and detail.</p>
+            <div class="fade-up" style="--delay:750ms"><a class="btn" href="#">View selected work →</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="pv" role="group" aria-label="Preview controls (not part of the site)">
+    <span class="t-label pv__title">Preview</span>
+    <button type="button" id="pv-replay">Replay</button>
+    <button type="button" class="pv-speed" data-rate="0.5" aria-pressed="true">Shipped</button>
+    <button type="button" class="pv-speed" data-rate="1" aria-pressed="false">Fast (first draft)</button>
+    <button type="button" class="pv-speed" data-rate="0.25" aria-pressed="false">Slow 4×</button>
+    <button type="button" id="pv-theme" aria-pressed="false">Light</button>
+    <button type="button" id="pv-session">New session</button>
+    <span class="t-label pv__status" id="pv-status" aria-live="polite"></span>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var HANDOFF_AT = 680, HANDOFF_MS = 480, FAILSAFE_MS = 2000;
+      var EASE = 'cubic-bezier(.16, 1, .3, 1)';
+      var introTemplate = document.querySelector('.intro').cloneNode(true);
+      var reveals = document.querySelectorAll('.reveal, .fade-up, .strata');
+      var status = document.getElementById('pv-status');
+      // The site ships this timeline at half speed (src/components/shell/Intro.module.css); the
+      // keyframes here are the first draft, so "Shipped" plays them at 0.5.
+      var rate = 0.5;
+
+      // Review aid: ?intro=replay&freeze=900 holds the timeline at 900ms (integer 0–3000 only).
+      var freezeParam = new URLSearchParams(location.search).get('freeze');
+      var freeze = /^\d{1,4}$/.test(freezeParam || '') && +freezeParam <= 3000 ? +freezeParam : null;
+      if (freeze !== null) root.dataset.freeze = '';
+
+      function revealHero() {
+        reveals.forEach(function (el) { el.classList.remove('is-in'); });
+        void document.body.offsetWidth;
+        reveals.forEach(function (el) { el.classList.add('is-in'); });
+      }
+
+      function setRate() {
+        document.getAnimations().forEach(function (a) { a.playbackRate = rate; });
+      }
+
+      function play(overlay) {
+        var done = false;
+        var mark = overlay.querySelector('.intro__mark');
+        var target = document.querySelector('.brand .mark');
+        function finish() {
+          if (done) return;
+          done = true;
+          overlay.remove();
+          delete root.dataset.intro;
+          motionQuery.removeEventListener('change', onMotionChange);
+          say('Intro finished. Reload: no intro this session.');
+        }
+        function onMotionChange(e) { if (e.matches) finish(); }
+        var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        motionQuery.addEventListener('change', onMotionChange);
+
+        var timer = setTimeout(finish, FAILSAFE_MS / rate);
+
+        // Handoff: when the overlay starts to lift, measure both boxes (so a late viewport change,
+        // like a mobile URL bar, can't throw it off) and move the big mark into the header slot.
+        function handoff() {
+          try {
+            var from = mark.getBoundingClientRect();
+            var to = target.getBoundingClientRect();
+            var s = to.height / from.height;
+            var move = mark.animate(
+              [{ transform: 'none' }, { transform: 'translate(' + (to.left - from.left) + 'px,' + (to.top - from.top) + 'px) scale(' + s + ')' }],
+              { duration: HANDOFF_MS, easing: EASE, fill: 'forwards' }
+            );
+            move.playbackRate = rate;
+            move.finished.then(function () { clearTimeout(timer); finish(); }, function () {});
+            return move;
+          } catch (e) {
+            return null; // No Web Animations: the CSS lift and the 2s fail-safe still clear the screen.
+          }
+        }
+
+        if (freeze === null) {
+          overlay.querySelector('.intro__bg').addEventListener('animationstart', handoff, { once: true });
+          setRate();
+          return;
+        }
+
+        // Review frames: hold every animation at `freeze` ms and write the handoff position inline,
+        // because headless captures don't reliably paint a paused compositor animation.
+        // Headless Edge resizes the viewport before capturing, so re-place the frozen handoff on resize.
+        clearTimeout(timer);
+        function holdFrame() {
+          mark.style.transform = '';
+          document.getAnimations().forEach(function (a) { a.pause(); a.currentTime = freeze; });
+          if (freeze > HANDOFF_AT) {
+            var move = handoff();
+            if (move) { move.pause(); move.currentTime = freeze - HANDOFF_AT; move.commitStyles(); move.cancel(); }
+          }
+        }
+        requestAnimationFrame(holdFrame);
+        window.addEventListener('resize', holdFrame);
+      }
+
+      function replay() {
+        if (root.dataset.motion !== 'full') return;
+        var old = document.querySelector('.intro');
+        if (old) old.remove();
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        root.dataset.intro = 'play';
+        var overlay = introTemplate.cloneNode(true);
+        document.body.prepend(overlay);
+        revealHero();
+        say('Playing at ' + (rate === 0.5 ? 'shipped speed' : rate === 1 ? 'first-draft speed' : '4× slower than the draft') + '…');
+        play(overlay);
+      }
+
+      function say(text) { status.textContent = text; }
+
+      // First load
+      var first = document.querySelector('.intro');
+      revealHero();
+      if (root.dataset.intro === 'play') {
+        say('First entry this session: playing.');
+        play(first);
+      } else {
+        first.remove();
+        say(root.dataset.motion === 'reduced'
+          ? 'Reduced motion: no intro, hero shows directly.'
+          : 'Already played this session: header logo animates as today.');
+      }
+
+      // Preview controls
+      document.getElementById('pv-replay').addEventListener('click', replay);
+      document.getElementById('pv-replay').disabled = root.dataset.motion !== 'full';
+      // Speed: picking one replays straight away at that speed.
+      var speedButtons = document.querySelectorAll('.pv-speed');
+      speedButtons.forEach(function (btn) {
+        btn.disabled = root.dataset.motion !== 'full';
+        btn.addEventListener('click', function () {
+          rate = +btn.dataset.rate;
+          speedButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+          replay();
+        });
+      });
+      document.getElementById('pv-theme').addEventListener('click', function () {
+        var light = root.dataset.theme !== 'light';
+        root.dataset.theme = light ? 'light' : 'dark';
+        this.setAttribute('aria-pressed', String(light));
+      });
+      document.getElementById('pv-session').addEventListener('click', function () {
+        try { sessionStorage.removeItem('ajc-intro'); } catch (e) {}
+        location.replace(location.pathname);
+      });
+    })();
+  </script>
+</body>
+</html>

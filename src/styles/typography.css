@@ -1,0 +1,36 @@
+/* Type roles. Display: Barlow Condensed — emphasis comes from weight
+   contrast (500/600 roman vs 300 italic), not from color. */
+.t-hero, .t-display, .t-h2, .t-h3, .t-statement, .t-quote {
+  font-family: var(--font-display);
+  font-weight: var(--fw-display);
+  color: var(--text-1);
+}
+.t-hero      { font-size: var(--fs-hero); line-height: .86; letter-spacing: -.015em; font-weight: var(--fw-hero); }
+.t-display   { font-size: var(--fs-display); line-height: .9; letter-spacing: -.01em; }
+.t-h2        { font-size: var(--fs-h2); line-height: .95; letter-spacing: -.01em; }
+.t-h3        { font-size: var(--fs-h3); line-height: 1.05; }
+.t-statement { font-size: var(--fs-statement); line-height: 1.06; letter-spacing: -.005em; }
+.t-quote     { font-size: var(--fs-h3); line-height: 1.12; font-style: italic; font-weight: var(--fw-emphasis); }
+
+:is(.t-hero, .t-display, .t-h2, .t-h3, .t-statement) em {
+  font-style: italic;
+  font-weight: var(--fw-emphasis);
+}
+
+.t-lead {
+  font-size: var(--fs-lead); line-height: 1.4; font-weight: 300;
+  letter-spacing: -.01em; color: var(--text-1);
+}
+.t-body { max-width: 62ch; }
+.t-body + .t-body { margin-top: 1em; }
+.t-small { font-size: var(--fs-small); line-height: 1.55; color: var(--text-2); }
+.t-label {
+  font-family: var(--font-mono); font-size: var(--fs-label); font-weight: 500;
+  line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3);
+}
+.t-mono { font-family: var(--font-mono); font-size: var(--fs-mono); line-height: 1.6; }
+
+.c-1 { color: var(--text-1); }
+.c-2 { color: var(--text-2); }
+.c-3 { color: var(--text-3); }
+.c-accent { color: var(--accent-ink); }

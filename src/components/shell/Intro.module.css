@@ -1,0 +1,44 @@
+/* First-entry intro, about 2.3s. Timeline:
+   0–940ms     hairlines draw left to right at each layer's lower edge
+   400–1400ms  layers rise out of their lines: Stack, Structure (steps out), Surface
+   1360ms      overlay lifts and the script moves the mark into the header (960ms) */
+
+/* Never interactive. Pure-CSS fail-safe: hidden at 3.2s even if the script never runs. */
+.intro {
+  position: fixed; inset: 0; z-index: var(--z-intro);
+  display: grid; place-items: center; pointer-events: none;
+  animation: gone 1ms 3200ms forwards;
+}
+@keyframes gone { to { visibility: hidden; } }
+
+.bg { position: absolute; inset: 0; background: var(--bg); animation: lift 840ms var(--ease-io) 1360ms both; }
+@keyframes lift { to { opacity: 0; } }
+
+/* Same box and viewBox as the header mark, so the handoff maps box to box. */
+.mark { position: relative; display: block; height: var(--intro-mark); width: auto; overflow: visible; transform-origin: 0 0; }
+
+.lines { animation: lift 480ms var(--ease-io) 1200ms both; }
+.line {
+  stroke: var(--line-strong); stroke-width: 1; vector-effect: non-scaling-stroke;
+  transform-box: fill-box; transform-origin: 0 50%;
+  animation: draw 700ms var(--ease) both;
+}
+.line.structure { stroke: var(--accent-ink); animation-delay: 120ms; }
+.line.stack { animation-delay: 240ms; }
+@keyframes draw { from { transform: scaleX(0); } }
+
+.band { fill: var(--text-1); animation: rise 720ms var(--ease) both; }
+.band.stack { --dy: 11.4px; animation-delay: 400ms; }
+.band.surface { --dy: 11.7px; animation-delay: 680ms; }
+@keyframes rise { from { transform: translateY(var(--dy)); } }
+
+/* Structure rises, then steps out into its displaced position in the spot color. */
+.band.structure { fill: var(--accent-ink); animation: step 840ms var(--ease) 540ms both; }
+@keyframes step {
+  0% { transform: translate(0, 8.5px); }
+  70% { transform: translate(0, 0); }
+  100% { transform: translate(3px, 0); }
+}
+
+/* Never rendered under reduced motion (index.html), but if the setting flips mid-intro: */
+:global(html[data-motion="reduced"]) .intro { display: none; }

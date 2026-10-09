@@ -1,0 +1,137 @@
+/* =============================================================
+   Design tokens — approved in style tile v0.1 (2026-10-08).
+   Every color, size, space and motion value lives here.
+   ============================================================= */
+:root {
+  /* ---------- Color ---------- */
+  --bg: #0F0E0D;            /* warm near-black, never #000 */
+  --surface-1: #171614;
+  --surface-2: #1F1D1B;
+  --line: #2A2826;          /* decorative dividers only */
+  --line-strong: #66625C;   /* interactive boundaries, 3.2:1 */
+
+  --text-1: #F2F0ED;        /* 17.0:1 */
+  --text-body: #D6D3CE;     /* 12.9:1 */
+  --text-2: #A3A09B;        /* 7.4:1 */
+  --text-3: #8A867F;        /* 5.3:1 */
+
+  --accent: #F99E35;        /* 9.2:1 on bg */
+  --accent-hover: #FFB25E;
+  --accent-press: #E3892A;
+  --accent-wash: rgb(249 158 53 / .12);
+  --accent-wash-strong: rgb(249 158 53 / .2);
+  --accent-ink: #F99E35;    /* accent as text, hairlines, focus ring; fills use --accent */
+  --on-accent: #0F0E0D;     /* always dark text on orange (white fails at 2.1:1) */
+
+  --header-bg: rgb(15 14 13 / .84);
+  --scrim: rgb(10 9 8 / .97);
+  --shadow-frame: 0 40px 80px -48px rgb(0 0 0 / .9);
+
+  /* Hero room (trial): a dark room lit only by a monitor, behind the name. */
+  --room-ink: #070605;      /* silhouettes: figure, chair, monitor back */
+  --room-form: #1C1A17;     /* surfaces catching faint light */
+  --room-screen: #E9E1D3;   /* screen light, always used at low opacity */
+  --room-rim: rgb(242 234 220 / .34);   /* monitor light catching edges */
+
+  /* ---------- Type ---------- */
+  --font-display: "Barlow Condensed", "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --fs-hero: clamp(5rem, .5rem + 21vw, 17rem);
+  --fs-display: clamp(3.25rem, 1.5rem + 7vw, 9rem);
+  --fs-h2: clamp(2.75rem, 1.6rem + 4.6vw, 6rem);
+  --fs-h3: clamp(1.75rem, 1.35rem + 1.6vw, 2.75rem);
+  --fs-statement: clamp(2rem, 1.45rem + 2.2vw, 3.5rem);
+  --fs-lead: clamp(1.25rem, 1.08rem + .7vw, 1.75rem);
+  --fs-body: clamp(1.0625rem, 1rem + .2vw, 1.125rem);
+  --fs-small: .9375rem;
+  --fs-label: .75rem;
+  --fs-mono: .875rem;
+
+  --fw-display: 500;
+  --fw-hero: 600;
+  --fw-emphasis: 300;       /* italic emphasis inside display type */
+
+  /* ---------- Space (8pt base, 4px half-steps) ---------- */
+  --s-1: 4px;   --s-2: 8px;    --s-3: 12px;   --s-4: 16px;
+  --s-5: 24px;  --s-6: 32px;   --s-7: 48px;   --s-8: 64px;
+  --s-9: 96px;  --s-10: 128px; --s-11: 192px; --s-12: 256px;
+
+  --section-y: clamp(96px, 4rem + 8vw, 192px);
+  --gutter: clamp(16px, 4vw, 56px);
+  --col-gap: clamp(16px, 2vw, 32px);
+  --cols: 12;
+  --maxw: 1440px;
+  --header-h: 64px;
+  --topbar-h: 36px;
+  --gauge-space: 0px;       /* extra right padding when the depth gauge shows */
+
+  /* ---------- Shape ---------- */
+  --radius-sm: 3px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(.16, 1, .3, 1);       /* house curve: expo-out */
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+  --d-1: 160ms;   /* micro-interactions */
+  --d-2: 280ms;
+  --d-3: 600ms;   /* reveals */
+  --d-4: 1000ms;
+
+  /* ---------- Layers ---------- */
+  --z-preview: 30;
+  --z-gauge: 40;
+  --z-topbar: 45;
+  --z-header: 50;
+  --z-overlay: 60;
+  --z-intro: 70;            /* first-entry intro; <dialog> sits in the top layer anyway */
+
+  /* ---------- Intro ---------- */
+  --intro-mark: clamp(88px, 24vw, 168px);   /* logo height while it assembles */
+  --intro-hold: 1200ms;     /* how long hero reveals wait while the intro plays */
+}
+
+/* ---------- Light theme (toggle in the header; dark is the default) ----------
+   Warm paper instead of white. Orange fills stay #F99E35 with dark text;
+   orange as text or hairline darkens to --accent-ink (5.4:1 on --bg). */
+:root[data-theme="light"] {
+  --bg: #F5F2ED;
+  --surface-1: #EDE9E3;
+  --surface-2: #E5E0D8;
+  --line: #DDD7CE;
+  --line-strong: #8A847C;   /* 3.3:1 */
+
+  --text-1: #171513;        /* 16.5:1 */
+  --text-body: #2E2B27;     /* 12.6:1 */
+  --text-2: #57524B;        /* 6.9:1 */
+  --text-3: #66605A;        /* 5.6:1, 4.7:1 on surface-2 */
+
+  --accent-ink: #A04B08;
+  --accent-wash: rgb(249 158 53 / .16);
+  --accent-wash-strong: rgb(249 158 53 / .28);
+
+  --header-bg: rgb(245 242 237 / .86);
+  --scrim: rgb(245 242 237 / .97);
+  --shadow-frame: 0 40px 80px -48px rgb(60 48 36 / .45);
+
+  --room-ink: #DAD4CB;
+  --room-form: #E6E1D9;
+  --room-screen: #FFFDF9;
+  --room-rim: rgb(255 255 255 / .7);
+}
+
+@media (max-width: 719px) {
+  :root {
+    --cols: 4;
+    --header-h: 56px;
+  }
+}
+
+@media (min-width: 1100px) {
+  :root {
+    --gauge-space: 48px;
+    --topbar-h: 0px;
+  }
+}

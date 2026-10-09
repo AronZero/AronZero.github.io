@@ -1,0 +1,11 @@
+.blueprint {
+  position: absolute; inset: 0;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgb(249 158 53 / .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(249 158 53 / .07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.blueprint svg { display: block; }
+.edges { filter: url(#ajc-blueprint); }
+:global(html[data-theme="light"]) .edges { filter: url(#ajc-blueprint-light); }
