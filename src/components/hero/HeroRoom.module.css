@@ -87,7 +87,10 @@ html:global([data-motion="full"]) .headIdle {
 .say[data-side="l"]::after { transform: rotate(-35deg); }
 
 @media (max-width: 719px) {
-  .room { width: 60%; opacity: .6; bottom: calc(var(--s-2) * -1); }
+  /* The name overlaps the figure here, so the room steps back further. Light theme's
+     charcoal figure needs a lower opacity to sit behind the text instead of competing. */
+  .room { --room-m: .6; width: 60%; opacity: var(--room-m); bottom: calc(var(--s-2) * -1); }
+  :global(:root[data-theme="light"]) .room { --room-m: .42; }
   html:global([data-motion="full"]) .room { animation-name: room-in-m; }
-  @keyframes room-in-m { from { opacity: 0; } to { opacity: .6; } }
+  @keyframes room-in-m { from { opacity: 0; } to { opacity: var(--room-m); } }
 }

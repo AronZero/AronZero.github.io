@@ -117,10 +117,10 @@
   --scrim: rgb(245 242 237 / .97);
   --shadow-frame: 0 40px 80px -48px rgb(60 48 36 / .45);
 
-  --room-ink: #DAD4CB;
-  --room-form: #E6E1D9;
+  --room-ink: #3B3733;      /* warm charcoal: reads as a figure on paper, still lighter than --text-1 */
+  --room-form: #7D776F;
   --room-screen: #FFFDF9;
-  --room-rim: rgb(255 255 255 / .7);
+  --room-rim: rgb(255 255 255 / .28);
   --wall-opacity: .3;
 }
 

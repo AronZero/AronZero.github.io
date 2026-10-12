@@ -5,7 +5,13 @@
 .hero > :global(.wrap) { width: 100%; }
 .heroTop { display: flex; justify-content: space-between; gap: var(--s-4); margin-bottom: var(--s-7); }
 .stage { position: relative; }
-.name { position: relative; z-index: 1; }
+/* Body tone, not --text-1: at hero size pure near-black/near-white glares. Still 12.6:1+. */
+.name { position: relative; z-index: 1; color: var(--text-body); }
+/* Light theme: the room's figure is dark charcoal, so a paper-coloured halo lifts
+   the name off it wherever they overlap (mostly the "y" on narrow screens). */
+:global(:root[data-theme="light"]) .name {
+  text-shadow: 0 0 2px var(--bg), 0 0 .03em var(--bg), 0 0 .06em var(--bg);
+}
 /* "Hey, I’m": a small italic kicker set as the first line of the h1. */
 .name :global(.line:first-child) {
   font-size: var(--fs-h3); font-weight: var(--fw-emphasis); font-style: italic;
