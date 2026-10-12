@@ -8,12 +8,13 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "npm run typecheck && npm run licenses && vite build",
+    "dev": "npm run thumbs && vite",
+    "build": "npm run typecheck && npm run licenses && npm run thumbs && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "licenses": "node scripts/licenses.mjs",
-    "audit:deps": "npm audit && npm audit signatures"
+    "audit:deps": "npm audit && npm audit signatures",
+    "thumbs": "node scripts/thumbs.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "5.3.0",
@@ -27,6 +28,7 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.1",
+    "sharp": "0.35.5",
     "typescript": "7.0.2",
     "vite": "8.3.0"
   }

@@ -6,6 +6,7 @@ import { col, FadeUp, RevealLines } from '../components/Reveal';
 import { DepthGauge, type GaugeLayer } from '../components/shell/DepthGauge';
 import { FeaturedProject } from '../components/project/FeaturedProject';
 import { HeroRoom } from '../components/hero/HeroRoom';
+import { ProjectWall } from '../components/hero/ProjectWall';
 import { ProjectIndex } from '../components/project/ProjectIndex';
 import { Certifications, Experience } from '../components/resume/Resume';
 import { StrataScene } from '../components/project/StrataScene';
@@ -57,6 +58,7 @@ export function HomePage() {
           </div>
 
           <div className={styles.stage}>
+            <ProjectWall />
             <HeroRoom />
             <RevealLines
               as="h1"

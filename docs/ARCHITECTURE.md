@@ -15,6 +15,7 @@ src/content/projects/<slug>/hero.*, gallery/*  ──(import.meta.glob)──┐
 ```
 
 - `index.ts` validates at build/dev time (slug format, duplicates, missing hero, orphan image folders).
+- `scripts/thumbs.mjs` (sharp, build-only) writes a 240 × 140 WebP of each hero to `src/generated/thumbs/` before every `dev` and `build`; `index.ts` attaches it as `project.thumb` for the hero wall. The folder is gitignored and rebuilt in CI. npm `pre*` hooks don't run under `ignore-scripts`, so the step is chained inside the `dev`/`build` scripts.
 - Image glob patterns must be **string literals** (a Vite requirement); a template string silently matches nothing.
 - Every list, filter, number and next/previous link is derived; no component hard-codes a project.
 

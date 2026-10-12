@@ -12,6 +12,9 @@ const galleryFiles = import.meta.glob<string>(
   { eager: true, import: 'default' },
 );
 
+/* Hero-wall thumbnails, written by scripts/thumbs.mjs before every dev/build run (gitignored). */
+const thumbFiles = import.meta.glob<string>('../generated/thumbs/*.webp', { eager: true, import: 'default' });
+
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 /* GIFs pair with the still of the same name and play only on request ("Nothing loops or auto-plays"). */
@@ -85,6 +88,7 @@ function buildProjects(entries: readonly ProjectEntry[]): Project[] {
       ...entry,
       number: String(i + 1).padStart(2, '0'),
       hero: heroFile ? toImage(heroFile, 'hero') : null,
+      thumb: thumbFiles[`../generated/thumbs/${entry.slug}.webp`] ?? (heroFile && /\.svg$/i.test(heroFile[0]) ? heroFile[1] : null),
       gallery: (galleries.get(entry.slug) ?? []).map((file) => toImage(file, 'gallery')),
       prevSlug: prev.slug,
       nextSlug: next.slug,

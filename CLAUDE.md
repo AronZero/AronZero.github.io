@@ -8,7 +8,7 @@ Stack: React 19 + TypeScript 7 + Vite 8, Lucide icons, self-hosted Fontsource fo
 
 ```bash
 npm run dev         # dev server
-npm run build       # strict type-check + production build (must pass before handing work back)
+npm run build       # type-check + hero thumbnails + production build (must pass before handing work back)
 npm run preview     # serve dist/ on :4173
 npm run audit:deps  # npm audit + registry signature/provenance checks
 ```
@@ -27,7 +27,7 @@ Node is installed but may not be on PATH in a fresh shell. In PowerShell, reload
 - Background is warm near-black `#0F0E0D`, never `#000`. The accent `#F99E35` appears once or twice per screen.
 - Text on orange is always dark (`--on-accent`). White on orange fails contrast.
 - Display type is Barlow Condensed. Emphasis comes from weight contrast (500/600 roman vs 300 italic), not from color.
-- Approved motion: line reveals, the Strata layer transition (Surface → Structure → Stack), the structure lens, the hero room, the first-entry logo Intro (once per session), and hover micro-interactions. The cinematic "Lightbox stage" was **rejected**; don't reintroduce it.
+- Approved motion: line reveals, the Strata layer transition (Surface → Structure → Stack), the structure lens, the hero room and its project wall, the first-entry logo Intro (once per session), and hover micro-interactions. The cinematic "Lightbox stage" was **rejected**; don't reintroduce it.
 - Every motion effect needs a static fallback under `html[data-motion="reduced"]` (set from the OS setting only; there is no motion toggle).
 - Dark is the default theme; a light theme overrides tokens under `:root[data-theme="light"]`. Use `--accent-ink` for orange text, hairlines and outlines, `--accent` only for fills.
 

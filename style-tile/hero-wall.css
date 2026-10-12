@@ -1,0 +1,103 @@
+/* Hero wall — review sample. Hero layout copied from HomePage.module.css so the room sits where it does on the site. */
+
+.hero {
+  min-height: min(100svh, 1000px); display: flex; align-items: flex-end;
+  padding-top: var(--s-10); padding-bottom: var(--s-8);
+}
+.hero > .wrap { width: 100%; }
+.heroTop { display: flex; justify-content: space-between; gap: var(--s-4); margin-bottom: var(--s-7); }
+.stage { position: relative; }
+.name { position: relative; z-index: 1; }
+.name .line { display: block; }
+.name .line:first-child {
+  font-size: var(--fs-h3); font-weight: var(--fw-emphasis); font-style: italic;
+  line-height: 1.1; letter-spacing: 0; color: var(--text-2);
+}
+.strata { margin: var(--s-6) 0 var(--s-8); }
+@media (max-width: 719px) {
+  .heroTop { flex-direction: column; gap: var(--s-1); margin-bottom: var(--s-6); }
+}
+
+/* ───────────── The wall (prototype) ─────────────
+   Same box as the room (.room in HeroRoom.module.css), drawn before it so the
+   figure, monitor and glow all sit in front. */
+/* --wall-opacity now lives in src/styles/tokens.css */
+
+.wall {
+  position: absolute; right: 0; bottom: calc(var(--s-4) * -1); z-index: 0;
+  width: clamp(340px, 40%, 640px); aspect-ratio: 600 / 520;
+  pointer-events: none; user-select: none;
+  container-type: inline-size;
+  /* Tile size follows the room: 120 × 70 once the room is ~515px wide (a 1440px desktop), smaller below, never under 56px. */
+  --tile-w: clamp(56px, 23.4cqi, 120px);
+  --tile-gap: calc(var(--tile-w) / 12);
+  opacity: var(--wall-opacity);
+  /* Edges dissolve into the dark, like the room scene. */
+  mask-image: radial-gradient(ellipse 52% 46% at 54% 40%, black 45%, transparent 100%);
+}
+
+/* Upper back wall: above the desk, behind the monitor and head. */
+.wallRows {
+  position: absolute; inset-inline: 0; top: 21%;
+  display: grid; row-gap: var(--tile-gap);
+}
+
+.wallRow { overflow: hidden; }
+.wallRow:nth-child(even) .wallTrack { margin-left: calc(var(--tile-w) * -.5); } /* stagger like brickwork */
+.wallTrack { display: flex; width: max-content; }
+
+.wallTile {
+  flex: none; padding-right: var(--tile-gap); /* padding, not gap, so exactly -50% loops seamlessly */
+}
+.wallTile img {
+  display: block; width: var(--tile-w); aspect-ratio: 120 / 70; height: auto;
+  object-fit: cover; object-position: top center;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+.wallTile img[data-pixel] { image-rendering: pixelated; } /* thumb is already centre-cropped */
+
+/* Motion: top row left → right, next row right → left, alternating. Constant px/s via --dur. */
+html[data-motion="full"] .wall { animation: wall-in 2.4s var(--ease) 1.1s both; }
+html[data-motion="full"] .wallTrack { animation: wall-slide var(--dur) linear infinite; will-change: transform; }
+html[data-motion="full"] .wallRow[data-dir="ltr"] .wallTrack { animation-direction: reverse; }
+.wall[data-active="false"] .wallTrack { animation-play-state: paused; }
+
+@keyframes wall-slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes wall-in { from { opacity: 0; } to { opacity: var(--wall-opacity); } }
+
+/* Reduced motion: one static set per row, centred. */
+html[data-motion="reduced"] .wallTrack { margin-inline: auto; }
+html[data-motion="reduced"] .wallRow:nth-child(even) .wallTrack { margin-left: auto; transform: translateX(calc(var(--tile-w) * -.5)); }
+
+/* Mobile: the room shrinks to 60% and fades to .6; the wall follows. */
+@media (max-width: 719px) {
+  .wall { width: 60%; bottom: calc(var(--s-2) * -1); opacity: calc(var(--wall-opacity) * .6); }
+  html[data-motion="full"] .wall { animation-name: wall-in-m; }
+  @keyframes wall-in-m { from { opacity: 0; } to { opacity: calc(var(--wall-opacity) * .6); } }
+}
+
+/* ───────────── Review panel (harness only) ───────────── */
+.panel {
+  position: fixed; left: var(--s-4); bottom: var(--s-4); z-index: 10;
+  width: min(300px, calc(100vw - var(--s-4) * 2));
+  font-family: var(--font-mono); font-size: var(--fs-label); color: var(--text-2);
+  background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius-md);
+}
+.panelToggle {
+  width: 100%; min-height: 44px; padding: 0 var(--s-4); text-align: left;
+  background: none; border: 0; color: var(--text-1); font: inherit; cursor: pointer;
+}
+.panelBody { display: grid; gap: var(--s-3); padding: 0 var(--s-4) var(--s-4); }
+.panelBody label { display: grid; gap: var(--s-1); }
+.panelBody b { color: var(--text-1); font-weight: 500; }
+.panelBody em { color: var(--accent-ink); font-style: normal; }
+.panelBody input[type="range"] { width: 100%; accent-color: var(--accent); }
+.panelRow { display: flex; gap: var(--s-2); }
+.panelRow button {
+  flex: 1; min-height: 44px; font: inherit; color: var(--text-1); cursor: pointer;
+  background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: var(--radius-sm);
+}
+.panelToggle:focus-visible, .panelRow button:focus-visible, .panelBody input:focus-visible {
+  outline: 2px solid var(--accent-ink); outline-offset: 2px;
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hero Wall Preview — Aron Jay Consuelo</title>
+  <meta name="description" content="Review checkpoint: a slow two-way marquee of project hero screenshots on the wall behind the hero room.">
+  <meta name="color-scheme" content="dark light">
+  <meta name="robots" content="noindex">
+  <script>
+    // Mirrors the site's boot script. Needs the Vite dev server (npm run dev), because the
+    // page imports the real HeroRoom and the live project list from src/.
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      root.dataset.theme = 'dark';
+      root.dataset.motion = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+    })();
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="./hero-wall.tsx"></script>
+</body>
+</html>

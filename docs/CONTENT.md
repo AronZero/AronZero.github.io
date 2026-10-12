@@ -36,7 +36,7 @@ src/content/projects/kindred-clinic/
     └── 02-booking-confirmation.png
 ```
 
-- **Hero**: a screenshot of the landing page's first screen.
+- **Hero**: a screenshot of the landing page's first screen. A small thumbnail for the home-page project wall is made from it automatically (cropped from the top); restart `npm run dev` after adding a new one.
 - **Gallery**: other pages. They're sorted by file name, and the name becomes the caption: `02-booking-confirmation.png` → "Booking confirmation". Use a number prefix to set the order.
 - **Formats**: PNG, JPG, WebP or AVIF.
 - **Animated GIFs** (games): put the GIF next to a still with the same name (`01-boss-fight.gif` + `01-boss-fight.png`). The still shows in the gallery with a GIF badge; the GIF plays only in the full-screen viewer, with a pause button. Game images are scaled up with hard pixel edges.

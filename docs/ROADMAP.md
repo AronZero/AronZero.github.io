@@ -11,6 +11,7 @@
 - [x] **Hero room** (2026-10-09): interactive monitor-lit figure behind the hero name (see DESIGN → Motion)
 - [x] **Phase 3a — Playground** (2026-10-08, awaiting review): `/play/<slug>` with the PICO-8 export in a framed player (poster → one-click start with sound, Mute / Full screen / Stop, Esc releases the keyboard, touch controls on phones); Playground nav opens it; case study "Play" layer and featured-card link. Astrox credited for Pixel Art (role + Graphic Design discipline)
 - [x] **Intro** (2026-10-09): first-entry logo intro that hands off into the header (≈2.3s, once per session, no skip, none under reduced motion). See DESIGN → Motion
+- [x] **Project wall** (2026-10-12): project thumbnails drift on the hero room's back wall; build step generates the thumbnails (see DESIGN → Motion)
 - [x] **Logo** (2026-10-09): Strata Signature (AJC in three layers) in header, Index dialog and footer; favicon is the centered A. See DESIGN → Logo. Résumé and social assets still to do
 
 ## Next

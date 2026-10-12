@@ -32,6 +32,7 @@
   --room-form: #1C1A17;     /* surfaces catching faint light */
   --room-screen: #E9E1D3;   /* screen light, always used at low opacity */
   --room-rim: rgb(242 234 220 / .34);   /* monitor light catching edges */
+  --wall-opacity: .18;      /* project screenshots on the back wall; kept faint behind the figure */
 
   /* ---------- Type ---------- */
   --font-display: "Barlow Condensed", "Arial Narrow", ui-sans-serif, sans-serif;
@@ -120,6 +121,7 @@
   --room-form: #E6E1D9;
   --room-screen: #FFFDF9;
   --room-rim: rgb(255 255 255 / .7);
+  --wall-opacity: .3;
 }
 
 @media (max-width: 719px) {
