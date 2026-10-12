@@ -20,7 +20,7 @@ export const ROOM_CONFIG = {
 } as const;
 
 /** What he says while shooing; one at random, never the same twice in a row. */
-export const ROOM_PHRASES = ['Shooo!', 'I’m busy.', 'Get away!', 'Do not disturb me.'];
+export const ROOM_PHRASES = ['Shooo!', 'I’m busy...', 'Go away!', 'Do not disturb me.'];
 
 const HEAD = { x: 320, y: 255 };
 const SHOULDER = { l: { x: 256, y: 318 }, r: { x: 384, y: 318 } };
