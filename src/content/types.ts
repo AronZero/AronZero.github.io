@@ -1,10 +1,11 @@
 /** Disciplines drive the category tags and the /work filter. Order here = filter order. */
-export const DISCIPLINES = ['web-design', 'ui-ux', 'front-end', 'graphic-design', 'game'] as const;
+export const DISCIPLINES = ['web-design', 'ui-ux', 'front-end', 'graphic-design', 'game', 'mobile-app-design'] as const;
 export type Discipline = (typeof DISCIPLINES)[number];
 
 export const DISCIPLINE_LABELS: Record<Discipline, string> = {
   'web-design': 'Web Design',
   'ui-ux': 'UI/UX',
+  'mobile-app-design': 'Mobile App Design',
   'front-end': 'Front-end',
   'graphic-design': 'Graphic Design',
   game: 'Games',
@@ -31,6 +32,10 @@ export interface WebsiteEntry extends BaseEntry {
   kind: 'website';
 }
 
+export interface MobileEntry extends BaseEntry {
+  kind: 'mobile';
+}
+
 export interface GameEntry extends BaseEntry {
   kind: 'game';
   /** Path to the exported PICO-8 HTML under /public, e.g. "/games/my-game/index.html". */
@@ -39,7 +44,7 @@ export interface GameEntry extends BaseEntry {
   controls?: readonly string[];
 }
 
-export type ProjectEntry = WebsiteEntry | GameEntry;
+export type ProjectEntry = WebsiteEntry| MobileEntry | GameEntry;
 
 export interface ProjectImage {
   src: string;

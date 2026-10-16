@@ -15,6 +15,18 @@ import type { ProjectEntry } from './types';
  */
 export const projectEntries = [
   {
+    kind: 'mobile',
+    slug: 'ozone',
+    title: 'OZONE',
+    role: 'UI/UX Design · Front-end Development',
+    description:
+      'A personal mobile app that bundles multiple tools: Notes, Finance Tracker, and Book Review.',
+    disciplines: ['mobile-app-design', 'ui-ux', 'front-end'],
+    stack: ['Flutter', 'Dart', 'SQLite'],
+    url: 'https://github.com/AronZero/OZONE-Super-App',
+    featured: true,
+  },
+  {
     kind: 'website',
     slug: 'glow-smoothies',
     title: 'Glow Smoothies',
@@ -35,7 +47,7 @@ export const projectEntries = [
     disciplines: ['web-design', 'ui-ux', 'front-end'],
     stack: ['Figma', 'AngularJS', 'Sass'],
     url: 'https://www.amperkcafe.com/',
-    featured: true,
+    featured: false,
   },
   {
     kind: 'website',
