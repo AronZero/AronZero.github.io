@@ -82,11 +82,11 @@ export function HomePage() {
                 From user flows to production-ready front-end code, with a graphic designer’s eye for type,
                 composition and detail.
               </FadeUp>
-              <FadeUp delay={750} className={styles.actions}>
+              {/* <FadeUp delay={750} className={styles.actions}>
                 <Link className="btn btn--primary" to="#selected">
                   View selected work <ArrowRight className="icon" size={16} aria-hidden="true" />
                 </Link>
-              </FadeUp>
+              </FadeUp> */}
             </div>
           </div>
         </div>
