@@ -7,6 +7,10 @@
 .heroSquare { max-width: min(100%, calc(100svh - var(--header-h) - var(--s-8))); }
 
 .brief { row-gap: var(--s-7); align-items: start; }
+/* The project details stay in view beside the story while it scrolls (two-column layout only). */
+@media (min-width: 720px) {
+  .briefMeta { position: sticky; top: calc(var(--header-h) + var(--topbar-h) + var(--s-6)); }
+}
 
 /* Case-study story under the brief: labelled blocks in reading order. */
 .story { display: grid; gap: var(--s-7); margin-top: var(--s-8); }

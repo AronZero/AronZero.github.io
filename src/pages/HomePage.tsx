@@ -97,11 +97,18 @@ export function HomePage() {
           <LayerHead num={numOf('about')} label="About" aside={`Layer ${numOf('about')} / ${total}`} />
           <h2 id="about-title" className="sr-only">About me</h2>
           <div className={`grid ${styles.about}`}>
-            {site.about.map((text, i) => (
-              <FadeUp key={i} as="p" delay={i * 150} className={i === 0 ? 't-lead' : 't-body c-2'} style={i === 0 ? col('1 / 8') : col('9 / 13')}>
-                {text}
-              </FadeUp>
-            ))}
+            <div className={styles.aboutText} style={col('1 / 8')}>
+              {site.about.map((text, i) => (
+                <FadeUp key={i} as="p" delay={i * 150} className={i === 0 ? 't-lead' : 't-body c-2'}>
+                  {text}
+                </FadeUp>
+              ))}
+            </div>
+            <FadeUp as="figure" delay={300} className={styles.quote} style={col('9 / 13')}>
+              <blockquote className="t-quote text-color-accent">
+                <p>“{site.quote}”</p>
+              </blockquote>
+            </FadeUp>
           </div>
         </div>
       </section>

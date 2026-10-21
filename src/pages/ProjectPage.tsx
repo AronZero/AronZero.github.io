@@ -144,7 +144,7 @@ function CaseStudy({ project }: { project: Project }) {
               <FadeUp as="p" className="t-lead">{project.description}</FadeUp>
               {project.story && <Story story={project.story} />}
             </div>
-            <FadeUp as="dl" delay={150} className="meta" style={col('9 / 13')}>
+            <FadeUp as="dl" delay={150} className={`meta ${styles.briefMeta}`} style={col('9 / 13')}>
               <dt className="t-label">Role</dt><dd>{project.role}</dd>
               <dt className="t-label">Discipline</dt><dd>{project.disciplines.map((d) => DISCIPLINE_LABELS[d]).join(' · ')}</dd>
               {project.stack.length > 0 && (

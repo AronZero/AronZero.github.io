@@ -24,7 +24,11 @@
 .statement { margin-bottom: var(--s-6); }
 .actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
 
-.about { row-gap: var(--s-6); align-items: start; }
+.about { row-gap: var(--s-8); align-items: start; }
+.aboutText { display: grid; gap: var(--s-5); }
+.quote { margin: 0; padding-top: var(--s-5); border-top: 1px solid var(--line-strong); }
+.quote blockquote, .quote p { margin: 0; }
+.quote figcaption { margin-top: var(--s-5); }
 
 .intro { row-gap: var(--s-6); align-items: end; margin-bottom: var(--s-10); }
 .intro > :first-child { --c: 1 / 9; }

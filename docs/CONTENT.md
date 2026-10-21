@@ -78,7 +78,8 @@ A game with `embedPath` gets a play page at `/play/<slug>`, a "Play in the brows
 Edit [`src/content/site.ts`](../src/content/site.ts):
 - `email`: your address
 - `linkedin`: your full profile URL
-- `about`: the two paragraphs in the home page's About section, under the hero (first one large)
+- `about`: the paragraphs in the home page's About section, under the hero (first one large)
+- `quote`: your own short motto, shown beside them and credited to you
 - `resumeUrl`: `/Aron-Jay-Consuelo-Resume.pdf` (the file in `public/`). Set to `null` to hide résumé buttons.
 
 ## Experience, certifications and résumé
