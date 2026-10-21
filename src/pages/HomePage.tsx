@@ -31,6 +31,7 @@ export function HomePage() {
   // Sections present on this page, numbered in order for the depth gauge.
   const layers: GaugeLayer[] = [
     { id: 'cover', name: 'Cover' },
+    { id: 'about', name: 'About' },
     { id: 'selected', name: 'Selected' },
     { id: 'experience', name: 'Experience' },
     { id: 'index', name: 'Index' },
@@ -47,7 +48,7 @@ export function HomePage() {
         <div className="wrap">
           <div className={styles.heroTop}>
             <FadeUp as="p" className="t-label">Portfolio — UI/UX Design &amp; Front-end Development</FadeUp>
-            <FadeUp as="p" delay={120} className="t-label">10 years · {projects.length} projects</FadeUp>
+            <FadeUp as="p" delay={120} className="t-label">10 years · 30+ projects</FadeUp>
           </div>
 
           <div className={styles.stage}>
@@ -79,8 +80,7 @@ export function HomePage() {
               </FadeUp>
               <FadeUp as="p" delay={600} className="t-body">
                 From user flows to production-ready front-end code, with a graphic designer’s eye for type,
-                composition and detail. Ten years of websites and apps for small businesses, associations and
-                local government.
+                composition and detail.
               </FadeUp>
               <FadeUp delay={750} className={styles.actions}>
                 <Link className="btn btn--primary" to="#selected">
@@ -88,6 +88,20 @@ export function HomePage() {
                 </Link>
               </FadeUp>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="layer" aria-labelledby="about-title">
+        <div className="wrap">
+          <LayerHead num={numOf('about')} label="About" aside={`Layer ${numOf('about')} / ${total}`} />
+          <h2 id="about-title" className="sr-only">About me</h2>
+          <div className={`grid ${styles.about}`}>
+            {site.about.map((text, i) => (
+              <FadeUp key={i} as="p" delay={i * 150} className={i === 0 ? 't-lead' : 't-body c-2'} style={i === 0 ? col('1 / 8') : col('9 / 13')}>
+                {text}
+              </FadeUp>
+            ))}
           </div>
         </div>
       </section>
@@ -112,7 +126,7 @@ export function HomePage() {
         <div className="wrap">
           <LayerHead num={numOf('index')} label="Index" aside={`Layer ${numOf('index')} / ${total}`} />
           <div className={styles.indexHead}>
-            <RevealLines as="h2" id="index-title" className="t-h2" lines={['All', <em key="w">work</em>]} />
+            <RevealLines as="h2" id="index-title" className="t-h2" lines={['The', <em key="w">index</em>]} />
             <Link className="arrow-link" to={paths.work()}>
               <span>Browse and filter the index</span>
               <ArrowRight className="icon icon--right" size={16} aria-hidden="true" />
