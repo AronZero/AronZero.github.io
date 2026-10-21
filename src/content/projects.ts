@@ -52,7 +52,7 @@ export const projectEntries = [
   {
     kind: 'website',
     slug: 'bcea',
-    title: 'BCEA - British Columbia Electrical Association',
+    title: 'BCEA',
     role: 'UI/UX Design · Front-end Development',
     description:
       'A website for the British Columbia Electrical Association, connecting electrical industry professionals with membership benefits, educational resources, industry events, job opportunities, and networking programs.',
@@ -108,7 +108,7 @@ export const projectEntries = [
   {
     kind: 'website',
     slug: 'romblon-pmis',
-    title: 'Romblon Provincial Management System',
+    title: 'Romblon PMIS',
     role: 'UI/UX Design · Front-end Development',
     description:
       'An internal management system for Romblon’s provincial operations, streamlining document tracking, payment processing, timekeeping, and employee reporting in one place.',
