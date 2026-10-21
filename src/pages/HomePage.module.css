@@ -24,8 +24,6 @@
 .statement { margin-bottom: var(--s-6); }
 .actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
 
-.layersSection { padding-top: var(--section-y); }
-
 .intro { row-gap: var(--s-6); align-items: end; margin-bottom: var(--s-10); }
 .intro > :first-child { --c: 1 / 9; }
 

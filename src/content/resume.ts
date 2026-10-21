@@ -19,9 +19,9 @@ export const experience: readonly Job[] = [
     company: 'Kamal Osman Jamjoom Service Philippines Inc.',
     period: '2020 – 2026',
     duties: [
-      'Design, build and maintain websites using authoring and scripting languages, content creation and management tools, and digital media, on schedule.',
-      'Examine user needs to determine technical requirements.',
-      'Keep up with current web technologies and programming practices.',
+      'Designed, built and maintained websites end to end, from layout and content to the code and media behind them, and delivered them on schedule.',
+      'Turned user needs into clear technical requirements.',
+      'Kept my work current with modern web technologies and programming practices.',
     ],
   },
   {
@@ -29,19 +29,16 @@ export const experience: readonly Job[] = [
     company: 'Intellismart Technology Inc.',
     period: '2016 – 2020',
     duties: [
-      'Responsible for the layout, visual appearance and usability of company and client websites and mobile apps.',
-      'Developed multimedia presentations, web pages, promotional products, technical illustrations and computer artwork for products, technical manuals and slide shows.',
+      'Owned the layout, visual design and usability of company and client websites and mobile apps.',
+      'Created multimedia presentations, web pages, promotional materials, technical illustrations and artwork for products, manuals and slide shows.',
     ],
   },
 ];
 
+/* A curated subset of the résumé: only training that supports UI/UX, front-end and graphic design.
+   (VMware, RapidMiner, NoSQL, 3D Animation and Getting Started in UX stay on the PDF only.) */
 export const certifications: readonly Certification[] = [
-  { name: 'Virtualization using VMware', issuer: 'ITechtivity' },
-  { name: 'Data Mining using RapidMiner', issuer: 'ITechtivity' },
-  { name: 'NoSQL DBMS', issuer: 'ITechtivity' },
+  { name: 'Design Thinking at Work', issuer: 'LinkedIn Learning' },
   { name: 'HTML5', issuer: 'EGlobio Training' },
   { name: 'Graphic Design', issuer: 'EGlobio Training' },
-  { name: '3D Animation', issuer: 'EGlobio Training' },
-  { name: 'Getting Started in UX', issuer: 'LinkedIn Learning' },
-  { name: 'Design Thinking at Work', issuer: 'LinkedIn Learning' },
 ];

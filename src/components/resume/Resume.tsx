@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { ArrowUpRight, Download } from 'lucide-react';
-import { certifications, experience, type Certification } from '../../content/resume';
+import { certifications, experience } from '../../content/resume';
 import { site } from '../../content/site';
 import { col, FadeUp, RevealLines } from '../Reveal';
 import styles from './Resume.module.css';
@@ -49,41 +49,20 @@ export function Experience({ head }: { head: ReactNode }) {
             </FadeUp>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
 
-function byIssuer(list: readonly Certification[]): [string, string[]][] {
-  const groups = new Map<string, string[]>();
-  for (const c of list) groups.set(c.issuer, [...(groups.get(c.issuer) ?? []), c.name]);
-  return [...groups];
-}
-
-const GROUP_COLS = ['1 / 5', '5 / 9', '9 / 13'];
-
-export function Certifications({ head }: { head: ReactNode }) {
-  return (
-    <section id="certifications" className="layer" aria-labelledby="certifications-title">
-      <div className="wrap">
-        {head}
-        <div className={`grid ${styles.intro}`}>
-          <RevealLines as="h2" id="certifications-title" className="t-h2" lines={['Training &', <em key="c">certifications</em>]} />
-        </div>
-
-        <div className={`grid ${styles.certGrid}`}>
-          {byIssuer(certifications).map(([issuer, names], i) => (
-            <FadeUp key={issuer} delay={i * 120} className={styles.group} style={col(GROUP_COLS[i % GROUP_COLS.length] ?? '1 / -1')}>
-              <h3 className={`t-label ${styles.issuer}`}>
-                <span>{issuer}</span>
-                <span>{String(names.length).padStart(2, '0')}</span>
-              </h3>
-              <ul className={styles.certs}>
-                {names.map((n) => <li key={n}>{n}</li>)}
-              </ul>
-            </FadeUp>
-          ))}
-        </div>
+        {certifications.length > 0 && (
+          <FadeUp className={`grid ${styles.training}`}>
+            <h3 className={`t-label ${styles.period}`} style={col('1 / 4')}>Training</h3>
+            <ul className={styles.certs} style={col('4 / 13')}>
+              {certifications.map((c) => (
+                <li key={c.name}>
+                  <span className={styles.certName}>{c.name}</span>
+                  <span className={styles.certIssuer}>{c.issuer}</span>
+                </li>
+              ))}
+            </ul>
+          </FadeUp>
+        )}
       </div>
     </section>
   );

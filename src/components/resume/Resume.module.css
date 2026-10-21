@@ -18,22 +18,16 @@
   content: ""; position: absolute; left: 0; top: .8em; width: var(--s-3); height: 1px; background: var(--text-3);
 }
 
-/* ---------- Certifications: grouped by issuer ---------- */
-.certGrid { row-gap: var(--s-8); }
-.issuer {
-  display: flex; justify-content: space-between; gap: var(--s-4);
-  padding-bottom: var(--s-3); border-bottom: 1px solid var(--line-strong);
-}
-.certs { list-style: none; padding: 0; margin: 0; }
-.certs li {
-  padding-block: var(--s-4); border-bottom: 1px solid var(--line);
-  font-family: var(--font-display); font-weight: var(--fw-display);
-  font-size: var(--fs-lead); line-height: 1.15; color: var(--text-1);
-}
+/* ---------- Training: one row under the jobs ---------- */
+.training { row-gap: var(--s-4); padding-block: var(--s-7); border-bottom: 1px solid var(--line); align-items: baseline; }
+.certs { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-8); }
+.certs li { display: grid; gap: var(--s-1); }
+.certName { font-family: var(--font-display); font-weight: var(--fw-display); font-size: var(--fs-lead); line-height: 1.15; color: var(--text-1); }
+.certIssuer { font-size: var(--fs-small); color: var(--text-2); }
 
 @media (max-width: 719px) {
   .intro { margin-bottom: var(--s-7); }
   .job { padding-block: var(--s-6); row-gap: var(--s-3); }
   .job > :first-child { margin-bottom: calc(var(--s-1) * -1); }
-  .certGrid { row-gap: var(--s-7); }
+  .training { padding-block: var(--s-6); row-gap: var(--s-3); }
 }

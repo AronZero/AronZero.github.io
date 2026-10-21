@@ -6,7 +6,7 @@
 - [x] **Style tile v0.1**: approved with changes: Barlow Condensed replaces Instrument Serif; orange level confirmed; layer transition kept; cinematic stage rejected; structure lens kept
 - [x] **Phase 1 — Foundation**: Vite + React + TS scaffold, vetted dependencies, design tokens, self-hosted fonts, content model with auto-discovered images, motion preference + reveal hooks
 - [x] **Project docs**: CLAUDE.md, DESIGN, CONTENT, ROADMAP, ARCHITECTURE; skills `vet-dependency`, `visual-check`
-- [x] **Phase 2 — Core pages** (awaiting review): router with View Transitions, site shell (header, Index dialog, footer/contact, depth gauge), Home (hero, Strata layer transition, selected work, index), `/work` with URL filter, case studies (Cover, Brief, Surface gallery + lightbox, Structure lens, Stack, Live/Next), 404
+- [x] **Phase 2 — Core pages** (awaiting review): router with View Transitions, site shell (header, Index dialog, footer/contact, depth gauge), Home (hero, selected work, experience, index; the Strata layer scene was removed 2026-10-21), `/work` with URL filter, case studies (Cover, Brief + story, Surface gallery + lightbox, Stack, Live/Next; the Structure lens was removed 2026-10-21), 404
 
 - [x] **Hero room** (2026-10-09): interactive monitor-lit figure behind the hero name (see DESIGN → Motion)
 - [x] **Phase 3a — Playground** (2026-10-08, awaiting review): `/play/<slug>` with the PICO-8 export in a framed player (poster → one-click start with sound, Mute / Full screen / Stop, Esc releases the keyboard, touch controls on phones); Playground nav opens it; case study "Play" layer and featured-card link. Astrox credited for Pixel Art (role + Graphic Design discipline)

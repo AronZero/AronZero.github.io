@@ -1,12 +1,11 @@
 import { useEffect, useState, type CSSProperties } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from 'lucide-react';
-import { DISCIPLINE_LABELS, getProject, isPlayable, type Project } from '../content';
+import { DISCIPLINE_LABELS, getProject, isPlayable, type Project, type ProjectStory } from '../content';
 import { col, FadeUp, RevealLines } from '../components/Reveal';
 import { DepthGauge, type GaugeLayer } from '../components/shell/DepthGauge';
 import { domainOf } from '../components/project/FeaturedProject';
 import { Gallery } from '../components/project/Gallery';
 import { endHeroHandoff, HERO_TRANSITION_NAME, isHeroHandoff } from '../components/project/heroHandoff';
-import { StructureLens } from '../components/project/StructureLens';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { Link, routeTransitionDone } from '../router/Router';
 import { paths } from '../router/routes';
@@ -18,6 +17,41 @@ function LayerHead({ layer, total, label }: { layer: GaugeLayer; total: string; 
     <div className="layer-head">
       <span className="t-label"><span className="layer-head__num">{layer.num}</span> — {label}</span>
       <span className="t-label">Layer {layer.num} / {total}</span>
+    </div>
+  );
+}
+
+/** Challenge, contribution, decisions and outcome, written by Aron in projects.ts. */
+function Story({ story }: { story: ProjectStory }) {
+  return (
+    <div className={styles.story}>
+      <FadeUp className={styles.storyBlock}>
+        <h3 className="t-label">The challenge</h3>
+        <p className="t-body">{story.challenge}</p>
+      </FadeUp>
+      <FadeUp className={styles.storyBlock}>
+        <h3 className="t-label">What I did</h3>
+        <p className="t-body">{story.contribution}</p>
+      </FadeUp>
+      {story.decisions.length > 0 && (
+        <FadeUp className={styles.storyBlock}>
+          <h3 className="t-label">Key decisions</h3>
+          <ol className={styles.decisions} role="list">
+            {story.decisions.map((d, i) => (
+              <li key={d}>
+                <span className="t-label">{String(i + 1).padStart(2, '0')}</span>
+                <p className="t-body">{d}</p>
+              </li>
+            ))}
+          </ol>
+        </FadeUp>
+      )}
+      {story.outcome && (
+        <FadeUp className={styles.storyBlock}>
+          <h3 className="t-label">Outcome</h3>
+          <p className="t-body">{story.outcome}</p>
+        </FadeUp>
+      )}
     </div>
   );
 }
@@ -54,7 +88,6 @@ function CaseStudy({ project }: { project: Project }) {
     { id: 'cover', name: 'Cover', show: true },
     { id: 'brief', name: 'Brief', show: true },
     { id: 'surface', name: 'Surface', show: project.gallery.length > 0 },
-    { id: 'structure', name: 'Structure', show: project.hero !== null },
     { id: 'stack', name: 'Stack', show: project.stack.length > 0 },
     { id: 'next', name: finalName, show: true },
   ]
@@ -62,7 +95,7 @@ function CaseStudy({ project }: { project: Project }) {
     .map(({ id, name }, i) => ({ id, name, num: String(i).padStart(2, '0') }));
   const total = layers[layers.length - 1]?.num ?? '';
   const layer = (id: string) => layers.find((l) => l.id === id);
-  const surface = layer('surface'), structure = layer('structure'), stack = layer('stack');
+  const surface = layer('surface'), stack = layer('stack');
 
   return (
     <>
@@ -109,6 +142,7 @@ function CaseStudy({ project }: { project: Project }) {
             <div style={col('1 / 8')}>
               <h2 id="brief-title" className="sr-only">Brief</h2>
               <FadeUp as="p" className="t-lead">{project.description}</FadeUp>
+              {project.story && <Story story={project.story} />}
             </div>
             <FadeUp as="dl" delay={150} className="meta" style={col('9 / 13')}>
               <dt className="t-label">Role</dt><dd>{project.role}</dd>
@@ -154,28 +188,7 @@ function CaseStudy({ project }: { project: Project }) {
         </section>
       )}
 
-      {/* 03 Structure */}
-      {structure && project.hero && (
-        <section id="structure" className="layer" aria-labelledby="structure-title">
-          <div className="wrap">
-            <LayerHead layer={structure} total={total} label="Structure" />
-            <div className={`grid ${styles.structure}`}>
-              <div style={col('1 / 5')}>
-                <RevealLines as="h2" id="structure-title" className="t-h2" lines={['Look', <em key="u">underneath.</em>]} />
-                <FadeUp as="p" className={`t-body ${styles.structureText}`}>
-                  A structure view generated from the screenshot. Edges are traced to show layout rhythm,
-                  alignment and hierarchy. Hover over the image, or use the slider.
-                </FadeUp>
-              </div>
-              <div style={col('6 / 13')}>
-                <StructureLens image={project.hero} barNum={structure.num} barLabel={`Structure · ${domain}`} />
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* 04 Stack */}
+      {/* 03 Stack */}
       {stack && (
         <section id="stack" className="layer" aria-labelledby="stack-title">
           <div className="wrap">
@@ -195,7 +208,7 @@ function CaseStudy({ project }: { project: Project }) {
         </section>
       )}
 
-      {/* 05 Live / Next */}
+      {/* 04 Live / Next */}
       <section id="next" className="layer" aria-labelledby="next-title">
         <div className="wrap">
           <LayerHead layer={layer('next')!} total={total} label={finalName} />

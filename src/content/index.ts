@@ -123,4 +123,4 @@ export const disciplinesInUse: readonly Discipline[] = DISCIPLINES.filter((d) =>
 );
 
 export { DISCIPLINE_LABELS, DISCIPLINES } from './types';
-export type { Discipline, Project, ProjectImage } from './types';
+export type { Discipline, Project, ProjectImage, ProjectStory } from './types';

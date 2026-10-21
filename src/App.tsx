@@ -1,4 +1,3 @@
-import { BlueprintDefs } from './components/project/Blueprint';
 import { Intro } from './components/shell/Intro';
 import { SiteFooter } from './components/shell/SiteFooter';
 import { SiteHeader } from './components/shell/SiteHeader';
@@ -30,7 +29,6 @@ export default function App() {
     <RouterProvider>
       <a className="skip-link" href="#main">Skip to content</a>
       <Intro />
-      <BlueprintDefs />
       <SiteHeader />
       <main id="main">
         <Page />

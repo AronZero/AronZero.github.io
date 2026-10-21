@@ -63,8 +63,6 @@ House easing is `cubic-bezier(.16, 1, .3, 1)` (expo-out). Micro-interactions tak
 
 **Approved**
 - Line-mask text reveals, staggered 90ms in reading order.
-- **Strata layer transition**: a pinned, scroll-driven scene where the Surface layer lifts and tilts away to reveal Structure, then Stack.
-- **Structure lens**: hover over a screenshot to see a blueprint reading of it underneath, with a slider as the keyboard and touch alternative. It is generated from the screenshot and labelled as such.
 - Hover micro-interactions: underline draws, arrow nudges, row dimming, the floating preview.
 - **Hero handoff** (approved 2026-10-21, `src/components/project/heroHandoff.ts`): clicking a project in the index grows the screenshot you clicked (the floating preview by the cursor on desktop, the inline thumbnail on mobile) into the case-study hero. On a Selected work card, the screenshot, title and "View case study" all hand off the card's screenshot the same way. It is a shared-element View Transition on the existing route transition (760ms, expo-out). The hero skips its fade-up when it arrives this way, and drops the shared name once the morph ends. Keyboard activation with no preview showing, reduced motion and browsers without View Transitions get the plain route change. Back navigation doesn't reverse it.
 - **Hero room** (approved 2026-10-09, `src/components/hero/HeroRoom.*`): behind the hero name, someone works in a dark room lit only by a monitor. It's a secondary discovery, so the name always stays dominant. The one approved exception to "nothing loops": a quiet idle (typing, breathing, a glance, screen light). With a fine pointer he turns toward a nearby cursor; inside his personal space he raises the near arm, waves it off with a random line ("Shooo!", "I’m busy..."…), then pointedly returns to work, with a cooldown that doubles when pestered. Tunables are `ROOM_CONFIG` / `ROOM_PHRASES`. Touch devices get only the idle; reduced motion gets a still scene. Colors are the `--room-*` tokens.
@@ -74,16 +72,18 @@ House easing is `cubic-bezier(.16, 1, .3, 1)` (expo-out). Micro-interactions tak
 
 **Rejected**
 - The cinematic "Lightbox stage" (a screenshot rising out of the dark with a spotlight and tilt). Too much; don't reintroduce it.
+- The home-page **Strata layer transition** (a pinned scroll scene lifting Surface off Structure and Stack). Removed 2026-10-21: it explained the site instead of showing work, and delayed Selected work.
+- The **Structure lens** (an edge-detected "blueprint" of the hero screenshot on case studies). Removed 2026-10-21: at a glance it read as a wireframe, which it wasn't, and the written story now explains the real decisions.
 - Scroll-jacking, smooth-scroll libraries, looping or decorative animation.
 
-**Reduced motion**: motion is on by default and follows only the OS setting (no manual toggle). Pinned scenes become plain stacked content, reveals become short fades, and nothing transforms.
+**Reduced motion**: motion is on by default and follows only the OS setting (no manual toggle). Reveals become short fades, and nothing transforms.
 
 ## Responsive
 
 Mobile is a recomposition, not a scale-down:
 - Images bleed edge to edge; frames lose their side borders.
 - Margin notes fold in under the image with an orange rule.
-- Hover interactions become touch ones: the lens becomes a slider, the floating preview becomes inline thumbnails.
+- Hover interactions become touch ones: the floating preview becomes inline thumbnails.
 - Navigation moves into a full-screen Index dialog.
 - No horizontal page scroll at any width, down to 320px.
 
@@ -98,4 +98,3 @@ Dark is the default and the primary identity. A header toggle (also in the Index
 - Light values override the color tokens under `:root[data-theme="light"]` in `tokens.css`; components never branch on theme.
 - Background is warm paper `#F5F2ED`, never `#FFF`.
 - Orange **fills** (primary button, selected filter) stay `--accent` with dark text in both themes. Orange as **text, hairline or focus ring** uses `--accent-ink`, which is `#F99E35` in dark and `#A04B08` in light (5.4:1).
-- The structure lens uses a per-theme SVG filter (`Blueprint.tsx`).

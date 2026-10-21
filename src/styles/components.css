@@ -130,18 +130,6 @@ html.js[data-motion="full"] .strata-lines.reveal-draw.is-in i { transform: scale
   .bleed-m .crop__marks { display: none; }
 }
 
-/* ---------- Range input (lens slider) ---------- */
-.range {
-  -webkit-appearance: none; appearance: none; flex: 1; height: 32px; background: transparent; cursor: pointer;
-}
-.range::-webkit-slider-runnable-track { height: 1px; background: var(--line-strong); }
-.range::-moz-range-track { height: 1px; background: var(--line-strong); }
-.range::-webkit-slider-thumb {
-  -webkit-appearance: none; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%;
-  background: var(--accent); border: 3px solid var(--bg);
-}
-.range::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); }
-
 /* ---------- Dialogs ---------- */
 html:has(dialog[open]) { overflow: hidden; }
 

@@ -42,7 +42,6 @@ A small hand-written router in `src/router/` (no dependency):
 ```
 App
 ├─ Intro                (first-entry logo intro; renders nothing unless html[data-intro="play"])
-├─ BlueprintDefs        (the SVG filter used by the structure views, rendered once)
 ├─ SiteHeader           (nav, theme toggle, résumé, mobile Index <dialog>)
 ├─ main → Page          (switch on route)
 │   └─ DepthGauge       (per page: the layers that page actually has, numbered in order)
@@ -54,9 +53,6 @@ App
 - `html[data-motion="full" | "reduced"]` is set **before first paint** by an inline script in `index.html` from the OS setting. `useMotionPreference` reads it. The same script sets `html[data-theme="dark" | "light"]` from `localStorage` (`ajc-theme`, default dark); `useTheme` reads and toggles it.
 - **Intro**: the same inline script decides, before first paint, whether the intro plays: home page, no hash, full motion, visible tab, no Save-Data, not yet this session (`ajc-intro` in `sessionStorage`, set on any entry so deep links count). `?intro=replay` is the only accepted override, for review. It sets `html[data-intro="play"]`, which hides the header mark and adds `--intro-offset` (`--intro-hold`) to reveal delays so the hero plays as the overlay lifts. The timeline is CSS (`Intro.module.css`). The only script is the handoff: when the overlay starts lifting (its `animationstart`, with a timer backup) it measures both marks and moves the big one into the header with the Web Animations API, then sets `data-intro="done"` so the header mark doesn't replay its own load animation. Fail-safes: CSS hides the overlay and shows the header mark at 3.2s, and a JS timer finishes at the same point. Phase 4 CSP: re-hash this inline script whenever it changes.
 - Reveals: `useReveal` adds `.is-in` via IntersectionObserver; CSS in `styles/motion.css` does the animation. Hidden states only apply under `html.js`.
-- **StrataScene**: one rAF scroll handler writes `--t1` and `--t2` on the scene; all transforms are CSS `calc()`. In reduced mode the handler is removed and CSS stacks the layers statically.
-- **StructureLens**: `clip-path` is set imperatively from pointer events, so moving the pointer never re-renders React. A range input is the keyboard and touch equivalent.
-- **Blueprint**: an SVG filter chain (grayscale → Laplacian `feConvolveMatrix` → accent-colored alpha) applied to an SVG `<image>`. It works in every modern browser with no canvas or library.
 
 ## Styling
 

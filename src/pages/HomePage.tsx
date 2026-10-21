@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { featuredProjects, projects, type Project } from '../content';
+import { featuredProjects, projects } from '../content';
 import { site } from '../content/site';
 import { col, FadeUp, RevealLines } from '../components/Reveal';
 import { DepthGauge, type GaugeLayer } from '../components/shell/DepthGauge';
@@ -8,16 +8,12 @@ import { FeaturedProject } from '../components/project/FeaturedProject';
 import { HeroRoom } from '../components/hero/HeroRoom';
 import { ProjectWall } from '../components/hero/ProjectWall';
 import { ProjectIndex } from '../components/project/ProjectIndex';
-import { Certifications, Experience } from '../components/resume/Resume';
-import { StrataScene } from '../components/project/StrataScene';
+import { Experience } from '../components/resume/Resume';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { useReveal } from '../hooks/useReveal';
 import { Link } from '../router/Router';
 import { paths } from '../router/routes';
 import styles from './HomePage.module.css';
-
-const withHero = (p: Project | undefined): (Project & { hero: NonNullable<Project['hero']> }) | null =>
-  p?.hero ? (p as Project & { hero: NonNullable<Project['hero']> }) : null;
 
 function LayerHead({ num, label, aside }: { num: string; label: string; aside?: string }) {
   return (
@@ -31,15 +27,12 @@ function LayerHead({ num, label, aside }: { num: string; label: string; aside?: 
 export function HomePage() {
   useDocumentMeta(null, `Portfolio of ${site.name}, a UI/UX designer specialising in front-end development, with a background in graphic design.`);
   const strataRef = useReveal<HTMLDivElement>();
-  const sceneProject = withHero(featuredProjects.find((p) => p.hero) ?? projects.find((p) => p.hero));
 
   // Sections present on this page, numbered in order for the depth gauge.
   const layers: GaugeLayer[] = [
     { id: 'cover', name: 'Cover' },
-    { id: 'experience', name: 'Experience' },
-    { id: 'certifications', name: 'Certifications' },
-    ...(sceneProject ? [{ id: 'layers', name: 'Layers' }] : []),
     { id: 'selected', name: 'Selected' },
+    { id: 'experience', name: 'Experience' },
     { id: 'index', name: 'Index' },
     { id: 'contact', name: 'Contact' },
   ].map((l, i) => ({ ...l, num: String(i).padStart(2, '0') }));
@@ -54,7 +47,7 @@ export function HomePage() {
         <div className="wrap">
           <div className={styles.heroTop}>
             <FadeUp as="p" className="t-label">Portfolio — UI/UX Design &amp; Front-end Development</FadeUp>
-            <FadeUp as="p" delay={120} className="t-label">{projects.length} projects · index below</FadeUp>
+            <FadeUp as="p" delay={120} className="t-label">10 years · {projects.length} projects</FadeUp>
           </div>
 
           <div className={styles.stage}>
@@ -86,8 +79,8 @@ export function HomePage() {
               </FadeUp>
               <FadeUp as="p" delay={600} className="t-body">
                 From user flows to production-ready front-end code, with a graphic designer’s eye for type,
-                composition and detail. Every project here reads in layers: from the surface people see to the
-                stack it ships on.
+                composition and detail. Ten years of websites and apps for small businesses, associations and
+                local government.
               </FadeUp>
               <FadeUp delay={750} className={styles.actions}>
                 <Link className="btn btn--primary" to="#selected">
@@ -98,18 +91,6 @@ export function HomePage() {
           </div>
         </div>
       </section>
-
-      <Experience head={<LayerHead num={numOf('experience')} label="Experience" aside={`Layer ${numOf('experience')} / ${total}`} />} />
-      <Certifications head={<LayerHead num={numOf('certifications')} label="Certifications" aside={`Layer ${numOf('certifications')} / ${total}`} />} />
-
-      {sceneProject && (
-        <section className={styles.layersSection} aria-label="How to read a project">
-          <div className="wrap">
-            <LayerHead num={numOf('layers')} label="Layers" aside={`Layer ${numOf('layers')} / ${total}`} />
-          </div>
-          <StrataScene id="layers" project={sceneProject} />
-        </section>
-      )}
 
       <section id="selected" className="layer" aria-labelledby="selected-title">
         <div className="wrap">
@@ -124,6 +105,8 @@ export function HomePage() {
           {featuredProjects.map((p, i) => <FeaturedProject key={p.slug} project={p} flip={i % 2 === 1} />)}
         </div>
       </section>
+
+      <Experience head={<LayerHead num={numOf('experience')} label="Experience" aside={`Layer ${numOf('experience')} / ${total}`} />} />
 
       <section id="index" className="layer" aria-labelledby="index-title">
         <div className="wrap">

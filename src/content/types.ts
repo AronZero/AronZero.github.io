@@ -11,6 +11,21 @@ export const DISCIPLINE_LABELS: Record<Discipline, string> = {
   game: 'Games',
 };
 
+/**
+ * The case-study story, in your own words. Shown in the Brief, under the description.
+ * Only write what really happened: no invented metrics, quotes or results.
+ */
+export interface ProjectStory {
+  /** What was needed or wrong, one or two sentences. */
+  challenge: string;
+  /** What you did, especially on team projects: which parts were yours. */
+  contribution: string;
+  /** Two to four design or build choices, each with its reason. */
+  decisions: readonly string[];
+  /** Optional. Only facts you know: launched, still in use, published… */
+  outcome?: string;
+}
+
 /** What you write in `projects.ts`. Images are not listed here: they are discovered from folders. */
 interface BaseEntry {
   /** URL-safe id, also the image folder name: lowercase letters, numbers and dashes. */
@@ -19,6 +34,8 @@ interface BaseEntry {
   /** Your role on the project, e.g. "UI/UX Design · Front-end Development". */
   role: string;
   description: string;
+  /** Optional case-study story (challenge, contribution, decisions, outcome). */
+  story?: ProjectStory;
   disciplines: readonly Discipline[];
   /** Technologies and tools, e.g. ["AngularJS", "Sass"]. */
   stack: readonly string[];

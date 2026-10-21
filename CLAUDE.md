@@ -27,11 +27,11 @@ Node is installed but may not be on PATH in a fresh shell. In PowerShell, reload
 - Background is warm near-black `#0F0E0D`, never `#000`. The accent `#F99E35` appears once or twice per screen.
 - Text on orange is always dark (`--on-accent`). White on orange fails contrast.
 - Display type is Barlow Condensed. Emphasis comes from weight contrast (500/600 roman vs 300 italic), not from color.
-- Approved motion: line reveals, the Strata layer transition (Surface → Structure → Stack), the structure lens, the hero room and its project wall, the hero handoff (index screenshot grows into the case-study hero), the first-entry logo Intro (once per session), and hover micro-interactions. The cinematic "Lightbox stage" was **rejected**; don't reintroduce it.
+- Approved motion: line reveals, the hero room and its project wall, the hero handoff (index screenshot grows into the case-study hero), the first-entry logo Intro (once per session), and hover micro-interactions. The cinematic "Lightbox stage" was **rejected**; don't reintroduce it.
 - Every motion effect needs a static fallback under `html[data-motion="reduced"]` (set from the OS setting only; there is no motion toggle).
 - Dark is the default theme; a light theme overrides tokens under `:root[data-theme="light"]`. Use `--accent-ink` for orange text, hairlines and outlines, `--accent` only for fills.
 
-**Content honesty.** Projects have only screenshots, title, role, description, tags, stack and an optional URL. Never invent process artifacts (wireframes, sketches, metrics) or show **years** on projects; they have no dates. (Work experience in `src/content/resume.ts` shows the periods printed on the résumé.) The structure lens is generated from the screenshot and must be labelled that way.
+**Content honesty.** Projects have only screenshots, title, role, description, an optional story written from Aron's own account, tags, stack and an optional URL. Never invent process artifacts (wireframes, sketches, metrics) or story facts, and never show **years** on projects; they have no dates. (Work experience in `src/content/resume.ts` shows the periods printed on the résumé.)
 
 **Accessibility.** Text contrast ≥ 4.5:1. Never rely on color alone (use underlines, icons, numbers). Keyboard alternatives exist for every hover interaction. Touch targets ≥ 44px on mobile. One `h1` per page.
 
@@ -48,7 +48,7 @@ Node is installed but may not be on PATH in a fresh shell. In PowerShell, reload
 | `src/styles/` | Tokens and global CSS. Components use CSS Modules. |
 | `src/router/` | Hand-written History API router; use `paths.*` builders, never hand-typed URLs |
 | `src/pages/` | Home, Work, Project (case study), NotFound |
-| `src/components/` | `shell/` (header, footer, depth gauge, `BrandMark` logo), `project/` (index, featured, Strata scene, lens, gallery), `Reveal.tsx` |
+| `src/components/` | `shell/` (header, footer, depth gauge, `BrandMark` logo), `project/` (index, featured, hero handoff, gallery), `Reveal.tsx` |
 | `src/hooks/` | `useMotionPreference`, `useTheme`, `useReveal`, `useDocumentMeta` |
 | `style-tile/` | Approved visual reference (v0.1). Not part of the build. |
 | `docs/` | DESIGN, CONTENT, ARCHITECTURE, ROADMAP |
