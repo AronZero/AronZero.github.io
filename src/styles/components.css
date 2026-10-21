@@ -150,6 +150,13 @@ html:has(dialog[open]) { overflow: hidden; }
 ::view-transition-new(root) { animation: vt-in 520ms var(--ease) both; }
 @keyframes vt-out { to { opacity: 0; transform: translateY(-12px); } }
 @keyframes vt-in { from { opacity: 0; transform: translateY(16px); } }
+/* Hero handoff: the clicked index screenshot grows into the case-study hero (heroHandoff.ts). */
+::view-transition-group(project-hero) {
+  animation-duration: 760ms; animation-timing-function: var(--ease);
+  border-radius: var(--radius-md); overflow: clip;
+}
+::view-transition-old(project-hero),
+::view-transition-new(project-hero) { height: 100%; animation-duration: 240ms; }
 
 /* ---------- Pixel art (game screenshots) ---------- */
 img[data-pixel] { image-rendering: pixelated; }

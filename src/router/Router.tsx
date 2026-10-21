@@ -61,6 +61,13 @@ function scrollToHash(hash: string): boolean {
   return true;
 }
 
+let activeTransition: ViewTransition | null = null;
+
+/** Resolves once the running route transition (if any) has finished animating. */
+export function routeTransitionDone(): Promise<void> {
+  return activeTransition ? activeTransition.finished.catch(() => undefined) : Promise.resolve();
+}
+
 function motionIsFull(): boolean {
   return document.documentElement.dataset.motion !== 'reduced';
 }
@@ -111,7 +118,11 @@ export function RouterProvider({ children }: { children: ReactNode }) {
     };
 
     if (!samePage && motionIsFull() && typeof document.startViewTransition === 'function') {
-      document.startViewTransition(commit);
+      const transition = document.startViewTransition(commit);
+      activeTransition = transition;
+      void transition.finished.finally(() => {
+        if (activeTransition === transition) activeTransition = null;
+      });
     } else {
       commit();
     }

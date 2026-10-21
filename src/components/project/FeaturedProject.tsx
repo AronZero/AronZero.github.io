@@ -1,8 +1,10 @@
+import { useRef } from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { DISCIPLINE_LABELS, isPlayable, type Project } from '../../content';
 import { Link } from '../../router/Router';
 import { paths } from '../../router/routes';
 import { col, FadeUp } from '../Reveal';
+import { heroHandoffClick } from './heroHandoff';
 import styles from './FeaturedProject.module.css';
 
 export function domainOf(url: string | undefined, fallback: string): string {
@@ -18,15 +20,17 @@ export function domainOf(url: string | undefined, fallback: string): string {
 export function FeaturedProject({ project, flip }: { project: Project; flip: boolean }) {
   const href = paths.project(project.slug);
   const titleId = `featured-${project.slug}`;
+  const root = useRef<HTMLElement>(null);
+  const handoff = heroHandoffClick(root, project.slug);
 
   return (
-    <article className={`grid ${styles.featured}`} data-flip={flip || undefined} aria-labelledby={titleId}>
+    <article ref={root} className={`grid ${styles.featured}`} data-flip={flip || undefined} aria-labelledby={titleId}>
       <FadeUp style={flip ? col('6 / 13', '1 / -1') : col('1 / 8', '1 / -1')} className={styles.media}>
-        <Link to={href} className={`crop bleed-m ${styles.shotLink}`} tabIndex={-1} aria-hidden="true">
+        <Link to={href} onClick={handoff} className={`crop bleed-m ${styles.shotLink}`} tabIndex={-1} aria-hidden="true">
           <span className="frame">
             <span className="frame__bar"><span>{project.number}</span><span>{domainOf(project.url, project.slug)}</span></span>
             {project.hero ? (
-              <img className={`frame__shot ${styles.shot}`} src={project.hero.src} data-pixel={project.hero.pixel || undefined} alt="" loading="lazy" decoding="async" />
+              <img className={`frame__shot ${styles.shot}`} src={project.hero.src} data-pixel={project.hero.pixel || undefined} data-hero={project.slug} alt="" loading="lazy" decoding="async" />
             ) : (
               <span className={styles.empty}>Screenshot coming soon</span>
             )}
@@ -41,7 +45,7 @@ export function FeaturedProject({ project, flip }: { project: Project; flip: boo
           <span className="t-label">{project.kind === 'game' ? 'Playable' : 'Featured'}</span>
         </div>
         <h3 id={titleId} className="t-h3">
-          <Link to={href} className={styles.titleLink}>{project.title}</Link>
+          <Link to={href} onClick={handoff} className={styles.titleLink}>{project.title}</Link>
         </h3>
         <p className={`t-label ${styles.role}`}>Role — {project.role}</p>
         <p className={`t-body c-2 ${styles.desc}`}>{project.description}</p>
@@ -52,7 +56,7 @@ export function FeaturedProject({ project, flip }: { project: Project; flip: boo
           <ul className={`stack ${styles.stack}`} role="list">{project.stack.map((s) => <li key={s}>{s}</li>)}</ul>
         )}
         <div className={styles.actions}>
-          <Link className="btn btn--primary" to={href}>
+          <Link className="btn btn--primary" to={href} onClick={handoff}>
             View case study <ArrowRight className="icon" size={16} aria-hidden="true" />
           </Link>
           {isPlayable(project) ? (

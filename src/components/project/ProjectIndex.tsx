@@ -4,6 +4,7 @@ import { DISCIPLINE_LABELS, type Discipline, type Project } from '../../content'
 import { useMotionPreference } from '../../hooks/useMotionPreference';
 import { Link } from '../../router/Router';
 import { paths } from '../../router/routes';
+import { heroHandoffClick } from './heroHandoff';
 import styles from './ProjectIndex.module.css';
 
 interface FilterProps {
@@ -67,7 +68,7 @@ function FloatPreview({ projects, activeSlug, visible, pointer }: {
       <div className={styles.floatInner}>
         {projects.map((p) => p.hero && (
           <div key={p.slug} className="frame" hidden={p.slug !== activeSlug}>
-            <img className="frame__shot" src={p.hero.src} data-pixel={p.hero.pixel || undefined} alt="" decoding="async" />
+            <img className="frame__shot" src={p.hero.src} data-pixel={p.hero.pixel || undefined} data-hero={p.slug} alt="" decoding="async" />
           </div>
         ))}
       </div>
@@ -78,6 +79,7 @@ function FloatPreview({ projects, activeSlug, visible, pointer }: {
 /** Monograph-style contents list of projects. */
 export function ProjectIndex({ projects, headingLevel = 'h3' }: { projects: readonly Project[]; headingLevel?: 'h2' | 'h3' }) {
   const Title = headingLevel;
+  const root = useRef<HTMLDivElement>(null);
   const pointer = useRef({ x: 0, y: 0 });
   const [hovered, setHovered] = useState<string | null>(null);
   const [armed, setArmed] = useState(false); // render preview images only after first hover
@@ -85,6 +87,7 @@ export function ProjectIndex({ projects, headingLevel = 'h3' }: { projects: read
 
   return (
     <div
+      ref={root}
       onPointerMove={(e) => { pointer.current = { x: e.clientX, y: e.clientY }; }}
       onPointerLeave={() => setHovered(null)}
     >
@@ -99,10 +102,11 @@ export function ProjectIndex({ projects, headingLevel = 'h3' }: { projects: read
                 setArmed(true);
                 setHovered(p.slug);
               }}
+              onClick={heroHandoffClick(root, p.slug)}
             >
               {p.hero && (
                 <span className={`frame ${styles.thumb}`} aria-hidden="true">
-                  <img className="frame__shot" src={p.hero.src} data-pixel={p.hero.pixel || undefined} alt="" loading="lazy" decoding="async" />
+                  <img className="frame__shot" src={p.hero.src} data-pixel={p.hero.pixel || undefined} data-hero={p.slug} alt="" loading="lazy" decoding="async" />
                 </span>
               )}
               <span className={styles.num}>{p.number}</span>

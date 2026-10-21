@@ -1,12 +1,14 @@
+import { useEffect, useState, type CSSProperties } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from 'lucide-react';
 import { DISCIPLINE_LABELS, getProject, isPlayable, type Project } from '../content';
 import { col, FadeUp, RevealLines } from '../components/Reveal';
 import { DepthGauge, type GaugeLayer } from '../components/shell/DepthGauge';
 import { domainOf } from '../components/project/FeaturedProject';
 import { Gallery } from '../components/project/Gallery';
+import { endHeroHandoff, HERO_TRANSITION_NAME, isHeroHandoff } from '../components/project/heroHandoff';
 import { StructureLens } from '../components/project/StructureLens';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { Link } from '../router/Router';
+import { Link, routeTransitionDone } from '../router/Router';
 import { paths } from '../router/routes';
 import { NotFoundPage } from './NotFoundPage';
 import styles from './ProjectPage.module.css';
@@ -33,6 +35,19 @@ function CaseStudy({ project }: { project: Project }) {
   const liveLabel = project.kind === 'game' ? 'Play the game' : 'Visit the live site';
   const playable = isPlayable(project);
   const finalName = playable ? 'Play' : project.url ? 'Live' : 'Next';
+
+  // Arriving from the index, the clicked screenshot morphs into the hero, so the hero
+  // is already in place (no fade-up) and holds the shared name until the morph ends.
+  const [handoff] = useState(() => isHeroHandoff(project.slug));
+  const [morphing, setMorphing] = useState(handoff);
+  useEffect(() => {
+    if (!handoff) return;
+    endHeroHandoff();
+    let live = true;
+    void routeTransitionDone().then(() => { if (live) setMorphing(false); });
+    return () => { live = false; };
+  }, [handoff]);
+  const HeroWrap = handoff ? 'div' : FadeUp;
 
   // Only the layers this project has content for, numbered in order.
   const layers: GaugeLayer[] = [
@@ -71,13 +86,17 @@ function CaseStudy({ project }: { project: Project }) {
             </ul>
           </FadeUp>
           {project.hero && (
-            <FadeUp delay={300} className={`crop bleed-m ${styles.hero} ${project.hero.pixel ? styles.heroSquare : ''}`}>
+            <HeroWrap {...(handoff ? {} : { delay: 300 })} className={`crop bleed-m ${styles.hero} ${project.hero.pixel ? styles.heroSquare : ''}`}>
               <div className="frame">
                 <div className="frame__bar" aria-hidden="true"><span>{project.number}</span><span>{domain}</span></div>
-                <img className="frame__shot" src={project.hero.src} data-pixel={project.hero.pixel || undefined} alt={project.hero.alt} fetchPriority="high" decoding="async" />
+                <img
+                  className="frame__shot" src={project.hero.src} data-pixel={project.hero.pixel || undefined} alt={project.hero.alt}
+                  fetchPriority="high" decoding={handoff ? 'sync' : 'async'}
+                  style={morphing ? ({ viewTransitionName: HERO_TRANSITION_NAME } as CSSProperties) : undefined}
+                />
               </div>
               <span className="crop__marks" aria-hidden="true" />
-            </FadeUp>
+            </HeroWrap>
           )}
         </div>
       </section>
