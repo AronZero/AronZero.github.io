@@ -32,8 +32,8 @@ export function HomePage() {
   const layers: GaugeLayer[] = [
     { id: 'cover', name: 'Cover' },
     { id: 'about', name: 'About' },
-    { id: 'selected', name: 'Selected' },
     { id: 'experience', name: 'Experience' },
+    { id: 'selected', name: 'Selected' },
     { id: 'index', name: 'Index' },
     { id: 'contact', name: 'Contact' },
   ].map((l, i) => ({ ...l, num: String(i).padStart(2, '0') }));
@@ -113,6 +113,8 @@ export function HomePage() {
         </div>
       </section>
 
+      <Experience head={<LayerHead num={numOf('experience')} label="Experience" aside={`Layer ${numOf('experience')} / ${total}`} />} />
+
       <section id="selected" className="layer" aria-labelledby="selected-title">
         <div className="wrap">
           <LayerHead num={numOf('selected')} label="Selected work" aside={`Layer ${numOf('selected')} / ${total}`} />
@@ -126,8 +128,6 @@ export function HomePage() {
           {featuredProjects.map((p, i) => <FeaturedProject key={p.slug} project={p} flip={i % 2 === 1} />)}
         </div>
       </section>
-
-      <Experience head={<LayerHead num={numOf('experience')} label="Experience" aside={`Layer ${numOf('experience')} / ${total}`} />} />
 
       <section id="index" className="layer" aria-labelledby="index-title">
         <div className="wrap">
