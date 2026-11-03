@@ -36,14 +36,24 @@
         // Motion is on unless the OS asks for reduced motion.
         root.dataset.motion = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
         root.classList.add('js');
-        // First-entry intro: home page only, once per browser session, full motion, visible tab, no Save-Data.
+        // '/' is the selector, once per browser session: a choice made this session skips it (before the app
+        // reads the URL); /?choose shows it anyway.
+        try { localStorage.removeItem('ajc-experience'); } catch (e) {} // the choice used to persist across sessions
+        if (location.pathname === '/' && !new URLSearchParams(location.search).has('choose')) {
+          var experience = null;
+          try { experience = sessionStorage.getItem('ajc-experience'); } catch (e) {}
+          if (experience === 'editorial' || experience === 'interactive') {
+            history.replaceState(null, '', '/' + experience + location.search + location.hash);
+          }
+        }
+        // First-entry intro: selector or editorial home only, once per browser session, full motion, visible tab, no Save-Data.
         // ?intro=replay (the only accepted value) forces it for review.
         var force = new URLSearchParams(location.search).get('intro') === 'replay';
         var saveData = !!(navigator.connection && navigator.connection.saveData);
         var decide = function () {
           var seen = '1';
           try { seen = sessionStorage.getItem('ajc-intro'); } catch (e) {} // storage blocked: can't remember it, so don't play
-          var play = root.dataset.motion === 'full' && location.pathname === '/' && !location.hash && (force || (!seen && !saveData));
+          var play = root.dataset.motion === 'full' && (location.pathname === '/' || location.pathname === '/editorial') && !location.hash && (force || (!seen && !saveData));
           try { sessionStorage.setItem('ajc-intro', '1'); } catch (e) {} // any entry counts, so deep links don't play it later
           return play;
         };

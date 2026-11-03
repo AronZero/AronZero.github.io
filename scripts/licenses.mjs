@@ -8,6 +8,7 @@ const shipped = [
   'react-dom',
   'scheduler',
   'lucide-react',
+  'three',
   '@fontsource/barlow-condensed',
   '@fontsource-variable/geist',
   '@fontsource-variable/geist-mono',

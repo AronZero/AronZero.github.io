@@ -1,0 +1,163 @@
+/* Full-viewport stage over the site chrome: the studio has its own UI. */
+.studio { position: fixed; inset: 0; z-index: var(--z-overlay); background: var(--bg); color: var(--text-body); }
+.canvas { position: absolute; inset: 0; }
+.canvas canvas { display: block; width: 100%; height: 100%; }
+
+/* The picture fallback, framed like the live room's overview. */
+.still {
+  position: absolute; left: 50%; top: 47%; translate: -50% -50%;
+  width: min(100%, 100svh * 1600 / 1216); height: auto; aspect-ratio: 1600 / 1216;
+  /* The render's backdrop is a shade off the page: feather every edge into it (a mask: only alpha counts). */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent), linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent), linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  mask-composite: intersect;
+}
+.stillNote {
+  position: absolute; left: 50%; bottom: var(--s-5); translate: -50% 0; margin: 0;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s-3);
+  width: min(560px, calc(100% - 2 * var(--gutter))); text-align: center;
+  font-size: var(--fs-small); line-height: 1.45; color: var(--text-2);
+}
+
+.top {
+  position: absolute; top: var(--s-5); left: var(--gutter); right: var(--gutter);
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-4);
+  pointer-events: none;
+}
+.top > * { pointer-events: auto; }
+/* At close-ups the room fills the screen: a fade from the page colour keeps the top bar readable. */
+.top { isolation: isolate; }
+.top::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  inset: calc(-1 * var(--s-5)) calc(-1 * var(--gutter)) calc(-1 * var(--s-7));
+  background: linear-gradient(var(--bg) 35%, transparent);
+}
+.top h1 { margin: 0; color: var(--text-2); }
+
+.note { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; color: var(--text-2); }
+
+/* Invisible button over each station: the keyboard and screen-reader route. The mouse and touch go to the
+   canvas underneath (pointer-events: none). The canvas draws the accent outline on focus; the native ring
+   stays as a second cue. */
+.hit {
+  position: absolute; min-width: 44px; min-height: 44px; padding: 0;
+  background: transparent; border: 0; border-radius: var(--radius-sm); pointer-events: none;
+}
+.hit:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 4px; }
+
+.chip {
+  position: absolute; transform: translate(-50%, calc(-100% - var(--s-3)));
+  padding: var(--s-1) var(--s-3); border-radius: var(--radius-pill);
+  background: var(--surface-2); border: 1px solid var(--line-strong);
+  font: 500 var(--fs-label)/1.4 var(--font-sans); letter-spacing: 0.04em; color: var(--text-1);
+  white-space: nowrap; pointer-events: none;
+}
+
+/* Touch screens: every station's label is always shown above it, and is itself a tap target (the button
+   underneath stays pointer-transparent; the label opts back in). A 44px hit area around a smaller pill.
+   The page script places each one (translate) so they stay on screen and clear of each other. */
+.tag {
+  position: absolute; left: 0; top: 0;
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: var(--s-1) var(--s-3); border-radius: var(--radius-pill);
+  background: var(--surface-2); border: 1px solid var(--line-strong);
+  font: 500 var(--fs-label)/1.4 var(--font-sans); letter-spacing: 0.04em; color: var(--text-1);
+  white-space: nowrap; pointer-events: auto; cursor: pointer;
+}
+.tag::before { content: ""; position: absolute; inset: 50% -4px auto; height: 44px; translate: 0 -50%; }
+/* Leader lines from each touch label to the middle of its object, drawn under the labels. */
+.leaders { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.leaders line { stroke: var(--text-2); stroke-width: 1; }
+.leaders circle { fill: var(--text-1); stroke: var(--bg); stroke-width: 1.5; }
+.tagNum { font: 400 var(--fs-mono)/1 var(--font-mono); color: var(--accent-ink); }
+
+.panel {
+  position: absolute; top: calc(var(--s-5) + var(--s-9)); right: var(--gutter); bottom: var(--s-7);
+  width: min(380px, calc(100% - 2 * var(--gutter)));
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius-md);
+}
+/* Only the content scrolls; the close button stays pinned to the panel's top-right corner. */
+.panelBody {
+  flex: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--s-3);
+  padding: var(--s-6); padding-top: calc(var(--s-6) + var(--s-5));
+}
+.panel h2 { margin: 0; color: var(--text-1); }
+.panel p { margin: 0; }
+.panelBody h3 { margin: var(--s-3) 0 0; color: var(--text-2); }
+.panelBody .hint { margin-top: auto; padding-top: var(--s-5); color: var(--text-3); }
+.close {
+  position: absolute; top: var(--s-3); right: var(--s-3); z-index: 1;
+  display: grid; place-items: center; width: 44px; height: 44px;
+  background: var(--surface-1); color: var(--text-2); border: 1px solid var(--line); border-radius: var(--radius-pill); cursor: pointer;
+}
+.close:hover { color: var(--text-1); border-color: var(--line-strong); }
+
+/* Touch screens: previous / next station, pinned under the scrolling content. */
+.steps { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.step {
+  display: flex; align-items: center; gap: var(--s-2); min-width: 0; min-height: 52px; padding: var(--s-2) var(--s-4);
+  background: transparent; color: var(--text-1); border: 0; cursor: pointer;
+  font: 500 var(--fs-small)/1.3 var(--font-sans); text-align: left;
+}
+.step + .step { border-left: 1px solid var(--line); justify-content: flex-end; text-align: right; }
+.step svg { flex: none; color: var(--text-2); }
+.stepText { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stepText .tagNum { margin-right: var(--s-2); }
+.step:active { background: var(--surface-2); }
+.step:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: -2px; }
+
+.fps { position: absolute; right: var(--gutter); bottom: var(--s-4); margin: 0; font: 400 var(--fs-mono)/1 var(--font-mono); color: var(--text-3); }
+
+/* The station dock: a short numbered list at the bottom-left, clear of the panel on the right. The open
+   station is marked by its accent number and a bar, not by colour alone. */
+.dock { position: absolute; left: var(--gutter); bottom: var(--s-5); }
+.dock ol { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.dockItem {
+  position: relative; display: flex; align-items: center; gap: var(--s-3); min-height: 36px; padding: 0 var(--s-3) 0 var(--s-4);
+  background: transparent; color: var(--text-2); border: 0; border-radius: var(--radius-sm); cursor: pointer;
+  font: 500 var(--fs-small)/1.2 var(--font-sans); text-align: left;
+  transition: color var(--d-2) var(--ease), background-color var(--d-2) var(--ease);
+}
+.dockItem::before {
+  content: ""; position: absolute; left: 0; top: 25%; bottom: 25%; width: 2px; border-radius: 1px;
+  background: var(--accent-ink); transform: scaleY(0); transition: transform var(--d-2) var(--ease);
+}
+.dockNum { font: 400 var(--fs-mono)/1 var(--font-mono); color: var(--text-3); }
+.dockItem:hover, .dockItem[data-hover] { color: var(--text-1); background: var(--surface-1); }
+.dockItem[aria-current] { color: var(--text-1); }
+.dockItem[aria-current]::before { transform: none; }
+.dockItem[aria-current] .dockNum { color: var(--accent-ink); }
+.dockItem:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 0; }
+
+/* Phones: the dock becomes a row of numbers along the bottom (names stay in each button's accessible name),
+   and the panel becomes a bottom sheet above it. */
+@media (max-width: 719px) {
+  .dock { left: 50%; translate: -50% 0; bottom: var(--s-3); }
+  .dock ol { grid-auto-flow: column; gap: var(--s-1); padding: var(--s-1); background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius-pill); }
+  .dockItem { justify-content: center; min-width: 44px; min-height: 44px; padding: 0; border-radius: var(--radius-pill); }
+  .dockItem::before { left: 30%; right: 30%; top: auto; bottom: 6px; width: auto; height: 2px; transform: scaleX(0); }
+  .dockItem[aria-current]::before { transform: none; }
+  .dockLabel { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .panel { top: auto; left: var(--gutter); right: var(--gutter); width: auto; max-height: 45%; bottom: calc(var(--s-3) + 56px + var(--s-3)); }
+  .stillNote { bottom: calc(var(--s-3) + 56px + var(--s-4)); }
+}
+
+/* The character's speech bubble when it shoos the cursor (same phrases as the hero room). */
+.say {
+  position: absolute; z-index: 2; pointer-events: none;
+  translate: calc(-50% + var(--dx, 60px)) calc(-100% - 56px);
+  padding: var(--s-2) var(--s-3); border-radius: var(--radius-md);
+  background: var(--surface-2); border: 1px solid var(--line-strong); color: var(--text-1);
+  font: 500 var(--fs-small)/1.3 var(--font-sans); white-space: nowrap;
+  animation: say 1.7s cubic-bezier(.16, 1, .3, 1) both;
+}
+.say[data-side="l"] { --dx: -60px; }
+@keyframes say {
+  0% { opacity: 0; transform: translateY(6px); }
+  12%, 78% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+html[data-motion="reduced"] .say { animation: none; }

@@ -15,7 +15,7 @@ src/content/projects/<slug>/hero.*, gallery/*  ──(import.meta.glob)──┐
 ```
 
 - `index.ts` validates at build/dev time (slug format, duplicates, missing hero, orphan image folders).
-- `scripts/thumbs.mjs` (sharp, build-only) writes a 240 × 140 WebP of each hero to `src/generated/thumbs/` before every `dev` and `build`; `index.ts` attaches it as `project.thumb` for the hero wall. The folder is gitignored and rebuilt in CI. npm `pre*` hooks don't run under `ignore-scripts`, so the step is chained inside the `dev`/`build` scripts.
+- `scripts/thumbs.mjs` (sharp, build-only) writes a 240 × 140 WebP of each hero to `src/generated/thumbs/` before every `dev` and `build`, plus a 640 × 400 `-card.webp`; `index.ts` attaches them as `project.thumb` (hero wall) and `project.card` (selected-work cards on the selector). The folder is gitignored and rebuilt in CI. npm `pre*` hooks don't run under `ignore-scripts`, so the step is chained inside the `dev`/`build` scripts.
 - Image glob patterns must be **string literals** (a Vite requirement); a template string silently matches nothing.
 - Every list, filter, number and next/previous link is derived; no component hard-codes a project.
 
@@ -25,15 +25,17 @@ A small hand-written router in `src/router/` (no dependency):
 
 | Path | Page |
 |---|---|
-| `/` | `HomePage` |
+| `/` | `ChoosePage`: the selector between the two experiences. Shown once per browser session, like the intro: a choice made this session (`ajc-experience` in `sessionStorage`) skips it before first paint (inline script in `index.html`); `/?choose` always shows it |
+| `/editorial` | `HomePage` |
 | `/work` and `/work?filter=<discipline>` | `WorkPage` (the filter lives in the URL, so it can be shared) |
 | `/work/<slug>` | `ProjectPage` (case study) |
 | `/play/<slug>` | `PlayPage` (games with an `embedPath` only; others 404) |
+| `/interactive` | `StudioPage`: the 3D studio, lazy-loaded with Three.js (see [STUDIO-DIRECTION.md](STUDIO-DIRECTION.md)) |
 | anything else | `NotFoundPage` |
 
 **Game player** (`components/project/GamePlayer.tsx`): the stock PICO-8 export is loaded unmodified in a same-origin `<iframe>` (lazy, `inert` behind a poster). Pressing Start calls the shell's `p8_run_cart()` inside that click, so audio is allowed and the cartridge `.js` only downloads then. On load the player injects a small stylesheet into the shell (our background, no scrollbars, PICO-8's side buttons hidden in favour of our Mute / Full screen / Stop toolbar) and an Esc listener that hands focus back to the page. Stop remounts the iframe. On touch devices it sets `p8_touch_detected` so the shell shows its on-screen controls, and the stage turns portrait while running.
 
-- `routes.ts` matches paths and holds the URL builders (`paths.work()`, `paths.project(slug)`). Never hand-type paths.
+- `routes.ts` matches paths and holds the URL builders (`paths.work()`, `paths.project(slug)`, `paths.studio()`) and `saveExperience()`, called by every link that switches experience. Never hand-type paths.
 - `Router.tsx` handles `pushState` navigation, a `<Link>` that keeps new-tab and middle-click working, scroll restoration on back/forward, hash scrolling (including across pages), and **View Transitions** between pages when motion is on.
 - **GitHub Pages deep links**: Pages has no SPA fallback, so a fresh load of `/work/<slug>` would 404. Phase 4 adds a build step that writes a real `index.html` for every route, each with its own title and link-preview tags.
 
@@ -42,16 +44,19 @@ A small hand-written router in `src/router/` (no dependency):
 ```
 App
 ├─ Intro                (first-entry logo intro; renders nothing unless html[data-intro="play"])
-├─ SiteHeader           (nav, theme toggle, résumé, mobile Index <dialog>)
-├─ main → Page          (switch on route)
-│   └─ DepthGauge       (per page: the layers that page actually has, numbered in order)
-└─ SiteFooter #contact  (on every page)
+└─ Shell
+    ├─ selector or studio: main → Page only (full screen, their own UI)
+    └─ editorial pages:
+        ├─ SiteHeader           (nav, theme toggle, résumé, mobile Index <dialog>)
+        ├─ main → Page          (switch on route)
+        │   └─ DepthGauge       (per page: the layers that page actually has, numbered in order)
+        └─ SiteFooter #contact  (on every editorial page)
 ```
 
 ## Motion architecture
 
 - `html[data-motion="full" | "reduced"]` is set **before first paint** by an inline script in `index.html` from the OS setting. `useMotionPreference` reads it. The same script sets `html[data-theme="dark" | "light"]` from `localStorage` (`ajc-theme`, default dark); `useTheme` reads and toggles it.
-- **Intro**: the same inline script decides, before first paint, whether the intro plays: home page, no hash, full motion, visible tab, no Save-Data, not yet this session (`ajc-intro` in `sessionStorage`, set on any entry so deep links count). `?intro=replay` is the only accepted override, for review. It sets `html[data-intro="play"]`, which hides the header mark and adds `--intro-offset` (`--intro-hold`) to reveal delays so the hero plays as the overlay lifts. The timeline is CSS (`Intro.module.css`). The only script is the handoff: when the overlay starts lifting (its `animationstart`, with a timer backup) it measures both marks and moves the big one into the header with the Web Animations API, then sets `data-intro="done"` so the header mark doesn't replay its own load animation. Fail-safes: CSS hides the overlay and shows the header mark at 3.2s, and a JS timer finishes at the same point. Phase 4 CSP: re-hash this inline script whenever it changes.
+- **Intro**: the same inline script decides, before first paint, whether the intro plays: the selector or the editorial home, no hash, full motion, visible tab, no Save-Data, not yet this session (`ajc-intro` in `sessionStorage`, set on any entry so deep links count). `?intro=replay` is the only accepted override, for review. It sets `html[data-intro="play"]`, which hides the header mark and adds `--intro-offset` (`--intro-hold`) to reveal delays so the hero plays as the overlay lifts. The timeline is CSS (`Intro.module.css`). The only script is the handoff: when the overlay starts lifting (its `animationstart`, with a timer backup) it measures both marks and moves the big one into the header with the Web Animations API, then sets `data-intro="done"` so the header mark doesn't replay its own load animation. Fail-safes: CSS hides the overlay and shows the header mark at 3.2s, and a JS timer finishes at the same point. Phase 4 CSP: re-hash this inline script whenever it changes.
 - Reveals: `useReveal` adds `.is-in` via IntersectionObserver; CSS in `styles/motion.css` does the animation. Hidden states only apply under `html.js`.
 
 ## Styling

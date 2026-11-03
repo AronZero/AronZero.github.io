@@ -1,0 +1,21 @@
+.projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.project {
+  display: grid; grid-template-columns: 2.2em 1fr; column-gap: var(--s-3); row-gap: var(--s-1);
+  padding: var(--s-3) 0; border-bottom: 1px solid var(--line);
+  color: var(--text-1); text-decoration: none;
+}
+.project:hover .name { text-decoration: underline; text-underline-offset: 3px; }
+.num { color: var(--text-3); grid-row: span 2; }
+.name { font-weight: 500; }
+.role { color: var(--text-2); }
+
+.quote { margin: 0; padding-left: var(--s-4); border-left: 2px solid var(--line-strong); }
+.quote p { font: 300 italic var(--fs-lead)/1.35 var(--font-display); color: var(--text-1); }
+
+.tags { list-style: none; margin: 0 0 var(--s-2); padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.tags li {
+  padding: var(--s-1) var(--s-3); border: 1px solid var(--line-strong); border-radius: var(--radius-pill);
+  font-size: var(--fs-small); color: var(--text-body);
+}
+.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
+.muted { color: var(--text-2); }

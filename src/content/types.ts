@@ -81,6 +81,8 @@ export type Project = ProjectEntry & {
   hero: ProjectImage | null;
   /** Small 240 × 140 copy of the hero for the hero wall (scripts/thumbs.mjs). SVG heroes are used as-is. */
   thumb: string | null;
+  /** 640 × 400 copy of the hero for the selected-work cards on the selector (scripts/thumbs.mjs). */
+  card: string | null;
   gallery: readonly ProjectImage[];
   prevSlug: string;
   nextSlug: string;

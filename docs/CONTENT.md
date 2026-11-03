@@ -71,7 +71,7 @@ src/content/projects/kindred-clinic/
 3. In the game's entry set `embedPath: '/games/<slug>/index.html'`, and add `controls` written as `'Key — action'` (e.g. `'X — shoot'`); the key is shown as a keycap.
 4. Keep `url` pointing at the Lexaloffle page. It's shown as "Also on lexaloffle.com" and as credit.
 
-A game with `embedPath` gets a play page at `/play/<slug>`, a "Play in the browser" button on its case study, and a "Play it" link on its featured card. With exactly one playable game, the **Playground** nav item opens it directly; with more, it lists all games.
+A game with `embedPath` gets a play page at `/play/<slug>`, a "Play in the browser" button on its case study, and a "Play it" link on its featured card. With exactly one playable game, the **Games** nav item opens it directly; with more, it lists all games.
 
 ## Site details
 

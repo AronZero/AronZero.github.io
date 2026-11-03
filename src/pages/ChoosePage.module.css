@@ -1,0 +1,90 @@
+/* The selector: a slim top bar like the site header (the Intro hands its logo off into this mark), then two
+   full-height halves. Hovering one widens it a little. */
+.choose { min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; background: var(--bg); }
+
+.top {
+  display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap;
+  min-height: var(--header-h); padding: var(--s-2) var(--gutter);
+  border-bottom: 1px solid var(--line);
+}
+.mark { font-size: 22px; }
+.name { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; line-height: 1; color: var(--text-1); }
+.role { margin-left: var(--s-2); }
+
+.halves { --l: 1fr; --r: 1fr; display: grid; grid-template-columns: var(--l) var(--r); min-height: 0; }
+html[data-motion="full"] .halves { transition: grid-template-columns var(--d-4) var(--ease); }
+@media (hover: hover) {
+  html[data-motion="full"] .halves:has([data-kind="interactive"]:hover) { --l: 1.18fr; }
+  html[data-motion="full"] .halves:has([data-kind="editorial"]:hover) { --r: 1.18fr; }
+}
+
+.half {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: var(--s-6);
+  min-height: 520px; padding: var(--s-8) var(--gutter);
+  color: var(--text-body); text-decoration: none;
+}
+.half + .half { border-left: 1px solid var(--line); }
+.half:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: -6px; }
+
+.rule { display: block; position: absolute; top: var(--s-8); left: var(--gutter); width: 100%; }
+
+/* The editorial half's sample: its selected work (the same projects as the home page's Selected work, up to
+   four) as screenshots in two columns, centred in the space above the copy. */
+.work {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5) var(--s-4);
+  margin-block: auto; padding-top: var(--s-6); max-width: 40rem;
+}
+.card { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+.cardImg {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover;
+  border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface-1);
+}
+.cardImg[data-pixel] { image-rendering: pixelated; }
+.cardLabel { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-small); color: var(--text-2); }
+.cardLabel .num { font-size: var(--fs-label); color: var(--text-3); }
+html[data-motion="full"] .cardImg { transition: translate var(--d-3) var(--ease), border-color var(--d-2) var(--ease); }
+.half:hover .cardImg { border-color: var(--line-strong); }
+html[data-motion="full"] .half:hover .card:nth-child(odd) .cardImg { translate: 0 calc(-1 * var(--s-1)); }
+html[data-motion="full"] .half:hover .card:nth-child(even) .cardImg { translate: 0 var(--s-1); }
+
+.copy { display: flex; flex-direction: column; gap: var(--s-4); max-width: 34rem; }
+.num { font-family: var(--font-mono); color: var(--text-2); margin-right: var(--s-2); }
+.title { color: var(--text-1); }
+.title em { display: block; }
+.desc { font-size: var(--fs-body); line-height: 1.55; color: var(--text-2); max-width: 30rem; }
+
+/* The call to action reads as a link: underline grows on hover, the arrow nudges and turns accent. */
+.go {
+  display: inline-flex; align-items: center; gap: var(--s-2); align-self: flex-start;
+  min-height: 44px; font-weight: 500; color: var(--text-1);
+  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 10px) / 100% 1px no-repeat;
+}
+.go .icon { transition: transform var(--d-2) var(--ease), color var(--d-2) var(--ease); }
+.half:hover .go .icon, .half:focus-visible .go .icon { transform: translateX(3px); color: var(--accent-ink); }
+
+/* The studio half: the rendered room fills the top and fades out above the text (a mask: only its alpha counts). */
+.still {
+  position: absolute; inset: 0 0 auto; z-index: -1; width: 100%; height: 64%;
+  object-fit: cover; object-position: 50% 40%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent);
+}
+html[data-motion="full"] .still { transition: transform var(--d-4) var(--ease); }
+html[data-motion="full"] .half:hover .still { transform: scale(1.03); }
+
+.foot { margin: 0; padding: var(--s-4) var(--gutter); border-top: 1px solid var(--line); }
+
+/* Phones: the halves stack, the studio on top, editorial below it. */
+@media (max-width: 719px) {
+  .role { display: none; }
+  .halves { grid-template-columns: 1fr; }
+  .half { min-height: 0; padding: var(--s-7) var(--gutter); }
+  .half[data-kind="interactive"] { min-height: 0; padding-top: 72vw; }
+  .still { height: 80vw; }
+  .work { padding-top: 0; }
+  .card:nth-child(n + 3) { display: none; }
+  .half + .half { border-left: 0; border-top: 1px solid var(--line); }
+  .rule { top: var(--s-6); }
+  .half[data-kind="editorial"] { padding-top: var(--s-9); }
+}

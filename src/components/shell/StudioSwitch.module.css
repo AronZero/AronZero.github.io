@@ -1,0 +1,14 @@
+/* Floating switch to the 3D studio. Accent fill like .btn--primary (Aron asked for it to stand out); text and
+   icon stay dark on orange. */
+.switch {
+  position: fixed; right: var(--gutter); bottom: var(--s-5); z-index: var(--z-gauge);
+  display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px; padding: 0 var(--s-4);
+  background: var(--accent); color: var(--on-accent); border: 0; border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-frame); font: 500 var(--fs-small)/1 var(--font-sans); text-decoration: none;
+  transition: background-color var(--d-2) var(--ease);
+}
+.switch:hover { background: var(--accent-hover); }
+.switch:active { background: var(--accent-press); }
+.switch .icon { transition: transform var(--d-2) var(--ease); }
+html[data-motion="full"] .switch:hover .icon { transform: rotate(-12deg); }
+.switch:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }

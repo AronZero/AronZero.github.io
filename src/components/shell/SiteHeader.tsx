@@ -37,7 +37,7 @@ export function SiteHeader() {
   const nav = [
     { label: 'Work', to: paths.work(), current: route.name === 'project' || (route.name === 'work' && route.filter !== 'game') },
     {
-      label: 'Playground',
+      label: 'Games',
       // One playable game opens straight into it; several (or none yet) list the games.
       to: playableProjects.length === 1 && playableProjects[0] ? paths.play(playableProjects[0].slug) : paths.work('game'),
       current: route.name === 'play' || (route.name === 'work' && route.filter === 'game'),

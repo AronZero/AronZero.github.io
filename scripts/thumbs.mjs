@@ -1,13 +1,18 @@
 // Writes src/generated/thumbs/<slug>.webp: a small copy of each project's hero image for the
-// hero wall (120 × 70 tiles, so 240 × 140 covers 2× screens). The full hero PNGs are ~0.5–1 MB
-// each; these are a few KB. Runs before `npm run dev` and `npm run build`; output is gitignored.
+// hero wall (120 × 70 tiles, so 240 × 140 covers 2× screens), and <slug>-card.webp, a 1024 × 640
+// copy for the selected-work cards on the selector page and the 3D studio's monitor and arcade
+// screens (the monitor texture is 1024 wide). The full hero PNGs are ~0.5–1 MB each; these are a
+// few KB to a few dozen KB. Runs before `npm run dev` and
+// `npm run build`; output is gitignored.
 // Only regenerates a thumb when its hero is newer, and removes thumbs for deleted projects.
 import { mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
-const WIDTH = 240;
-const HEIGHT = 140;
+const SIZES = [
+  { suffix: '', width: 240, height: 140, quality: 72 },
+  { suffix: '-card', width: 1024, height: 640, quality: 76 },
+];
 const HERO = /^hero\.(png|jpe?g|webp|avif)$/i; // SVG heroes scale on their own; no thumb needed
 
 const projectsDir = new URL('../src/content/projects/', import.meta.url);
@@ -29,23 +34,25 @@ for (const entry of readdirSync(projectsDir, { withFileTypes: true })) {
   slugs.add(slug);
 
   const src = new URL(`${slug}/${heroName}`, projectsDir);
-  const out = new URL(`${slug}.webp`, outDir);
-  if (mtime(out) >= mtime(src)) continue;
+  for (const size of SIZES) {
+    const out = new URL(`${slug}${size.suffix}.webp`, outDir);
+    if (mtime(out) >= mtime(src)) continue;
 
-  const image = sharp(fileURLToPath(src));
-  const { width = 0, height = 0 } = await image.metadata();
-  // Small sources are pixel art (game heroes): keep hard edges and crop from the centre.
-  // Screenshots crop from the top, where the page header and hero section are.
-  const pixel = width < WIDTH || height < HEIGHT;
-  await image
-    .resize(WIDTH, HEIGHT, { fit: 'cover', position: pixel ? 'centre' : 'top', kernel: pixel ? 'nearest' : 'lanczos3' })
-    .webp({ quality: pixel ? 90 : 72, effort: 6 })
-    .toFile(fileURLToPath(out));
-  made++;
+    const image = sharp(fileURLToPath(src));
+    const { width = 0, height = 0 } = await image.metadata();
+    // Small sources are pixel art (game heroes): keep hard edges and crop from the centre.
+    // Screenshots crop from the top, where the page header and hero section are.
+    const pixel = width < size.width || height < size.height;
+    await image
+      .resize(size.width, size.height, { fit: 'cover', position: pixel ? 'centre' : 'top', kernel: pixel ? 'nearest' : 'lanczos3' })
+      .webp({ quality: pixel ? 90 : size.quality, effort: 6 })
+      .toFile(fileURLToPath(out));
+    made++;
+  }
 }
 
 for (const file of readdirSync(outDir)) {
-  if (!slugs.has(file.replace(/\.webp$/, ''))) rmSync(new URL(file, outDir));
+  if (!slugs.has(file.replace(/(-card)?\.webp$/, ''))) rmSync(new URL(file, outDir));
 }
 
-console.log(`[thumbs] ${slugs.size} project thumbnails (${made} regenerated)`);
+console.log(`[thumbs] ${slugs.size} projects × ${SIZES.length} sizes (${made} regenerated)`);

@@ -12,7 +12,7 @@ const galleryFiles = import.meta.glob<string>(
   { eager: true, import: 'default' },
 );
 
-/* Hero-wall thumbnails, written by scripts/thumbs.mjs before every dev/build run (gitignored). */
+/* Hero-wall thumbnails and selector cards, written by scripts/thumbs.mjs before every dev/build run (gitignored). */
 const thumbFiles = import.meta.glob<string>('../generated/thumbs/*.webp', { eager: true, import: 'default' });
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -89,6 +89,7 @@ function buildProjects(entries: readonly ProjectEntry[]): Project[] {
       number: String(i + 1).padStart(2, '0'),
       hero: heroFile ? toImage(heroFile, 'hero') : null,
       thumb: thumbFiles[`../generated/thumbs/${entry.slug}.webp`] ?? (heroFile && /\.svg$/i.test(heroFile[0]) ? heroFile[1] : null),
+      card: thumbFiles[`../generated/thumbs/${entry.slug}-card.webp`] ?? (heroFile && /\.svg$/i.test(heroFile[0]) ? heroFile[1] : null),
       gallery: (galleries.get(entry.slug) ?? []).map((file) => toImage(file, 'gallery')),
       prevSlug: prev.slug,
       nextSlug: next.slug,

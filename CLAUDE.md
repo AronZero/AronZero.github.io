@@ -47,7 +47,8 @@ Node is installed but may not be on PATH in a fresh shell. In PowerShell, reload
 | `src/content/resume.ts` | Work experience + certifications (home page, from the résumé PDF) |
 | `src/styles/` | Tokens and global CSS. Components use CSS Modules. |
 | `src/router/` | Hand-written History API router; use `paths.*` builders, never hand-typed URLs |
-| `src/pages/` | Home, Work, Project (case study), NotFound |
+| `src/pages/` | Choose (selector at `/`), Home (`/editorial`), Work, Project (case study), Play, Studio (`/interactive`, 3D), NotFound |
+| `src/studio/` | The 3D studio: scene, character, stations, panels, baked assets (see `docs/STUDIO-DIRECTION.md`) |
 | `src/components/` | `shell/` (header, footer, depth gauge, `BrandMark` logo), `project/` (index, featured, hero handoff, gallery), `Reveal.tsx` |
 | `src/hooks/` | `useMotionPreference`, `useTheme`, `useReveal`, `useDocumentMeta` |
 | `style-tile/` | Approved visual reference (v0.1). Not part of the build. |
