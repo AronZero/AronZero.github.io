@@ -19,7 +19,7 @@
 - [ ] **Dual experience** (branch `feature/dual-experience`): selector at `/` → `/editorial` (current site) or `/interactive` (3D "After Hours Studio"). Look approved 2026-11-02 (isometric, semi-lowpoly, dark and warm). Plan and milestones in [STUDIO-DIRECTION.md](STUDIO-DIRECTION.md). Milestone 1 (workstation benchmark, `/interactive/bench`) approved 2026-11-02. Milestone 2 (character) approved. Milestone 3 (all six stations) approved 2026-11-03. Milestone 4: selector, `/interactive` route, dock and picture fallback built 2026-11-03; perf/a11y/security/licence passes done 2026-11-03 (results in STUDIO-DIRECTION §11c). Open: real-GPU fps check, an NVDA run, CSP meta (Phase 4), Barlow marquee at the next bake
 
 - [ ] **Phase 3b — About**: About page, contact polish, résumé download
-- [ ] **Phase 4 — Polish + ship**: static `index.html` per route (fixes deep links on Pages, adds per-route titles and link previews), image optimization, accessibility and performance pass (Lighthouse 95+), GitHub Actions deploy to Pages
+- [ ] **Phase 4 — Polish + ship**: ~~static page per route~~ and ~~Content Security Policy~~ done 2026-11-03 (`scripts/pages.mjs`); ~~GitHub Actions deploy~~ done 2026-10-09. Still open: image optimization (case-study PNGs and GIFs) and a Lighthouse pass (95+)
 
 ## Waiting on content (from Aron)
 

@@ -34,8 +34,8 @@ jobs:
 
       - run: npm run build
 
-      # Pages has no SPA fallback: serve the app for deep links (/work/<slug>) until
-      # Phase 4 writes a static index.html per route.
+      # `npm run build` writes a static page per known route (scripts/pages.mjs). Anything else
+      # (an old or mistyped URL) gets the app as 404.html, which shows the not-found page.
       - run: cp dist/index.html dist/404.html
 
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6

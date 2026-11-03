@@ -24,6 +24,7 @@
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import glbUrl from './assets/studio.glb?url';
 import bakeUrl from './assets/studio-bake.jpg?url';
+import bakePhoneUrl from './assets/studio-bake-2048.jpg?url';
 import groundUrl from './assets/ground-bake.jpg?url';
 import { CLIPS, StudioCharacter, type SayEvent } from './StudioCharacter';
 import { OVERVIEW, STATIONS, type StationId, type StationView } from './stations';
@@ -263,7 +264,8 @@ export class StudioScene {
     const characterReady = this.character.load(this.scene);
     const [gltf, bake, groundTex, arcade, ...images] = await Promise.all([
       new GLTFLoader().loadAsync(glbUrl),
-      textures.loadAsync(bakeUrl),
+      // Phones get the half-resolution atlas (0.4 MB instead of 1.3 MB; docs/STUDIO-DIRECTION.md §10).
+      textures.loadAsync(window.matchMedia('(max-width: 719px)').matches ? bakePhoneUrl : bakeUrl),
       textures.loadAsync(groundUrl),
       this.options.arcade ? loadImage(this.options.arcade) : Promise.resolve(null),
       ...this.options.screens.map((src) => loadImage(src)),

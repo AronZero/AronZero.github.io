@@ -35,7 +35,9 @@ Node is installed but may not be on PATH in a fresh shell. In PowerShell, reload
 
 **Accessibility.** Text contrast ≥ 4.5:1. Never rely on color alone (use underlines, icons, numbers). Keyboard alternatives exist for every hover interaction. Touch targets ≥ 44px on mobile. One `h1` per page.
 
-**Git.** Don't commit or push unless asked. Until the Pages deploy workflow exists (Phase 4), pushing `main` publishes the raw source `index.html`.
+**Git.** Don't commit or push unless asked. Pushing `main` deploys the site (`.github/workflows/deploy.yml`).
+
+**Security.** Production pages carry a Content Security Policy (written by `scripts/pages.mjs`): no inline styles or `style="…"` attributes in `index.html`, no new inline scripts, no third-party origins. Anything that needs one must update the policy there.
 
 ## Where things live
 

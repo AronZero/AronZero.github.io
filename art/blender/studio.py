@@ -431,7 +431,10 @@ s_obj = screen("arc_screen", (0.46, 0.006, 0.36), (0, -0.005, 1.33), scr_rot, "a
 mq = box("marquee", (0.6, 0.03, 0.2), (0, 0.0, 1.72), mat("mq_bg", "#000000", emit="#2A1A10", strength=2), rot=(math.radians(-12), 0, 0), bevel=0.004, parent=arc)
 bpy.ops.object.text_add(location=(0, -0.025, 1.7), rotation=(math.radians(90 - 12), 0, 0))
 txt = bpy.context.object; txt.data.body = "ASTROX"; txt.data.align_x = "CENTER"; txt.data.align_y = "CENTER"
-txt.data.size = 0.11; txt.data.extrude = 0.004; txt.data.materials.append(M["marquee"]); txt.parent = arc
+# The site's display face (SIL OFL), converted from the Fontsource WOFF by fonts/woff-to-ttf.mjs.
+_font = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts", "BarlowCondensed-SemiBold-latin.ttf")
+if os.path.exists(_font): txt.data.font = bpy.data.fonts.load(_font)
+txt.data.size = 0.15; txt.data.extrude = 0.004; txt.data.materials.append(M["marquee"]); txt.parent = arc
 
 # ---------- foreground: sofa, side table, rug, floor plant, beanbag ----------
 box("rug", (1.9, 1.5, 0.012), (2.15, 1.9, 0.006), M["rug"], bevel=0.004)

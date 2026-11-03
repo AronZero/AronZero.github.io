@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "npm run thumbs && vite",
-    "build": "npm run typecheck && npm run licenses && npm run thumbs && vite build",
+    "build": "npm run typecheck && npm run licenses && npm run thumbs && vite build && node scripts/pages.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "licenses": "node scripts/licenses.mjs",
