@@ -19,7 +19,7 @@
 - [x] **Dual experience** (shipped 2026-11-03): selector at `/` (once per session) → `/editorial` (this site) or `/interactive` (the 3D "After Hours Studio"). Plan, milestones and pass results in [STUDIO-DIRECTION.md](STUDIO-DIRECTION.md). Aron's NVDA run passed. Open: real-GPU fps check (`/interactive?fps=1`)
 
 - [ ] **Phase 3b — About**: About page, contact polish, résumé download
-- [ ] **Phase 4 — Polish + ship**: ~~static page per route~~ and ~~Content Security Policy~~ done 2026-11-03 (`scripts/pages.mjs`); ~~GitHub Actions deploy~~ done 2026-10-09. ~~image optimization~~ done 2026-11-03 (`scripts/images.mjs`, 29 MB → 5.6 MB). Still open: a Lighthouse pass (95+)
+- [x] **Phase 4 — Polish + ship** (done 2026-11-03): static page per route and Content Security Policy (`scripts/pages.mjs`); GitHub Actions deploy (2026-10-09); image optimization (`scripts/images.mjs`, 29 MB → 5.6 MB); Lighthouse pass, all scores green (Aron, 2026-11-03)
 
 ## Waiting on content (from Aron)
 
