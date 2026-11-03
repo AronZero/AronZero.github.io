@@ -16,7 +16,7 @@
 
 ## Next
 
-- [x] **Dual experience** (shipped 2026-11-03): selector at `/` (once per session) → `/editorial` (this site) or `/interactive` (the 3D "After Hours Studio"). Plan, milestones and pass results in [STUDIO-DIRECTION.md](STUDIO-DIRECTION.md). Aron's NVDA run passed. Open: real-GPU fps check (`/interactive?fps=1`)
+- [x] **Dual experience** (shipped 2026-11-03): selector at `/` (once per session) → `/editorial` (this site) or `/interactive` (the 3D "After Hours Studio"). Plan, milestones and pass results in [STUDIO-DIRECTION.md](STUDIO-DIRECTION.md). Aron's NVDA run and real-GPU fps check passed
 
 - [x] **Phase 3b — About** (closed 2026-11-03): About lives on the home page under the hero (and in the studio's About station), not a separate page (Aron, 2026-10-21); résumé downloads from the header, footer, Experience section and studio; contact (email + LinkedIn) in the footer and studio
 - [x] **Phase 4 — Polish + ship** (done 2026-11-03): static page per route and Content Security Policy (`scripts/pages.mjs`); GitHub Actions deploy (2026-10-09); image optimization (`scripts/images.mjs`, 29 MB → 5.6 MB); Lighthouse pass, all scores green (Aron, 2026-11-03)
