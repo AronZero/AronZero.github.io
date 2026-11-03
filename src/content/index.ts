@@ -1,15 +1,24 @@
 import { projectEntries } from './projects';
 import { DISCIPLINES, type Discipline, type Project, type ProjectEntry, type ProjectImage } from './types';
 
-/* Images are discovered from folders at build time; nothing to register by hand.
-   (Vite needs these glob patterns as plain string literals.) */
-const heroFiles = import.meta.glob<string>('./projects/*/hero.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,avif,AVIF,svg,SVG}', {
-  eager: true,
-  import: 'default',
-});
-const galleryFiles = import.meta.glob<string>(
-  './projects/*/gallery/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,avif,AVIF,svg,SVG}',
-  { eager: true, import: 'default' },
+/* Images are discovered from folders at build time; nothing to register by hand. The site ships the web copies
+   that scripts/images.mjs writes to src/generated/images/ (mirroring src/content/projects/, gitignored) before
+   every dev/build run, never the originals. Keys are mapped back to "./projects/<slug>/…" so captions, slugs
+   and GIF pairing read the same as the source folders. (Vite needs these glob patterns as plain literals.) */
+const fromGenerated = (files: Record<string, string>): Record<string, string> =>
+  Object.fromEntries(Object.entries(files).map(([path, src]) => [path.replace('../generated/images/', './projects/'), src]));
+
+const heroFiles = fromGenerated(
+  import.meta.glob<string>('../generated/images/*/hero.{webp,png,PNG,jpg,JPG,jpeg,JPEG,avif,AVIF,svg,SVG}', {
+    eager: true,
+    import: 'default',
+  }),
+);
+const galleryFiles = fromGenerated(
+  import.meta.glob<string>('../generated/images/*/gallery/*.{webp,png,PNG,jpg,JPG,jpeg,JPEG,avif,AVIF,svg,SVG}', {
+    eager: true,
+    import: 'default',
+  }),
 );
 
 /* Hero-wall thumbnails and selector cards, written by scripts/thumbs.mjs before every dev/build run (gitignored). */
@@ -17,8 +26,13 @@ const thumbFiles = import.meta.glob<string>('../generated/thumbs/*.webp', { eage
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-/* GIFs pair with the still of the same name and play only on request ("Nothing loops or auto-plays"). */
-const animatedFiles = import.meta.glob<string>('./projects/*/gallery/*.{gif,GIF}', { eager: true, import: 'default' });
+/* GIFs pair with the still of the same name and play only on request ("Nothing loops or auto-plays"). They ship
+   as lossless animated WebP in gallery/animated/, keyed here as if they sat beside their still. */
+const animatedFiles = Object.fromEntries(
+  Object.entries(import.meta.glob<string>('../generated/images/*/gallery/animated/*.webp', { eager: true, import: 'default' })).map(
+    ([path, src]) => [path.replace('../generated/images/', './projects/').replace('/animated/', '/'), src],
+  ),
+);
 
 const baseOf = (path: string): string => path.replace(/\.[^.]+$/, '');
 const animatedByBase = new Map(Object.entries(animatedFiles).map(([path, src]) => [baseOf(path), src]));

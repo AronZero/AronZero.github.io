@@ -75,8 +75,8 @@ export function ChoosePage() {
                 <img
                   className={styles.cardImg}
                   src={project.card!}
-                  width={640}
-                  height={400}
+                  width={1024}
+                  height={640}
                   alt=""
                   loading="lazy"
                   decoding="async"

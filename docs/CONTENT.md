@@ -57,7 +57,7 @@ src/content/projects/kindred-clinic/
 
 - **Hero**: a screenshot of the landing page's first screen. A small thumbnail for the home-page project wall is made from it automatically (cropped from the top); restart `npm run dev` after adding a new one.
 - **Gallery**: other pages. They're sorted by file name, and the name becomes the caption: `02-booking-confirmation.png` → "Booking confirmation". Use a number prefix to set the order.
-- **Formats**: PNG, JPG, WebP or AVIF.
+- **Formats**: PNG, JPG, WebP or AVIF. Drop in the original at full quality: the build makes a compressed WebP copy of every image (and an animated WebP of every GIF) and ships only those, so file size here doesn't matter. Restart `npm run dev` after adding or replacing images.
 - **Animated GIFs** (games): put the GIF next to a still with the same name (`01-boss-fight.gif` + `01-boss-fight.png`). The still shows in the gallery with a GIF badge; the GIF plays only in the full-screen viewer, with a pause button. Game images are scaled up with hard pixel edges.
 - **Size**: at least 1600px wide; 2560px is ideal for sharp retina screens. Keep the same aspect ratio across a project (16:10 or 16:9 browser viewport).
 - **Capture only the page.** Leave out browser chrome and device mockups; the site adds its own frame.

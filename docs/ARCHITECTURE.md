@@ -15,7 +15,8 @@ src/content/projects/<slug>/hero.*, gallery/*  ──(import.meta.glob)──┐
 ```
 
 - `index.ts` validates at build/dev time (slug format, duplicates, missing hero, orphan image folders).
-- `scripts/thumbs.mjs` (sharp, build-only) writes a 240 × 140 WebP of each hero to `src/generated/thumbs/` before every `dev` and `build`, plus a 640 × 400 `-card.webp`; `index.ts` attaches them as `project.thumb` (hero wall) and `project.card` (selected-work cards on the selector). The folder is gitignored and rebuilt in CI. npm `pre*` hooks don't run under `ignore-scripts`, so the step is chained inside the `dev`/`build` scripts.
+- `scripts/thumbs.mjs` (sharp, build-only) writes a 240 × 140 WebP of each hero to `src/generated/thumbs/` before every `dev` and `build`, plus a 1024 × 640 `-card.webp`; `index.ts` attaches them as `project.thumb` (hero wall) and `project.card` (selected-work cards on the selector). The folder is gitignored and rebuilt in CI. npm `pre*` hooks don't run under `ignore-scripts`, so the step is chained inside the `dev`/`build` scripts.
+- `scripts/images.mjs` (sharp, build-only, same chaining) writes the **web copies the site ships** to `src/generated/images/<slug>/`, mirroring the content folders: WebP quality 85 for screenshots, lossless WebP for small pixel-art stills (< 640 px), lossless animated WebP for GIFs (in `gallery/animated/`), SVGs and anything WebP wouldn't shrink copied as-is. `index.ts` globs only these (keys mapped back to `./projects/…`), so the originals are never bundled: 29 MB of sources ship as 5.6 MB. Cached by modification time; stale copies are pruned. The first run takes ~20 s (also in CI).
 - Image glob patterns must be **string literals** (a Vite requirement); a template string silently matches nothing.
 - Every list, filter, number and next/previous link is derived; no component hard-codes a project.
 

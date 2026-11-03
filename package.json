@@ -8,13 +8,14 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "npm run thumbs && vite",
-    "build": "npm run typecheck && npm run licenses && npm run thumbs && vite build && node scripts/pages.mjs",
+    "dev": "npm run thumbs && npm run images && vite",
+    "build": "npm run typecheck && npm run licenses && npm run thumbs && npm run images && vite build && node scripts/pages.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "licenses": "node scripts/licenses.mjs",
     "audit:deps": "npm audit && npm audit signatures",
-    "thumbs": "node scripts/thumbs.mjs"
+    "thumbs": "node scripts/thumbs.mjs",
+    "images": "node scripts/images.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "5.3.0",
