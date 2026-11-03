@@ -78,6 +78,10 @@
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius-md);
 }
+/* Wide screens: room for the longer descriptions so the content doesn't feel cramped. */
+@media (min-width: 1200px) {
+  .panel { min-width: 560px; }
+}
 /* Only the content scrolls; the close button stays pinned to the panel's top-right corner. */
 .panelBody {
   flex: 1; min-height: 0; overflow-y: auto;
