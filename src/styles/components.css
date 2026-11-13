@@ -157,7 +157,7 @@ img[data-pixel] { image-rendering: pixelated; }
     width: 100px;
     height: 100px;
     display: block;
-    background-image: url("public/profile pic 512 x 512.png");
+    background-image: url("public/profile-pic-512-x-512.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
