@@ -45,7 +45,7 @@ export const projectEntries = [
       'A storefront to provide a convenient, wholesome way to help customers fuel their bodies and achieve their daily wellness goals.',
     story: {
       challenge: 'A small collagen-smoothie brand sold through Shopee and social media, with no home of its own to explain the products and what goes into them.',
-      contribution: 'I designed the site in Adobe XD and built the front end in AngularJS and Sass.',
+      contribution: 'I designed the site in Adobe XD and built the front end in AngularJS and SCSS.',
       decisions: [
         'Kept checkout on Shopee, where customers already buy, and made “Get from Shopee.ph” the main action on every product page.',
         'Product pages lead with ingredients and benefits, because people choosing a wellness drink want to know what’s in it.',
@@ -53,7 +53,7 @@ export const projectEntries = [
       ],
     },
     disciplines: ['web-design', 'ui-ux', 'front-end'],
-    stack: ['Adobe XD', 'AngularJS', 'Sass'],
+    stack: ['Adobe XD', 'AngularJS', 'SCSS'],
     featured: false,
   },
   {
@@ -65,7 +65,7 @@ export const projectEntries = [
       'A café website where customers can explore the menu and find location details with convenient online ordering to make getting their daily coffee easier.',
     story: {
       challenge: 'A local café wanted customers to browse the full menu and order ahead from their phones, instead of reading a board at the counter.',
-      contribution: 'I designed the UI in Figma and built the front end in AngularJS and Sass, working with the rest of the team.',
+      contribution: 'I designed the UI in Figma and built the front end in AngularJS and SCSS, working with the rest of the team.',
       decisions: [
         'The menu is the home page: categories in a sidebar, search on top, and every drink one tap from its details.',
         'Ordering happens in one sheet: size, add-ons and a note for the barista, with the running price on the Add button.',
@@ -74,7 +74,7 @@ export const projectEntries = [
       outcome: 'Live at amperkcafe.com.',
     },
     disciplines: ['web-design', 'ui-ux', 'front-end'],
-    stack: ['Figma', 'AngularJS', 'Sass'],
+    stack: ['Figma', 'AngularJS', 'SCSS'],
     url: 'https://www.amperkcafe.com/',
     featured: false,
   },
@@ -87,7 +87,7 @@ export const projectEntries = [
       'A website for the British Columbia Electrical Association, connecting electrical industry professionals with membership benefits, educational resources, industry events, job opportunities, and networking programs.',
     story: {
       challenge: 'A century-old association offers a lot: events, online courses, industry news, membership programs and two networks. Members and the wider industry needed one place to find all of it.',
-      contribution: 'I designed the site in Figma and built the front end in AngularJS and Sass.',
+      contribution: 'I designed the site in Figma and built the front end in AngularJS and SCSS.',
       decisions: [
         'Upcoming events sit in the hero as cards that link straight to registration, because events are what bring members back.',
         'A news strip under the hero keeps the latest industry news one glance away.',
@@ -96,7 +96,7 @@ export const projectEntries = [
       outcome: 'Live at bcea.bc.ca.',
     },
     disciplines: ['web-design', 'ui-ux', 'front-end'],
-    stack: ['Figma', 'AngularJS', 'Sass'],
+    stack: ['Figma', 'AngularJS', 'SCSS'],
     url: 'https://www.bcea.bc.ca/',
     featured: true,
   },
@@ -109,7 +109,7 @@ export const projectEntries = [
       'A wedding website that brings event details and guest information together, with a simple RSVP experience to help guests confirm their attendance.',
     story: {
       challenge: 'A couple needed one place for guests to find the wedding details and confirm attendance, instead of chasing replies by message.',
-      contribution: 'I designed the site in Adobe XD and built it in AngularJS and Sass.',
+      contribution: 'I designed the site in Adobe XD and built it in AngularJS and SCSS.',
       decisions: [
         'Only four sections (Home, Our Story, The Wedding Day and RSVP), so guests find what they need quickly.',
         'The reply-by date sits right beside the “Register now” button, so guests know when to answer.',
@@ -117,7 +117,7 @@ export const projectEntries = [
       ],
     },
     disciplines: ['web-design', 'ui-ux', 'front-end'],
-    stack: ['Adobe XD', 'AngularJS', 'Sass'],
+    stack: ['Adobe XD', 'AngularJS', 'SCSS'],
     featured: false,
   },
   {
@@ -129,7 +129,7 @@ export const projectEntries = [
       'An e-commerce website for a skincare brand, featuring products for different skin types and concerns, with customer reviews to help shoppers find the right products for their skincare routine.',
     story: {
       challenge: 'A skincare brand with products for many skin types and concerns needed shoppers to find the right product and trust it enough to buy.',
-      contribution: 'I designed the store in Adobe XD and built the front end in AngularJS and Sass.',
+      contribution: 'I designed the store in Adobe XD and built the front end in AngularJS and SCSS.',
       decisions: [
         'Best sellers come first on the products page, followed by a full catalogue with sort and filter.',
         'Customer reviews on product pages, because in skincare other people’s results persuade more than claims.',
@@ -137,7 +137,7 @@ export const projectEntries = [
       ],
     },
     disciplines: ['web-design', 'ui-ux', 'front-end'],
-    stack: ['Adobe XD', 'AngularJS', 'Sass'],
+    stack: ['Adobe XD', 'AngularJS', 'SCSS'],
     featured: false,
   },
   {
@@ -168,7 +168,7 @@ export const projectEntries = [
       'A tourism website showcasing Romblon’s best destinations, with trip schedules, travel promos, and the latest local news to help visitors plan their next adventure.',
     story: {
       challenge: 'Visitors planning a trip to Romblon had to piece together destinations, events and promos from many sources. The province needed one site for all of it.',
-      contribution: 'I designed the site in Adobe XD and built the front end in AngularJS and Sass.',
+      contribution: 'I designed the site in Adobe XD and built the front end in AngularJS and SCSS.',
       decisions: [
         'Each of the 17 municipalities has its own page with quick facts and main attractions, reachable from one row of chips.',
         'Site-wide search across destinations, events and news.',
@@ -176,7 +176,7 @@ export const projectEntries = [
       ],
     },
     disciplines: ['web-design', 'ui-ux', 'front-end'],
-    stack: ['Adobe XD', 'AngularJS', 'Sass'],
+    stack: ['Adobe XD', 'AngularJS', 'SCSS'],
     featured: false,
   },
   {
@@ -188,7 +188,7 @@ export const projectEntries = [
       'An internal management system for Romblon’s provincial operations, streamlining document tracking, payment processing, timekeeping, and employee reporting in one place.',
     story: {
       challenge: 'The Provincial Government of Romblon handled documents, attendance, cheques and procurement on paper, across many offices. The goal was to make every transaction faster by automating repetitive tasks, and safer by keeping records in one system.',
-      contribution: 'I designed the system’s interface in Adobe XD and built the front end in AngularJS and Sass.',
+      contribution: 'I designed the system’s interface in Adobe XD and built the front end in AngularJS and SCSS.',
       decisions: [
         'The dashboard opens with what staff do every day, clocking in and out and checking monthly attendance, before the list of applications.',
         'Urgent pending documents surface in a highlighted panel at the top of Document Tracking.',
@@ -196,7 +196,7 @@ export const projectEntries = [
       ],
     },
     disciplines: ['web-design', 'ui-ux', 'front-end'],
-    stack: ['Adobe XD', 'AngularJS', 'Sass'],
+    stack: ['Adobe XD', 'AngularJS', 'SCSS'],
     featured: false,
   },
   {

@@ -5,6 +5,8 @@ export const site = {
     primary: 'UI/UX Designer',
     focus: 'Front-end Development',
     also: 'Graphic Design',
+    skills: ['AngularJS', 'ReactJS', 'React Native', 'Flutter', 'Bootstrap', 'TailwindCSS', 'SCSS', 'HTML', 'JavaScript', 'Microsoft SQL'],
+    tools: ['Figma', 'Adobe XD', 'Adobe Illustrator', 'Adobe Photoshop', 'GitHub', 'Azure Repos', 'Claude', 'ChatGPT'],
   },
   statement: 'I design interfaces — then I build them, down to the last transition.',
   /** Shown in "About" under the hero, beside the paragraphs below. Your own words, credited to you. */

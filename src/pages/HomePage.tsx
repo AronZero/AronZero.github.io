@@ -72,7 +72,22 @@ export function HomePage() {
             <FadeUp as="dl" delay={300} className={styles.roles} style={col('1 / 5')}>
               <dt className="t-label">Role</dt><dd>{site.roles.primary}</dd>
               <dt className="t-label">Focus</dt><dd>{site.roles.focus}</dd>
-              <dt className="t-label">Also</dt><dd>{site.roles.also}</dd>
+              <dt className="t-label">Skills</dt>
+              <dd>
+                <ul className="stack stack-bullet">
+                  {site.roles.skills.map((text, i) => (
+                    <li key={i}>{text}</li>
+                  ))}
+                </ul>
+              </dd>
+              <dt className="t-label">Tools</dt>
+              <dd>
+                <ul className="stack stack-bullet">
+                  {site.roles.tools.map((text, i) => (
+                    <li key={i}>{text}</li>
+                  ))}
+                </ul>
+              </dd>
             </FadeUp>
             <div style={col('6 / 13')}>
               <FadeUp as="p" delay={450} className={`t-statement ${styles.statement}`}>

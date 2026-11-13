@@ -65,6 +65,7 @@ button.tag:hover { color: var(--text-1); border-color: var(--text-2); }
 
 .stack { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; font-family: var(--font-mono); font-size: .8125rem; color: var(--text-2); }
 .stack li + li::before { content: "/"; margin: 0 .6em; color: var(--text-3); }
+.stack.stack-bullet li + li::before { content: "•" }
 
 /* ---------- Metadata ---------- */
 .meta { display: grid; grid-template-columns: max-content 1fr; column-gap: var(--s-6); margin: 0; }
