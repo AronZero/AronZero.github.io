@@ -148,3 +148,24 @@ html:has(dialog[open]) { overflow: hidden; }
 
 /* ---------- Pixel art (game screenshots) ---------- */
 img[data-pixel] { image-rendering: pixelated; }
+
+/* ---------- Editorial Profile Picture ---------- */
+#hero-name.is-in .line:first-child { overflow: visible !important; }
+#hero-name.is-in .line:first-child span { position: relative; display: inline; }
+#hero-name.is-in .line:first-child span::before {
+    content: '';
+    width: 100px;
+    height: 100px;
+    display: block;
+    background-image: url("public/profile pic 512 x 512.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    right: calc(-100% - 15px);
+    top: -20px;
+    border-radius: 50%; }
+@media (max-width: 992px) { #hero-name.is-in .line:first-child span::before { right: calc(-100% - 20px); } }
+@media (max-width: 872px) { #hero-name.is-in .line:first-child span::before { width: 80px; height: 80px; } }
+@media (max-width: 604px) { #hero-name.is-in .line:first-child span::before { width: 60px; height: 60px; right: -100%; top: -5px; } }
+@media (max-width: 604px) { #hero-name.is-in .line:first-child span::before { top: -15px; } }
