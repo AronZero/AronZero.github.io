@@ -104,16 +104,16 @@ export function StationPanel({ id, featured, titleId }: { id: StationId; feature
       return (
         <>
           <h2 id={titleId} className="t-h3">Skills & tools</h2>
-          <h3 className="t-label">Disciplines</h3>
+          <h3 className="t-label">Skills</h3>
           <ul className={styles.tags}>
-            {disciplinesInUse.map((d) => (
-              <li key={d}>{DISCIPLINE_LABELS[d]}</li>
+            {site.roles.skills.map((text, i) => (
+              <li key={i}>{text}</li>
             ))}
           </ul>
-          <h3 className="t-label">Tools used in these projects</h3>
+          <h3 className="t-label">Tools</h3>
           <ul className={styles.tags}>
-            {tools.map((t) => (
-              <li key={t}>{t}</li>
+            {site.roles.tools.map((text, i) => (
+              <li key={i}>{text}</li>
             ))}
           </ul>
           <h3 className="t-label">Training</h3>

@@ -14,7 +14,7 @@ export const site = {
   /** Shown in "About" under the hero: the first paragraph large, the second under it. */
   about: [
     'I’m a UI/UX designer who also writes the front-end code. Over ten years I’ve worked on more than 30 websites and apps for cafés, retailers, an industry association and a provincial government.',
-    'Building what I design keeps my designs honest: every layout has to work in the browser, not just in the mockup. My graphic design background shows in the type, composition and imagery. In my own time I make things for myself, like OZONE, an offline app for money, books and notes, and Astrox, a pixel-art arcade game.',
+    'Building what I design keeps my work grounded in reality. Every layout must function in the browser, not just look good in a mockup. My graphic design background is reflected in my attention to typography, composition, and imagery. Beyond professional work, I enjoy exploring personal creative projects, experimenting with ideas, and building things that combine design, technology, and creativity.',
   ],
   email: 'aronjayconsuelo@gmail.com',
   /** Full LinkedIn profile URL. */
