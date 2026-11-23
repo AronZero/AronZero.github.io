@@ -1,5 +1,5 @@
 import { ArrowUpRight, Play } from 'lucide-react';
-import { DISCIPLINE_LABELS, disciplinesInUse, getProject, isPlayable, projects, type Project } from '../content';
+import { getProject, isPlayable, projects, type Project } from '../content';
 import { certifications } from '../content/resume';
 import { site } from '../content/site';
 import { Link } from '../router/Router';
@@ -13,11 +13,11 @@ import styles from './StationPanel.module.css';
  */
 
 /** Every tool named in a project's stack, most used first. */
-const tools: readonly string[] = (() => {
-  const counts = new Map<string, number>();
-  for (const p of projects) for (const t of p.stack) counts.set(t, (counts.get(t) ?? 0) + 1);
-  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([t]) => t);
-})();
+// const tools: readonly string[] = (() => {
+//   const counts = new Map<string, number>();
+//   for (const p of projects) for (const t of p.stack) counts.set(t, (counts.get(t) ?? 0) + 1);
+//   return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([t]) => t);
+// })();
 
 function CaseStudyLink({ slug, label = 'Open case study' }: { slug: string; label?: string }) {
   return (
